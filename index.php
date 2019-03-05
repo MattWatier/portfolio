@@ -8,10 +8,7 @@
     }
 ?>
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html>
 <head>
   <?php zp_apply_filter('theme_head'); ?> 
     <title><?php echo getBareGalleryTitle(); ?> | <?php echo getBareAlbumTitle();?> | <?php echo getBareImageTitle();?></title>
@@ -40,7 +37,7 @@
       $gallery_item = '<div id="ablumns"><div class="row">';
       while (next_album()):
         $gallery_item .= '<div class="albumn '.getAnnotatedAlbumTitle().'" ><div class="row">';
-        $gallery_item .= '<h3><a href="'.getAlbumLinkURL().'" class="link no-underline" title="View album '.getAnnotatedAlbumTitle().'">'.getAlbumTitle().'&raquo;</a></h3>';
+        $gallery_item .= '<h3><a href="'.html_encode(getAlbumURL()).'" class="link no-underline" title="View album '.getAnnotatedAlbumTitle().'">'.getAlbumTitle().'&raquo;</a></h3>';
         $gallery_item .= '<div class="d3_chart" id="dataholder_'.getAnnotatedAlbumTitle().'">&nbsp;</div>';
         $images = '<ul class="thumbnail-holder">';
         for ($i=1; $i<=10; $i++) {
@@ -55,7 +52,7 @@
         }
         $images .= "</ul> \n";
         $gallery_item .= $images;
-        $gallery_item .= '<p class="albumn-description">'.getAlbumCustomData().'<a href="'.getAlbumLinkURL().'">&nbsp; Explore my work on '.getAnnotatedAlbumTitle().'&nbsp;<i class="fa fa-arrow-circle-right"></i></a></p>'; 
+        $gallery_item .= '<p class="albumn-description">'.getAlbumCustomData().'<a href="'.html_encode(getAlbumURL()).'">&nbsp; Explore my work on '.getAnnotatedAlbumTitle().'&nbsp;<i class="fa fa-arrow-circle-right"></i></a></p>'; 
         $gallery_item .= "\n </div></div> \n";
       endwhile;
       $gallery_item .= '</div></div></div></div>';

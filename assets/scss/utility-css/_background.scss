@@ -1,0 +1,73 @@
+/*
+  Background Colors
+ 
+  Background colors can be easily change with bg_{{color-name}}  
+ 
+  bg_primary            	- background color warning color
+  bg_secondary            	- background color warning color
+  bg_alert            	- background color alert color
+  bg_warning            	- background color warning color
+  bg_success              - background color success color
+  bg_info              - background color success color
+  bg_highlight              - background color success color
+
+
+  markup:
+  <div class="{$modifiers} p_3 c_white">Background Color of {$modifiers}</div>
+ 
+  Styleguide 104.1
+ 
+ */
+/*
+  Background Color Shades
+ 
+  Background colors can be shifted by appending a modifier bg_{{color-name}}-{{n5 to 5}}.  The negative(n) numbers mix the color with black and the positive numbers mix the color with white.   
+ 
+  bg_primary              - background color modified light to dark
+  bg_secondary              - background color modified light to dark
+  bg_info              - background color modified light to dark
+  bg_highlight              - background color success color
+  bg_success              - background color modified light to dark
+  bg_warning              - background color modified light to dark
+  bg_alert              - background color modified light to dark
+
+  markup:
+  <div class="grid-x">
+    <div class="bg_white cell auto text-center p_2 p-y_5 ">white</div>
+    <div class="{$modifiers}-5 cell auto text-center  p_2 p-y_5">5</div>
+    <div class="{$modifiers}-4 cell auto text-center  p_2 p-y_5">4</div>
+    <div class="{$modifiers}-3 cell auto text-center  p_2 p-y_5">3</div>
+    <div class="{$modifiers}-2 cell auto text-center  p_2 p-y_5">2</div>
+    <div class="{$modifiers}-1 cell auto text-center  c_white p_2 p-y_5">1</div>
+    <div class="{$modifiers}-0 cell auto text-center  c_white p_2 p-y_5">0</div>
+    <div class="{$modifiers}-n1 cell auto text-center  c_white p_2 p-y_5">n1</div>
+    <div class="{$modifiers}-n2 cell auto text-center  c_white p_2 p-y_5">n2</div>
+    <div class="{$modifiers}-n3 cell auto text-center  c_white p_2 p-y_5">n3</div>
+    <div class="{$modifiers}-n4 cell auto text-center  c_white p_2 p-y_5">n4</div>
+    <div class="{$modifiers}-n5 cell auto text-center  c_white p_2 p-y_5">n5</div>
+    <div class="bg_black cell auto text-center  c_white p_2 p-y_5">black</div>
+  </div>
+
+ 
+  Styleguide 104.2
+ 
+ */
+
+@each $color-name, $color in $acc-palette {
+	@include color-loop(background-color, $color-name, $color);
+}
+
+.bg_white {
+	background-color: $white;
+}
+.bg_black {
+	background-color: $black;
+}
+@if $short-names-only {
+	.bg_white {
+		@extend .bg_white;
+	}
+	.bg_black {
+		@extend .bg_black;
+	}
+}

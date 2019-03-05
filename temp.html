@@ -1,0 +1,86 @@
+<?php 
+
+require_once('cache.php');
+  //instantiate $cache
+  $cache = new Cache();
+  // if($flush){$cache->delete('gallery_grouping.tmp');}
+  // $gallery_grouping = $cache->read('gallery_grouping.tmp');
+  // if (empty($gallery_grouping)) { 
+  //   $gallery_grouping  = query_full_array("SELECT zp_albums.parentid AS id, LEFT( zp_albums.folder,  (LOCATE(zp_albums.title, zp_albums.folder)-2))   AS type, count(zp_albums.title) AS count FROM zp_albums INNER JOIN zp_images ON zp_albums.id = zp_images.albumid  GROUP BY zp_albums.parentid");
+  //   $cache->write('gallery_grouping.tmp', $gallery_grouping);     
+  // }
+  
+  $query = "SELECT zp_albums.parentid AS id, LEFT( zp_albums.folder,  (LOCATE(zp_albums.title, zp_albums.folder)-2))   AS type, count(zp_albums.title) AS count FROM zp_albums INNER JOIN zp_images ON zp_albums.id = zp_images.albumid  GROUP BY zp_albums.parentid;";
+  $cacheName = "gallery_grouping.tmp";
+  $gallery_grouping = queryCache($flush, $query, $casheName);
+
+
+
+  $infographicinfo = array();
+  foreach ($gallery_grouping as $key => $value) {
+    $cachedQuery = 'cachedQuery_'.$value['id'].'.tmp';
+    if($flush){$cache->delete($cachedQuery);}
+    $data = $cache ->read($cachedQuery);
+    if (empty($data)) { 
+      $queryString="SELECT DISTINCT zp_albums.title AS type, COUNT(zp_images.albumid) as count FROM zp_albums INNER JOIN zp_images ON zp_albums.id = zp_images.albumid WHERE zp_albums.parentid = ".$value['id']." GROUP BY zp_albums.folder;";
+      $data  = query_full_array($queryString);
+      $cache->write($cachedQuery, $data);     
+    }
+    $infographicinfo[$value['type']]=$data;
+    # code...
+  }
+// if($flush){$cache->delete('tag_time.tmp'); echo "flush tag_time";}
+// $tag_time = $cache->read('tag_time.tmp');
+// if(empty($tag_time)){
+//   $tag_time = query_full_array("SELECT (@cnt := @cnt + 1) AS id, t.* from (SELECT zp_tags.name AS name, zp_images.date AS date FROM zp_tags JOIN zp_obj_to_tag ON zp_obj_to_tag.tagid = zp_tags.id  RIGHT JOIN zp_images ON zp_obj_to_tag.objectid = zp_images.id WHERE LOCATE('_color',zp_tags.name)!= 1 ORDER BY  zp_images.date) t CROSS JOIN (SELECT @cnt := 0) AS dummy;");
+//   $cache->write('tag_time.tmp',$tag_time);
+// }
+$query = "SELECT (@cnt := @cnt + 1) AS id, t.* from (SELECT zp_tags.name AS name, zp_images.date AS date FROM zp_tags JOIN zp_obj_to_tag ON zp_obj_to_tag.tagid = zp_tags.id  RIGHT JOIN zp_images ON zp_obj_to_tag.objectid = zp_images.id WHERE LOCATE('_color',zp_tags.name)!= 1 ORDER BY  zp_images.date) t CROSS JOIN (SELECT @cnt := 0) AS dummy;";
+$cacheName = "tag_time.tmp";
+$tag_name = queryCache($flush, $query, $casheName);
+
+// if($flush){$cache->delete('tag_name.tmp'); echo "flush tag_name";}
+// $tag_name = $cache->read('tag_name.tmp');
+// if(empty($tag_name)){
+//   $tag_name = query_full_array("SELECT DISTINCT name FROM zp_tags WHERE LOCATE('_color',zp_tags.name) != 1;");
+//   $cache->write('tag_name.tmp',$tag_name);
+// }
+
+$query = "SELECT DISTINCT name FROM zp_tags WHERE LOCATE('_color',zp_tags.name) != 1;";
+$cacheName = "tag_name.tmp";
+$tag_name = queryCache($flush, $query, $casheName);
+
+// if($flush){$cache->delete('color_name.tmp'); echo "flush color_name";}
+//   $color_name = $cache->read('color_name.tmp');
+// if(empty($color_name)){
+//   $color_name = query_full_array("SELECT DISTINCT name FROM zp_tags WHERE LOCATE('_color',zp_tags.name) = 1 and LENGTH(zp_tags.name) !=6 ;");
+//   $cache->write('color_name.tmp',$color_name);
+// }
+$query = "SELECT DISTINCT name FROM zp_tags WHERE LOCATE('_color',zp_tags.name) = 1 and LENGTH(zp_tags.name) !=6 ;";
+$cacheName = "color_name.tmp";
+$color_name = queryCache($flush, $query, $casheName);
+
+//  if($flush){$cache->delete('color_time.tmp');echo "flush color_time";}
+// $color_time = $cache->read('color_time.tmp');
+// if(empty($color_time)){
+//   $color_time = query_full_array("SELECT (@cnt := @cnt + 1) AS id, t.* from (SELECT zp_tags.name, UNIX_TIMESTAMP(zp_images.date) AS date FROM zp_tags JOIN zp_obj_to_tag ON zp_obj_to_tag.tagid = zp_tags.id  RIGHT JOIN zp_images ON zp_obj_to_tag.objectid = zp_images.id WHERE LOCATE('_color',zp_tags.name) = 1 and LENGTH(zp_tags.name) !=6 ORDER BY  zp_tags.name) t CROSS JOIN (SELECT @cnt := 0) AS dummy;");
+//   $cache->write('color_time.tmp',$tag_time);
+// }
+
+$query = "SELECT (@cnt := @cnt + 1) AS id, t.* from (SELECT zp_tags.name, UNIX_TIMESTAMP(zp_images.date) AS date FROM zp_tags JOIN zp_obj_to_tag ON zp_obj_to_tag.tagid = zp_tags.id  RIGHT JOIN zp_images ON zp_obj_to_tag.objectid = zp_images.id WHERE LOCATE('_color',zp_tags.name) = 1 and LENGTH(zp_tags.name) !=6 ORDER BY  zp_tags.name) t CROSS JOIN (SELECT @cnt := 0) AS dummy;";
+$cacheName ="color_time.tmp";
+$color_time = queryCache($flush, $query, $cacheName);
+
+
+  function queryCache($flush, $query, $cacheName){
+    var $storageVar;
+    if($flush){$cache->delete( $cacheName ) }
+    if(empty( $cache )){
+      $storageVar = query_full_array($query);
+      $cache->write($cacheName,$storageVar);
+    }else{
+      $storageVar = $cache->read($cacheName);
+    }
+    return $storageVar;
+  }
+?>

@@ -46,7 +46,7 @@
     "fibers": "^2.0.2",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.4.0",
-    "gulp-dart-sass": "^0.9.0",
+    "gulp-dart-sass": "^0.9.1",
     "gulp-postcss": "^7.0.1",
     "gulp-rename": "^1.4.0",
     "gulp-serve": "^1.4.0",

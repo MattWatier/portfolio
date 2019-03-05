@@ -3,12 +3,13 @@
   <script src="<?php echo $_zp_themeroot ?>/javascripts/d3.v3.min.js" type="text/javascript"></script>
   <script src="<?php echo $_zp_themeroot ?>/javascripts/graphs.js" type="text/javascript"></script>
 	<script src="<?php echo $_zp_themeroot ?>/javascripts/jquery.lazyload.min.js" type="text/javascript"></script>
-
+<!-- 
 	<script type="text/javascript">stLight.options({publisher: "204b14bf-1829-43ba-a1b0-4931301a44eb", doNotHash: false, doNotCopy: false, hashAddressBar: true});</script>
 <script>
 var options={ "publisher": "204b14bf-1829-43ba-a1b0-4931301a44eb", "position": "right", "ad": { "visible": false, "openDelay": 5, "closeDelay": 0}, "chicklets": { "items": ["facebook", "twitter", "googleplus", "email", "sharethis"]}};
 var st_hover_widget = new sharethis.widgets.hoverbuttons(options);
 </script>
+ -->
 <!-- Add fancyBox main JS and CSS files -->
   <script  src="<?php echo $_zp_themeroot ?>/javascripts/fancyBox/jquery.fancybox.js?v=2.1.4" type="text/javascript"></script>
  

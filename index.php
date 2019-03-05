@@ -9,58 +9,62 @@
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
-  <?php zp_apply_filter('theme_head'); ?> 
-    <title><?php echo getBareGalleryTitle(); ?> | <?php echo getBareAlbumTitle();?> | <?php echo getBareImageTitle();?></title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width">
-  <?php include('_htmlHeader.php' ); ?> 
+   <?php zp_apply_filter('theme_head'); ?>
+   <title><?php echo getBareGalleryTitle(); ?> | <?php echo getBareAlbumTitle();?> | <?php echo getBareImageTitle();?></title>
+   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+   <meta name="viewport" content="width=device-width">
+   <?php include('_htmlHeader.php' ); ?>
 </head>
-<body>
-<!--[if lt IE 8]>
+
+<body class="">
+   <!--[if lt IE 8]>
         <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
  <![endif]-->
-    <?php zp_apply_filter('theme_body_open'); ?>
-    <?php include('_siteHeaderNav.php' ); ?>
-    <div class='page'>
-        <div id="introduction">
-            <h1 class="fontface">Welcome to the Fragments of Me.</h1>
-            <div id="bar_holder"class="row">
-              <!-- this is a holder for the bar chart -->
+   <?php zp_apply_filter('theme_body_open'); ?>
+   <?php include('_siteHeaderNav.php' ); ?>
+   <div class="grid-container" style="max-width:100%;">
+      <div class='page grid-x grid-margin-x'>
+         <div id="introduction" class="cell large-4">
+            <h1 class="font_display font_5">Welcome to the Fragments of Me.</h1>
+            <div id="bar_holder" class="row">
+               <!-- this is a holder for the bar chart -->
             </div>
-            <p><?php printGalleryDesc(); ?></p>
+            <div class="font_2 font_copy"><?php printGalleryDesc(); ?></div>
             <hr>
-            <h4>Shards of my work scatter across time</h4>
-            <p><em>It is interesteding to see my work plotted into the months they were created over time. This isn't all my work but the work that is represented this repository.</em></p>
-        </div><!-- End of Introduction -->
-    <?php 
-      $gallery_item = '<div id="ablumns"><div class="row">';
+            <!-- <h4  class="font_display font_4">Shards of my work scatter across time</h4>
+         <p><em>It is interesteding to see my work plotted into the months they were created over time. This isn't all my work but the work that is represented this repository.</em></p> -->
+         </div><!-- End of Introduction -->
+         <?php 
+      $gallery_item = '<div id="ablumns" class="cell large-8"><div class="grid-x grid-margin-x grid-margin-y">';
       while (next_album()):
-        $gallery_item .= '<div class="albumn '.getAnnotatedAlbumTitle().'" ><div class="row">';
-        $gallery_item .= '<h3><a href="'.html_encode(getAlbumURL()).'" class="link no-underline" title="View album '.getAnnotatedAlbumTitle().'">'.getAlbumTitle().'&raquo;</a></h3>';
-        $gallery_item .= '<div class="d3_chart" id="dataholder_'.getAnnotatedAlbumTitle().'">&nbsp;</div>';
-        $images = '<ul class="thumbnail-holder">';
-        for ($i=1; $i<=10; $i++) {
+        $gallery_item .= '<div class="albumn '.getAnnotatedAlbumTitle().' cell small-12 medium-6" ><div class="">';
+        $gallery_item .= '<h3 class="font_4 br-b_1 br_solid br_0 br_primary-5 p-x_4"><a href="'.html_encode(getAlbumURL()).'" class="link no-underline" title="View album '.getAnnotatedAlbumTitle().'">'.getAlbumTitle().'<i class="far fa-arrow-alt-circle-right font_2 p-l_2"></i></a></h3>';
+        $gallery_item .= '<div class="d3_chart " id="dataholder_'.getAnnotatedAlbumTitle().'">&nbsp;</div>';
+        $images = '<ul class="thumbnail-holder grid-x no-bullet">';
+        for ($i=1; $i<=18; $i++) {
           $randomImage = getRandomImagesAlbum( $rootAlbum = getAnnotatedAlbumTitle(),$daily = false);
-          $images .= "<li class='thumbnail'><a class='fancybox' href='".$randomImage->getFullImage()."'>";
+          $images .= "<li class='cell center large-1 m-x_auto m-y_2 medium-2 small-4 text-center m-x_3'><a class='fancybox br_1 inline-block br_secondary-4 br_solid p_2 bg_secondary-5 hover:primary' href='".$randomImage->getFullImage()."'>";
           if ($randomImage->getWidth() >= $randomImage->getHeight()) {
-            $ih = 30; $iw = NULL; }else{ $ih = NULL; $iw = 30;
+            $ih = 60; $iw = NULL; }else{ $ih = NULL; $iw = 60;
           }
-          $images .= "<img width='30' height='30'  class='lazy' src='".$_zp_themeroot."/images/holder.gif' data-original='".html_encode($randomImage->getCustomImage(NULL, $iw, $ih, 30, 30, NULL, NULL, true))."'/>";
+          $images .= "<img width='60' height='60'  class='lazy' src='".$_zp_themeroot."/images/holder.gif' data-original='".html_encode($randomImage->getCustomImage(NULL, $iw, $ih, 60, 60, NULL, NULL, true))."'/>";
           $images .= "</a></li> \n";
-          //if($i==3){$images .= "</ul><ul style='list-style: none;'class='thumbnails row'>";}
         }
         $images .= "</ul> \n";
         $gallery_item .= $images;
-        $gallery_item .= '<p class="albumn-description">'.getAlbumCustomData().'<a href="'.html_encode(getAlbumURL()).'">&nbsp; Explore my work on '.getAnnotatedAlbumTitle().'&nbsp;<i class="fa fa-arrow-circle-right"></i></a></p>'; 
+        $gallery_item .= '<div class="albumn-description font_1 font_copy c_secondary-n4 lh_4 font_1 p_5 p-t_4 br-t_1 br_solid br_0 br_primary-5">'.getAlbumCustomData().'<a href="'.html_encode(getAlbumURL()).'" class="font_2 font_display block">Explore my work on '.getAnnotatedAlbumTitle().'<i class="far fa-caret-square-right p-l_3"></i></a></div>'; 
         $gallery_item .= "\n </div></div> \n";
       endwhile;
       $gallery_item .= '</div></div></div></div>';
       echo $gallery_item;
     ?>
-<div class="row" id="dataholder" style="position: relative;"></div>
-<?php 
-
+      </div>
+      <div class="row" id="dataholder" style="position: relative;"></div>
+      <?php 
+  
+  
   require_once('cache.php');
   //instantiate it
   $cache = new Cache();
@@ -69,7 +73,7 @@
   $query = "SELECT fragments_albums.parentid AS id, LEFT( fragments_albums.folder,  (LOCATE(fragments_albums.title, fragments_albums.folder)-2))   AS type, count(fragments_albums.title) AS count FROM fragments_albums INNER JOIN fragments_images ON fragments_albums.id = fragments_images.albumid  GROUP BY fragments_albums.parentid;";
   
   $cacheName = "gallery_grouping.tmp";
-  $gallery_grouping = query_full_array($query);//d3QueryCache($flush, $query, $cacheName, $cache);
+  $gallery_grouping = query_full_array($query); //d3QueryCache($flush, $query, $cacheName, $cache);
  
 
   // script tags to place the arrays on the page.
@@ -120,20 +124,24 @@
     return $storageVar;
   }
 ?>
-  <?php include('_endofTheme.php' ); ?>
-  </div>
-  <div id="colortheme">
-    <!-- this is a holder for a secondary block -->
-  </div>
+   </div>
+   <?php include('_endofTheme.php' ); ?>
+   <div id="colortheme">
+      <!-- this is a holder for a secondary block -->
+   </div>
 
-  <script type="text/javascript">
-    $(document).ready(function() {
+   <script type="text/javascript">
+   $(document).ready(function() {
       <?php echo $d3BuilderCall; ?>
       $imgs = $("img.lazy");
-      $imgs.lazyload({ effect : "fadeIn",failure_limit: Math.max($imgs.length - 1, 0)});
-    });
-   </script> 
+      $imgs.lazyload({
+         effect: "fadeIn",
+         failure_limit: Math.max($imgs.length - 1, 0)
+      });
+   });
+   </script>
 
 
-    </body>
+</body>
+
 </html>

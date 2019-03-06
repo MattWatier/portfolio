@@ -44,22 +44,22 @@
 @include loop-style(margin-left, "", "");
 @include loop-style(margin-right, "", "");
 @media #{$medium-up} {
-	@include loop-style(margin, $bp_medium, "");
-	@include loop-style(margin-vertical, $bp_medium, "");
-	@include loop-style(margin-horizontal, $bp_medium, "");
-	@include loop-style(margin-top, $bp_medium, "");
-	@include loop-style(margin-bottom, $bp_medium, "");
-	@include loop-style(margin-left, $bp_medium, "");
-	@include loop-style(margin-right, $bp_medium, "");
+	@include loop-style(margin, $bp_medium, "\:medium");
+	@include loop-style(margin-vertical, $bp_medium, "\:medium");
+	@include loop-style(margin-horizontal, $bp_medium, "\:medium");
+	@include loop-style(margin-top, $bp_medium, "\:medium");
+	@include loop-style(margin-bottom, $bp_medium, "\:medium");
+	@include loop-style(margin-left, $bp_medium, "\:medium");
+	@include loop-style(margin-right, $bp_medium, "\:medium");
 }
 @media #{$large-up} {
-	@include loop-style(margin, $bp_large, "");
-	@include loop-style(margin-vertical, $bp_large, "");
-	@include loop-style(margin-horizontal, $bp_large, "");
-	@include loop-style(margin-top, $bp_large, "");
-	@include loop-style(margin-bottom, $bp_large, "");
-	@include loop-style(margin-left, $bp_large, "");
-	@include loop-style(margin-right, $bp_large, "");
+	@include loop-style(margin, $bp_large, "\:large");
+	@include loop-style(margin-vertical, $bp_large, "\:large");
+	@include loop-style(margin-horizontal, $bp_large, "\:large");
+	@include loop-style(margin-top, $bp_large, "\:large");
+	@include loop-style(margin-bottom, $bp_large, "\:large");
+	@include loop-style(margin-left, $bp_large, "\:large");
+	@include loop-style(margin-right, $bp_large, "\:large");
 }
 
 /*

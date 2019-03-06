@@ -45,7 +45,7 @@
         $images = '<ul class="thumbnail-holder grid-x no-bullet">';
         for ($i=1; $i<=18; $i++) {
           $randomImage = getRandomImagesAlbum( $rootAlbum = getAnnotatedAlbumTitle(),$daily = false);
-          $images .= "<li class='cell center large-1 m-x_auto m-y_2 medium-2 small-4 text-center m-x_3'><a class='fancybox br_1 inline-block br_secondary-4 br_solid p_2 bg_secondary-5 hover:primary' href='".$randomImage->getFullImage()."'>";
+          $images .= "<li class='cell center large-1 m-x_auto m-y_2 medium-2 small-4 text-center m-x_3'><a data-fancybox='gallery_".getAnnotatedAlbumTitle()."' class='br_1 inline-block br_secondary-4 br_solid p_2 bg_secondary-5 hover:primary' href='".$randomImage->getFullImage()."'>";
           if ($randomImage->getWidth() >= $randomImage->getHeight()) {
             $ih = 60; $iw = NULL; }else{ $ih = NULL; $iw = 60;
           }

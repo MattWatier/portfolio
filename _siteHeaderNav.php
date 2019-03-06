@@ -6,8 +6,8 @@
 <div class="site-nav br-t_secondary-n2 br_solid br-t_3 br_0 block">
    <div class="grid-container font_2" style="max-width:100%;">
       <ul class="grid-x no-bullet bg_secondary-n2 br-bl_radius br-br_radius inline-flex">
-         <li class="logo cell shrink bg_secondary-n2 br-bl_radius">
-            <a class="p-y_2 p-x_4 block br-bl_radius hover:bg_secondary-n4" href="/">
+         <li class="logo cell shrink bg_secondary-n2 br-bl_radius hover:bg_secondary-n4">
+            <a class="p-y_2 lh_1 p-t_3 p-x_4 block br-bl_radius hover:bg_secondary-n4" href="/">
                <svg style="height:1.5rem;" class="bg_white hover:bg_ br_white br_solid br_1 vertical-align_middle" version="1.1" id="Logo_MW" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1656 794" xml:space="preserve">
                   <g>
                      <rect class="shape" width="72" height="792" />
@@ -30,19 +30,19 @@
                </svg>
             </a>
          </li>
-         <li class="section-nav cell shrink">
+         <li class="section-nav cell small-12 medium-shrink">
             <ul class="no-bullet grid-x">
-               <li class="cell shrink"><a class="c_white bg_secondary block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_secondary-5 br-bl_radius" href="/fragments/"><span class="text">fragments</span></a></li>
-               <li class="cell shrink"><a class="c_white bg_secondary block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_secondary-5" href="/thoughts/"><span class="text">thoughts</span></a></li>
-               <li class="cell shrink"><a class="c_white br-br_radius bg_secondary block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_secondary-5" href="/books/"><span class="text">books</span></a></li>
+               <li class="medium-shrink small-auto cell"><a class="c_white bg_secondary block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_primary-1 br-bl_radius" href="/fragments/"><span class="text">fragments</span></a></li>
+               <li class="medium-shrink small-auto cell"><a class="c_white bg_secondary block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_primary-1" href="/thoughts/"><span class="text">thoughts</span></a></li>
+               <li class="medium-shrink small-auto cell"><a class="c_white br-br_radius bg_secondary block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_primary-1" href="/books/"><span class="text">books</span></a></li>
             </ul>
          </li>
-         <li class="social-nav cell shrink bg_seondary-2">
+         <li class="social-nav cell small-12 medium-shrink bg_seondary-2">
             <ul class="no-bullet grid-x">
-               <li class="cell shrink"><a class="c_white  block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_secondary-5 " href="https://twitter.com/mattwatier" target="_blank"><i class="fab fa-twitter"></i><span class="text"></span></a></li>
-               <li class="cell shrink"><a class="c_white  block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_secondary-5 " href="https://www.linkedin.com/in/mattwatier" target="_blank"><i class="fab fa-linkedin"></i><span class="text"></span></a></li>
-               <li class="cell shrink"><a class="c_white  block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_secondary-5 " href="http://mattwatier.deviantart.com/" target="_blank"><i class="fab fa-deviantart"></i><span class="text"></span></a></li>
-               <li class="cell shrink"><a class="c_white  block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_secondary-5 " href="/thoughts/contact_me.php" target="blank"><i class="far fa-envelope"></i><span></span></a></li>
+               <li class="cell medium-shrink small-3"><a class="c_white  block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_accent-1 " href="https://twitter.com/mattwatier" target="_blank"><i class="fab fa-twitter"></i><span class="text"></span></a></li>
+               <li class="cell medium-shrink small-3"><a class="c_white  block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_accent-1 " href="https://www.linkedin.com/in/mattwatier" target="_blank"><i class="fab fa-linkedin"></i><span class="text"></span></a></li>
+               <li class="cell medium-shrink small-3"><a class="c_white  block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_accent-1 " href="http://mattwatier.deviantart.com/" target="_blank"><i class="fab fa-deviantart"></i><span class="text"></span></a></li>
+               <li class="cell medium-shrink small-3"><a class="c_white  block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_accent-1 " href="/thoughts/contact_me.php" target="blank"><i class="far fa-envelope"></i><span></span></a></li>
             </ul>
          </li>
       </ul>

@@ -598,7 +598,7 @@ function drawBarChartNav(selectData, dataSet, selectString) {
 		.append("svg")
 
 		.attr("class", function() {
-			return "fixed bar" + selectData;
+			return " bar" + selectData;
 		})
 		.attr("width", barChart.w)
 		.attr("height", barChart.h)

@@ -28,7 +28,7 @@ include_once "masonFunctions.php";
 	<div id="main" class="cell small-12 medium-7 large-9">
 		<div class="grid-x grid-margin-x">
 			<div id="breadcrumb" class="cell small-6 medium-7 large-9">
-				<h1 class="font_display font_5"><?php printHomeLink('', ' | '); ?><a href="<?php echo html_encode(getGalleryIndexURL());?>" title="<?php echo gettext('Albums Index'); ?>"><?php echo getGalleryTitle();?></a> | <?php printParentBreadcrumb(); ?> <?php printAlbumTitle(true);?></h1>
+				<h1 class="font_display font_5"><?php printHomeLink('', ' | '); ?><a href="<?php echo html_encode(getGalleryIndexURL());?>" title="<?php echo gettext('Albums Index'); ?>">Fragments</a> | <?php printParentBreadcrumb(); ?> <?php printAlbumTitle(true);?></h1>
 				<div class="font_1"><?php printAlbumDesc(true); ?></div>
 			</div>
 			<div id="dataholder" class="cell small-6 medium-5 large-3">
@@ -72,7 +72,7 @@ include_once "masonFunctions.php";
 						$gallery->add_to_filter(array_unique($tags));
 					}
 					$image_item .= "<div class='images br_secondary-4 bw_1 br_solid p_2 m_2 m-y_3 texture-light bg_secondary-5 ".getBareAlbumTitle()." ".$space_separated_array."' style='width:".($W+14)."px; height:".($H+14)."px;' >";
-					$image_item .= "<a href='".getCustomImageURL(800)."' title='".getBareImageTitle()."' class='fancybox'  style='width:".($W+12)."px; height:".($H+12)."px;' >";
+					$image_item .= "<a href='".getCustomImageURL(800)."' title='".getBareImageTitle()."' data-arrows='false'   data-fancybox='gallery_".getBareAlbumTitle()."' style='width:".($W+12)."px; height:".($H+12)."px;' >";
 					$image_item .="<img width='".$W."' height='".$H."' class='lazy' src='' data-original='".getCustomSizedImageMaxSpace( $W, $H)."' /></a></div>";
 					$album_item .= $image_item;	
 					endwhile; 

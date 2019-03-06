@@ -40,7 +40,7 @@
          <li class="social-nav cell shrink bg_seondary-2">
             <ul class="no-bullet grid-x">
                <li class="cell shrink"><a class="c_white  block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_secondary-5 " href="https://twitter.com/mattwatier" target="_blank"><i class="fab fa-twitter"></i><span class="text"></span></a></li>
-               <li class="cell shrink"><a class="c_white  block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_secondary-5 " href="https://www.linkedin.com/in/mattwatier" target="_blank"><i class="fab fa-linkedin-square"></i><span class="text"></span></a></li>
+               <li class="cell shrink"><a class="c_white  block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_secondary-5 " href="https://www.linkedin.com/in/mattwatier" target="_blank"><i class="fab fa-linkedin"></i><span class="text"></span></a></li>
                <li class="cell shrink"><a class="c_white  block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_secondary-5 " href="http://mattwatier.deviantart.com/" target="_blank"><i class="fab fa-deviantart"></i><span class="text"></span></a></li>
                <li class="cell shrink"><a class="c_white  block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_secondary-5 " href="/thoughts/contact_me.php" target="blank"><i class="far fa-envelope"></i><span></span></a></li>
             </ul>

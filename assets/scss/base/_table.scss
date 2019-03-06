@@ -41,30 +41,27 @@ markup:
 Styleguide 10.2.1
 */
 .table {
-	
 }
-.table__thead, thead{
-	 @extend .font_0;
-	 background-color: $white;
+.table__thead,
+thead {
+	@extend .font_0;
+	background-color: $white;
 
-		th, td{
-			border-bottom: 2px solid get-themecolor(primary, 1);
-
-			
-
-		}
+	th,
+	td {
+		border-bottom: 2px solid get-themecolor(primary, 1);
+	}
 }
-.table__tfoot, tfoot{
-	 @extend .font_n1;
-	 background-color: get-themecolor(secondary, 5);
+.table__tfoot,
+tfoot {
+	@extend .font_n1;
+	background-color: get-themecolor(secondary, 5);
 
-		th, td{
-			border-top: 1px solid get-themecolor(secondary, 1);
-			font-style: italic;
-
-			
-
-		}
+	th,
+	td {
+		border-top: 1px solid get-themecolor(secondary, 1);
+		font-style: italic;
+	}
 }
 
 /*
@@ -112,8 +109,6 @@ markup:
 Styleguide 10.2.2
 */
 
-
-
 /*
 
 table banded
@@ -158,36 +153,26 @@ markup:
 Styleguide 10.2.3
 */
 .table.banded {
-  .table__head, thead{
-    th:nth-child(even){
-     // @extend .back_acc-5;
-      background-color: get-themecolor(acc, 5);
-
-
-
-
-          }
-  }
-    .table__body, tbody{
-    td:nth-child(even){
-     // @extend .back_primary-5;
-      background-color: get-themecolor(primary, 5);
-  
-          }
-    tr:nth-child(even){
-      td:nth-child(even){
-     // @extend .back_acc-4;
-       background-color: get-themecolor(acc, 4);
-
-
-
-          }
-      
-    }
-      
-  }
-
-
+	.table__head,
+	thead {
+		th:nth-child(even) {
+			// @extend .back_acc-5;
+			background-color: get-themecolor(secondary, 5);
+		}
+	}
+	.table__body,
+	tbody {
+		td:nth-child(even) {
+			// @extend .back_primary-5;
+			background-color: get-themecolor(primary, 5);
+		}
+		tr:nth-child(even) {
+			td:nth-child(even) {
+				// @extend .back_acc-4;
+				background-color: get-themecolor(secondary, 4);
+			}
+		}
+	}
 }
 
 /*
@@ -233,8 +218,6 @@ markup:
 Styleguide 10.2.4
 */
 .table.unstripped {
-
-  
 }
 
 /*
@@ -286,7 +269,6 @@ markup:
 
 Styleguide 10.2.5
 */
-
 
 /*
 
@@ -361,13 +343,3 @@ markup:
 
 Styleguide 10.2.6
 */
-
-
-
-
-
-
-
-
-
-

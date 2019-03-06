@@ -10,23 +10,22 @@
 
 Fonts 
 
-The ACC is focused on stable, conservative, clean fonts.   Roboto Slab is the standard serif fonts across all products at the ACC.  Muli is the current successor to Open Sans, and Maven is a slightly modern font to give a small level of interests which replaces Raleway, or Lato in other products.
+The Design is focused on stable, conservative, clean fonts.   
 
  Styleguide 0.1
 */
 
-
 /*
 
-Roboto Slab
+Big Caslon
  
  A beuatiful slab font that shows a complexity and texture to the fonts used in the design. 
 
  markup:
 	<div class="font_slab">
 		<h2 class="font_slab group-divide-bottom font--name small-12">
-			Roboto Slab
-			<span class="sub-line">font-family: 'Roboto Slab', "Times New Roman",  'Lucida Bright', Georgia, serif</span>
+			Big Caslon
+			<span class="sub-line">font-family: Big Caslon, Book Antiqua, Palatino Linotype, Georgia, serif;</span>
 		</h2>
 		<div class="font grid-x grid-padding-x grid-padding-y">
 			<div class="cell shrink font_10 font--dropcase_2x">Rs</div>
@@ -53,8 +52,9 @@ Maven Pro
  markup:
 	<div class="font_display">
 		<h2 class="font_display group-divide-bottom font--name small-12">
-			Maven Pro
-			<span class="sub-line">font-family: 'Maven Pro', "Times New Roman",  'Lucida Bright', Georgia, serif</span>
+			Sansation
+			<span class="sub-line">font-family:	font-family: "SansationRegular", "Muli", "Helvetica Neue", "Helvetica",
+		Helvetica, Arial, sans-serif;</span>
 		</h2>
 		<div class="font grid-x grid-padding-x grid-padding-y">
 			<div class="cell shrink font_10 font--dropcase_2x">Mp</div>
@@ -102,19 +102,22 @@ Muli
  Styleguide 0.1.3
 */
 
-.font{
-	.font--example{background-image: url(http://basehold.it/i/24);}
+.font {
+	.font--example {
+		background-image: url(http://basehold.it/i/24);
+	}
 
 	// &.font-display{@include font-display(); }
 	// &.font-slab{@include font-slab(); }
 	// &.font-normal{@include font(); }
 	// &.font-light{@include font-light(); }
-	.font--name{color:#000}
-	.font--dropcase_2x{color:map-get($acc-palette,primary);} 
-     
+	.font--name {
+		color: #000;
+	}
+	.font--dropcase_2x {
+		color: map-get($acc-palette, primary);
+	}
 }
-
-
 
 /*
 

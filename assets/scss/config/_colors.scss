@@ -1,8 +1,10 @@
 $teal: #198dae;
+$royal-blue: #3182bd;
 $dark-grey: #64666d;
 $alt-grey: #807871;
 $green: #088532;
 $orange: #db7b14;
+$gold: #ff7f0e;
 $red: #cb241c;
 $blue: #406bc0;
 $purple: #7e4fbb;
@@ -12,16 +14,13 @@ $white: #fff;
 $black: #111;
 
 $acc-palette: (
-	primary: $teal,
+	primary: $royal-blue,
 	secondary: $dark-grey,
 	success: $green,
 	warning: $orange,
 	alert: $red,
-	navigation: $blue,
-	accent: $purple,
-	info: $alt-grey,
-	highlight: $magenta,
-	acc: $acc-blue
+	accent: $gold,
+	info: $alt-grey
 );
 
 %hover-text-white {
@@ -37,16 +36,15 @@ $acc-palette: (
 
   Strathmore color is based off of the ACC Scrub Colors  
 
-  back_primary                  - Scrub Teal used for primary colors often this color is swapped out for the product color of the product. This color can be found on most UI items. 
-  back_secondary                - Grey used secondary colors and secondary actions
-  back_navigation               - Scrub Blue reserved for navigation items. IE next, previous, forard, back buttons. 
-  back_info                     - Scrub Magenta for information 
-  back_highlight                - Scrub Purple used for highlighting 
-  back_success                  - Action color for Success and Complete
-  back_warning                  - Action color for warnings
-  back_alert                    - Action colors for alerts and errors
-  back_acc                      - ACC Blue
-  back_accent                   - life is better with a bit of purple
+  bg_primary                  - Scrub Teal used for primary colors often this color is swapped out for the product color of the product. This color can be found on most UI items. 
+  bg_secondary                - Grey used secondary colors and secondary actions
+  bg_navigation               - Scrub Blue reserved for navigation items. IE next, previous, forard, back buttons. 
+  bg_info                     - Scrub Magenta for information 
+  bg_highlight                - Scrub Purple used for highlighting 
+  bg_success                  - Action color for Success and Complete
+  bg_warning                  - Action color for warnings
+  bg_alert                    - Action colors for alerts and errors
+  bg_accent                   - life is better with a bit of purple
   
   markup:
   <div class="{$modifiers} cell auto text-center color_white padding_2">{$modifiers}</div>  
@@ -55,70 +53,70 @@ $acc-palette: (
  
  */
 
-.back_black {
+.bg_black {
 	background-color: $black;
 }
-.back_black-1 {
+.bg_black-1 {
 	background-color: rgba(0, 0, 0, 0.9);
 }
-.back_black-2 {
+.bg_black-2 {
 	background-color: rgba(0, 0, 0, 0.8);
 }
-.back_black-3 {
+.bg_black-3 {
 	background-color: rgba(0, 0, 0, 0.7);
 }
-.back_black-4 {
+.bg_black-4 {
 	background-color: rgba(0, 0, 0, 0.6);
 }
-.back_black-5 {
+.bg_black-5 {
 	background-color: rgba(0, 0, 0, 0.5);
 }
-.back_black-6 {
+.bg_black-6 {
 	background-color: rgba(0, 0, 0, 0.4);
 }
-.back_black-7 {
+.bg_black-7 {
 	background-color: rgba(0, 0, 0, 0.3);
 }
-.back_black-8 {
+.bg_black-8 {
 	background-color: rgba(0, 0, 0, 0.2);
 }
-.back_black-9 {
+.bg_black-9 {
 	background-color: rgba(0, 0, 0, 0.1);
 }
-.back_black-0 {
+.bg_black-0 {
 	background-color: rgba(0, 0, 0, 0.02);
 }
 
-.back_white {
+.bg_white {
 	background-color: $white;
 }
-.back_white-1 {
+.bg_white-1 {
 	background-color: rgba(255, 255, 255, 0.9);
 }
-.back_white-2 {
+.bg_white-2 {
 	background-color: rgba(255, 255, 255, 0.8);
 }
-.back_white-3 {
+.bg_white-3 {
 	background-color: rgba(255, 255, 255, 0.7);
 }
-.back_white-4 {
+.bg_white-4 {
 	background-color: rgba(255, 255, 255, 0.6);
 }
-.back_white-5 {
+.bg_white-5 {
 	background-color: rgba(255, 255, 255, 0.5);
 }
-.back_white-6 {
+.bg_white-6 {
 	background-color: rgba(255, 255, 255, 0.4);
 }
-.back_white-7 {
+.bg_white-7 {
 	background-color: rgba(255, 255, 255, 0.3);
 }
-.back_white-8 {
+.bg_white-8 {
 	background-color: rgba(255, 255, 255, 0.2);
 }
-.back_white-9 {
+.bg_white-9 {
 	background-color: rgba(255, 255, 255, 0.1);
 }
-.back_white-0 {
+.bg_white-0 {
 	background-color: rgba(255, 255, 255, 0.02);
 }

@@ -12,7 +12,7 @@
 
 <head>
    <?php zp_apply_filter('theme_head'); ?>
-   <title><?php echo getBareGalleryTitle(); ?> | <?php echo getBareAlbumTitle();?> | <?php echo getBareImageTitle();?></title>
+   <title>Artistic Fragments of Matt Watier</title>
    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
    <meta name="viewport" content="width=device-width">
    <?php include('_htmlHeader.php' ); ?>
@@ -28,10 +28,10 @@
       <div class='page grid-x grid-margin-x'>
          <div id="introduction" class="cell large-4">
             <h1 class="font_display font_5">Welcome to the Fragments of Me.</h1>
-            <div id="bar_holder" class="row">
+            <div id="bar_holder">
                <!-- this is a holder for the bar chart -->
             </div>
-            <div class="font_3 font_copy"><?php printGalleryDesc(); ?></div>
+            <div class="font_3 font_copy m-t_4"><?php printGalleryDesc(); ?></div>
             <hr>
             <!-- <h4  class="font_display font_4">Shards of my work scatter across time</h4>
          <p><em>It is interesteding to see my work plotted into the months they were created over time. This isn't all my work but the work that is represented this repository.</em></p> -->

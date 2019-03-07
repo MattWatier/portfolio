@@ -41,7 +41,6 @@ include_once "masonFunctions.php";
 			$gallery_item = "<div id='album' class='row'>";
 			$checked = false;
 				while (next_album( $all = true)):
-				$crap = getAlbumThumb( getBareAlbumTitle());
 				$current_alblum = $_zp_current_album;
 				$albumTitle = $_zp_current_album ->name;
 				$album_item = "";
@@ -71,53 +70,21 @@ include_once "masonFunctions.php";
 					$space_separated_array = str_replace("_", " ", $space_separated_array);
 						$gallery->add_to_filter(array_unique($tags));
 					}
-					$image_item .= "<div class='images br_secondary-4 bw_1 br_solid p_2 m_2 m-y_3 texture-light bg_secondary-5 ".getBareAlbumTitle()." ".$space_separated_array."' style='width:".($W+14)."px; height:".($H+14)."px;' >";
-					$image_item .= "<a href='".getCustomImageURL(800)."' title='".getBareImageTitle()."' data-arrows='false'   data-fancybox='gallery_".getBareAlbumTitle()."' style='width:".($W+12)."px; height:".($H+12)."px;' >";
+					$image_item .= "<div class='images br_secondary-4 shadow_1 bw_1 br_solid p_2 m_2 m-y_3 texture-light bg_secondary-5 ".getBareAlbumTitle()." ".$space_separated_array."' style='width:".($W+10)."px; height:".($H+10)."px;' >";
+					$image_item .= "<a class='shadow_2 block br_secondary-3 bw_1 br_solid texture_disabled' href='".getCustomImageURL(1000)."' title='".getBareImageTitle()."' data-arrows='false'   data-fancybox='gallery_".getBareAlbumTitle()."' style='width:".($W)."px; height:".($H)."px;' >";
 					$image_item .="<img width='".$W."' height='".$H."' class='lazy' src='' data-original='".getCustomSizedImageMaxSpace( $W, $H)."' /></a></div>";
 					$album_item .= $image_item;	
 					endwhile; 
 					//end of next_image loop
 					$gallery_item .= $album_item;
 				endwhile; //end of next album loop
-				
-					$album_item="";		
-				while (next_image($all = TRUE)):
-					$image_item = "";	
-					$maxSQ=30000;
-					$h = getFullHeight( );
-					$w = getFullWidth( );
-					$proportioned = get_proportion($w, $h, $maxSQ);
-					$m = get_modifier($proportioned,$w);
-					$size = get_image_size($w, $h, $m);
-					$W = $size[0];
-					$H = $size[1];
-					
-					//echo "tags";
-					$tags= getTags();
-					if(isset($tags)){
-						array_push($tags, getBareAlbumTitle());
-						$gallery->add_to_filter(array_unique($tags));
-					}
-					$space_separated_array = implode("_", array_unique($tags));
-					$space_separated_array = str_replace(" ", "-", $space_separated_array);
-					$space_separated_array = str_replace("_", " ", $space_separated_array);
-					$image_item .= "<div class='images ".getBareAlbumTitle()." ".$space_separated_array."' style='display:block;padding:5px;margin-bottom:12px; border:1px #fff solid; width:".($W+10)."px; height:".($H+10)."px;' >";
-					$image_item .= "<a href='".getCustomImageURL(800)."' title='".getBareImageTitle()."' class='fancybox'>";
-					$image_item .="<img width='".$W."px' height='".$H."px' class='lazy' src='' data-original='".getCustomSizedImageMaxSpace( $W, $H)."' /></a></div>";
-					
-					
-					$album_item .= $image_item;	
-					
-				
-				endwhile; //end of next_image loop
-				$gallery_item .= $album_item;
 				//end of gallery mechanic and logic
 				$gallery_item .= "</div><!-- End of Gallery -->";
 				//echo $gallery_item;  
 				$filters = $gallery->get_filters();
 				$D3_BarChart_Array = flattenArray($filters);
 				$colors = $gallery->get_colorfilters();
-				$D3_Wheel_Array= flattenArray($colors);
+				$D3_Wheel_Array = flattenArray($colors);
 				
 				function flattenArray($array){
 						$temparray = array();
@@ -145,7 +112,7 @@ include_once "masonFunctions.php";
 	$win = $(window);
  	$container.isotope({
    		itemSelector:  '.images',
-  		masonry: { columnWidth: 164}
+  		masonry: { columnWidth: 148}
 		}
 	);
 	$('#filters a').click(function(){

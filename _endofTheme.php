@@ -2,8 +2,12 @@
 <div id="credit"class="container"><?php printZenphotoLink(); ?></div>
 <!-- <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>   -->
 <script src="<?php echo $_zp_themeroot ?>/javascripts/d3.v3.min.js" type="text/javascript"></script>
-  <script src="<?php echo $_zp_themeroot ?>/javascripts/graphs.js" type="text/javascript"></script>
-	<script src="<?php echo $_zp_themeroot ?>/javascripts/jquery.lazyload.min.js" type="text/javascript"></script>
+<script src="<?php echo $_zp_themeroot ?>/javascripts/d3.Utlity.js" type="text/javascript"></script>
+<script src="<?php echo $_zp_themeroot ?>/javascripts/d3.ColorWheel.js" type="text/javascript"></script>
+<script src="<?php echo $_zp_themeroot ?>/javascripts/d3.BarChart.js" type="text/javascript"></script>
+<script src="<?php echo $_zp_themeroot ?>/javascripts/d3.DonutChart.js" type="text/javascript"></script>
+<script src="<?php echo $_zp_themeroot ?>/javascripts/d3.GalleryChart.js" type="text/javascript"></script>
+<script src="<?php echo $_zp_themeroot ?>/javascripts/jquery.lazyload.min.js" type="text/javascript"></script>
 
 <!-- Add fancyBox main JS and CSS files -->
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.js"></script>

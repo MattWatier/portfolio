@@ -28,87 +28,92 @@ include_once "masonFunctions.php";
     <?php zp_apply_filter('theme_body_open'); ?>
     <?php include('_siteHeaderNav.php'); ?>
     <div class="header grid-x p-x_4">
-        <div id="breadcrumb" class="cell small-6 medium-7 large-9">
+        <div id="breadcrumb" class="cell">
             <h1 class="font_display font_5"><?php printHomeLink('', ' | '); ?><a href="<?php echo html_encode(getGalleryIndexURL()); ?>" title="<?php echo gettext('Albums Index'); ?>">Fragments</a> | <?php printParentBreadcrumb(); ?> <?php printAlbumTitle(true); ?></h1>
             <div class="font_1"><?php printAlbumDesc(true); ?></div>
         </div>
     </div>
     <div class="filters grid-x grid-margin-x p-x_4">
-        <div id="typeHolder" class="cell auto">
+        <div id="colorWheel" class="cell small-12 medium-6 large-auto">
+            <h4 class="text-left font_2 font_bold c_secondary-n1 m-b_0">Colors</h4>
+        </div>
+        <div id="typeHolder" class="cell small-12 medium-6 large-auto">
             <h4 class="text-left font_2 font_bold c_secondary-n1 m-b_n3">Type</h4>
         </div>
-        <div id="filterHolder" class="cell auto">
+        <div id="filterHolder" class="cell small-12 large-auto">
             <h4 class="text-left font_2 font_bold c_secondary-n1 m-b_n3">Content</h4>
-        </div>
-        <div id="colorWheel" class="cell auto">
-            <h4 class="text-left font_2 font_bold c_secondary-n1 m-b_0">Colors</h4>
         </div>
     </div>
     <div class="page grid-x">
         <div class="small-12 cell">
             <?php
-						$gallery = new MyGallery(getBareAlbumTitle());
-						$gallery_item = "<div id='album' class='row'>";
-						$checked = false;
-						while (next_album($all = true)) :
-							$current_alblum = $_zp_current_album;
-							$albumTitle = $_zp_current_album->name;
-							$album_item = "";
-							$images = $current_alblum->images;
+            $gallery = new MyGallery(getBareAlbumTitle());
+            $query = "SELECT fragments_obj_to_tag.tagid as ID, fragments_tags.name as name, fragments_albums.title as ablum, SUBSTRING( fragments_albums.folder, 1 ,LOCATE('/',fragments_albums.folder)-1) as parent, COUNT(fragments_obj_to_tag.tagid) as count FROM fragments_obj_to_tag LEFT JOIN fragments_tags ON fragments_obj_to_tag.tagid = fragments_tags.id LEFT JOIN fragments_images ON fragments_obj_to_tag.objectid = fragments_images.id LEFT JOIN fragments_albums ON fragments_images.albumid = fragments_albums.id WHERE LOCATE('_color',name)!= 1 AND fragments_albums.parentid = " . $_zp_current_album->getID() . " GROUP BY ID ORDER BY count DESC;";
+            $data_TagCounts = query_full_array($query);
+            $gallery_item = "<div id='album' class='row'>";
+            $checked = false;
+            while (next_album($all = true)) :
+                $current_alblum = $_zp_current_album;
+                $albumTitle = $_zp_current_album->name;
+                $album_item = "";
+                $images = $current_alblum->images;
 
 
-							//Print out List of current images in gallery.
-							//Pass those images to a foreach loop
-							//Inside the For each loop make this data structure DIV(class="alblum_names image" ) ->image(src = "thumbnail" ) (alt = "image name" )
-							while (next_image($all = true)) :
-								$image_item = "";
-								$maxSQ = 30000;
-								$h = getFullHeight();
-								$w = getFullWidth();
-								$proportioned = get_proportion($w, $h, $maxSQ);
-								$m = get_modifier($proportioned, $w);
-								$size = get_image_size($w, $h, $m);
-								$W = $size[0];
-								$H = $size[1];
+                //Print out List of current images in gallery.
+                //Pass those images to a foreach loop
+                //Inside the For each loop make this data structure DIV(class="alblum_names image" ) ->image(src = "thumbnail" ) (alt = "image name" )
+                while (next_image($all = true)) :
+                    $image_item = "";
+                    $maxSQ = 30000;
+                    $h = getFullHeight();
+                    $w = getFullWidth();
+                    $proportioned = get_proportion($w, $h, $maxSQ);
+                    $m = get_modifier($proportioned, $w);
+                    $size = get_image_size($w, $h, $m);
+                    $W = $size[0];
+                    $H = $size[1];
 
-								//echo "tags";
-								$tags = getTags();
-								if (isset($tags)) {
-									array_push($tags, "_type-" . getBareAlbumTitle());
-									$space_separated_array = implode("_", array_unique($tags));
-									$space_separated_array = str_replace(" ", "-", $space_separated_array);
-									$space_separated_array = str_replace("_", " ", $space_separated_array);
-									$gallery->add_to_filter(array_unique($tags));
-								}
-								$image_item .= "<div class='images br_secondary-4 shadow_1 bw_1 br_solid p_2 m_2 m-y_3 texture-light bg_secondary-5 hover:bg_accent " . getBareAlbumTitle() . " " . $space_separated_array . "' style='width:" . ($W + 10) . "px; height:" . ($H + 10) . "px;' >";
-								$image_item .= "<a class='shadow_2 block br_secondary-3 bw_1 br_solid texture_disabled' href='" . getCustomImageURL(1000) . "' title='" . getBareImageTitle() . "' data-arrows='false'   data-fancybox='gallery_" . getBareAlbumTitle() . "' style='width:" . ($W) . "px; height:" . ($H) . "px;' >";
-								$image_item .= "<img width='" . $W . "' height='" . $H . "' class='lazy' src='' data-original='" . getCustomSizedImageMaxSpace($W, $H) . "' /></a></div>";
-								$album_item .= $image_item;
-							endwhile;
-							//end of next_image loop
-							$gallery_item .= $album_item;
-						endwhile; //end of next album loop
-						//end of gallery mechanic and logic
-						$gallery_item .= "</div><!-- End of Gallery -->";
-						//echo $gallery_item;  
-						$filters = $gallery->get_filters();
-						$D3_BarChart_Array = flattenArray($filters);
-						$colors = $gallery->get_colorfilters();
-						$D3_Wheel_Array = flattenArray($colors);
-						$type_tags = $gallery->get_typefilters();
-						$D3_BarChartType_Array = flattenArray($type_tags);
+                    //echo "tags";
+                    $tags = getTags();
+                    if (isset($tags)) {
+                        array_push($tags, "_type-" . getBareAlbumTitle());
+                        $space_separated_array = implode("_", array_unique($tags));
+                        $space_separated_array = str_replace(" ", "-", $space_separated_array);
+                        $space_separated_array = str_replace("_", " ", $space_separated_array);
+                        $gallery->add_to_filter(array_unique($tags));
+                    }
+                    $image_item .= "<div class='images br_secondary-4 shadow_1 bw_1 br_solid p_2 m_2 m-y_3 texture-light bg_secondary-5 hover:bg_accent " . getBareAlbumTitle() . " " . $space_separated_array . "' style='width:" . ($W + 10) . "px; height:" . ($H + 10) . "px;' >";
+                    $image_item .= "<a class='shadow_2 block br_secondary-3 bw_1 br_solid texture_disabled' href='" . getCustomImageURL(1000) . "' title='" . getBareImageTitle() . "' data-arrows='false'   data-fancybox='gallery_" . getBareAlbumTitle() . "' style='width:" . ($W) . "px; height:" . ($H) . "px;' >";
+                    $image_item .= "<img width='" . $W . "' height='" . $H . "' class='lazy' src='' data-original='" . getCustomSizedImageMaxSpace($W, $H) . "' /></a></div>";
+                    $album_item .= $image_item;
+                endwhile;
+                //end of next_image loop
+                $gallery_item .= $album_item;
+            endwhile; //end of next album loop
+            //end of gallery mechanic and logic
+            $gallery_item .= "</div><!-- End of Gallery -->";
+            //echo $gallery_item;  
+            $filters = $gallery->get_filters();
+            $D3_BarChart_Array = flattenArray($filters);
+            $colors = $gallery->get_colorfilters();
+            $D3_Wheel_Array = flattenArray($colors);
+            $type_tags = $gallery->get_typefilters();
+            $D3_BarChartType_Array = flattenArray($type_tags);
 
-						function flattenArray($array)
-						{
-							$temparray = array();
-							foreach ($array as $key => $value) {
-								array_push($temparray, $value);
-							}
-							$array = $temparray;
-							return $array;
-						}
-						echo $gallery_item;
-						?> </div>
+
+
+
+            function flattenArray($array)
+            {
+                $temparray = array();
+                foreach ($array as $key => $value) {
+                    array_push($temparray, $value);
+                }
+                $array = $temparray;
+                return $array;
+            }
+            echo $gallery_item;
+            ?> </div>
 
 
 
@@ -118,20 +123,22 @@ include_once "masonFunctions.php";
 
 
     <script>
-        var dset = <?php echo json_encode($D3_BarChart_Array); ?>;
+        var type_dset_sql = <?php echo json_encode($data_TagCounts); ?>;
+        var type_dset = <?php echo json_encode($D3_BarChart_Array); ?>;
         var wheel_dset = <?php echo json_encode($D3_Wheel_Array); ?>;
-        var typeChart_dset = <?php echo json_encode($D3_BarChartType_Array); ?>;
+        var tag_dset = <?php echo json_encode($D3_BarChartType_Array); ?>;
 
         $(document).ready(function() {
             var $container = $('#album'),
                 $win = $(window),
                 $imgs = $("img.lazy");
-            drawBarChartNav("value", dset, "#filterHolder", {
-                w: 250,
-                h: 250,
-                m: 10
-            });
-            drawBarChartNav("value", typeChart_dset, "#typeHolder", {
+            drawBarChartNav("value", type_dset, "#filterHolder");
+            // drawBarChartNav("value", type_dset, "#filterHolder", {
+            //     w: 250,
+            //     h: 250,
+            //     m: 10
+            // });
+            drawDonutChart("value", tag_dset, "#typeHolder", {
                 w: 250,
                 h: 250,
                 m: 10

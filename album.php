@@ -161,7 +161,7 @@ include_once "masonFunctions.php";
       $container.isotope({
          itemSelector: '.images',
          masonry: {
-            columnWidth: 148
+            columnWidth: 187
          },
          onLayout: function() {
             $win.trigger("scroll");

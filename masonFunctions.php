@@ -7,10 +7,10 @@ function get_image_size($w, $h, $m){
 	}
 
 function get_modifier($proportioned,$w) {
-	$containerSize = 1400;
-	$gutter = 16;
-	$column = $containerSize/10;
-	$padding = -10;
+	$containerSize = 1800;
+	$gutter = 18;
+	$column = 179;
+	$padding = -18;
 	$size_1x = $column+$padding;
 	$size_2x = $column+$column+$gutter+$padding+$padding;
 	$size_3x = $column+$column+$column+$gutter+$gutter+$padding+$padding+$padding;

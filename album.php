@@ -15,41 +15,44 @@ include_once "masonFunctions.php";
 <!--<![endif]-->
 
 <head>
-    <?php zp_apply_filter('theme_head'); ?>
-    <title><?php echo getBareGalleryTitle(); ?> | <?php echo getBareAlbumTitle(); ?> | <?php echo getBareImageTitle(); ?></title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width">
-    <?php include('_htmlHeader.php'); ?>
+   <?php zp_apply_filter('theme_head'); ?>
+   <title><?php echo getBareGalleryTitle(); ?> | <?php echo getBareAlbumTitle(); ?> | <?php echo getBareImageTitle(); ?></title>
+   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+   <meta name="viewport" content="width=device-width">
+   <?php include('_htmlHeader.php'); ?>
 
 </head>
 
 <body id="albumbody">
 
-    <?php zp_apply_filter('theme_body_open'); ?>
-    <?php include('_siteHeaderNav.php'); ?>
-    <div class="header grid-x p-x_4">
-        <div id="breadcrumb" class="cell">
-            <h1 class="font_display font_5"><?php printHomeLink('', ' | '); ?><a href="<?php echo html_encode(getGalleryIndexURL()); ?>" title="<?php echo gettext('Albums Index'); ?>">Fragments</a> | <?php printParentBreadcrumb(); ?> <?php printAlbumTitle(true); ?></h1>
-            <div class="font_1"><?php printAlbumDesc(true); ?></div>
-        </div>
-    </div>
-    <div class="filters grid-x grid-margin-x p-x_4">
-        <div id="colorWheel" class="cell small-12 medium-6 large-auto">
-            <h4 class="text-left font_2 font_bold c_secondary-n1 m-b_0">Colors</h4>
-        </div>
-        <div id="typeHolder" class="cell small-12 medium-6 large-auto">
-            <h4 class="text-left font_2 font_bold c_secondary-n1 m-b_n3">Type</h4>
-        </div>
-        <div id="filterHolder" class="cell small-12 large-auto">
-            <h4 class="text-left font_2 font_bold c_secondary-n1 m-b_n3">Content</h4>
-        </div>
-    </div>
-    <div class="page grid-x">
-        <div class="small-12 cell">
-            <?php
+   <?php zp_apply_filter('theme_body_open'); ?>
+   <?php include('_siteHeaderNav.php'); ?>
+   <div class="header grid-x p-x_4">
+      <div id="breadcrumb" class="cell">
+         <h1 class="font_display font_5"><?php printHomeLink('', ' | '); ?><a href="<?php echo html_encode(getGalleryIndexURL()); ?>" title="<?php echo gettext('Albums Index'); ?>">Fragments</a> | <?php printParentBreadcrumb(); ?> <?php printAlbumTitle(true); ?></h1>
+         <div class="font_1"><?php printAlbumDesc(true); ?></div>
+      </div>
+   </div>
+   <div class="filters grid-x grid-margin-x p-x_4">
+      <div id="colorWheel" class="cell small-12 medium-6 large-auto">
+         <h4 class="text-left font_2 font_bold c_secondary-n1 m-b_0">Colors</h4>
+      </div>
+      <div id="typeHolder" class="cell small-12 medium-6 large-auto">
+         <h4 class="text-left font_2 font_bold c_secondary-n1 m-b_n3">Type</h4>
+      </div>
+      <div id="filterHolder" class="cell small-12 large-auto">
+         <h4 class="text-left font_2 font_bold c_secondary-n1 m-b_n3">Content</h4>
+      </div>
+   </div>
+   <div class="page grid-x">
+      <div class="small-12 cell">
+         <?php
             $gallery = new MyGallery(getBareAlbumTitle());
             $query = "SELECT fragments_obj_to_tag.tagid as ID, fragments_tags.name as name, fragments_albums.title as ablum, SUBSTRING( fragments_albums.folder, 1 ,LOCATE('/',fragments_albums.folder)-1) as parent, COUNT(fragments_obj_to_tag.tagid) as count FROM fragments_obj_to_tag LEFT JOIN fragments_tags ON fragments_obj_to_tag.tagid = fragments_tags.id LEFT JOIN fragments_images ON fragments_obj_to_tag.objectid = fragments_images.id LEFT JOIN fragments_albums ON fragments_images.albumid = fragments_albums.id WHERE LOCATE('_color',name)!= 1 AND fragments_albums.parentid = " . $_zp_current_album->getID() . " GROUP BY ID ORDER BY count DESC;";
             $data_TagCounts = query_full_array($query);
+
+            $query = "SELECT fragments_obj_to_tag.tagid as ID, SUBSTRING(fragments_tags.name,LOCATE('-', fragments_tags.name )+1,CHAR_LENGTH(fragments_tags.name)) as name,SUBSTRING( fragments_albums.folder, 1 ,LOCATE('/',fragments_albums.folder)-1) as parent, COUNT(fragments_obj_to_tag.tagid) as count FROM fragments_obj_to_tag LEFT JOIN fragments_tags ON fragments_obj_to_tag.tagid = fragments_tags.id LEFT JOIN fragments_images ON fragments_obj_to_tag.objectid = fragments_images.id LEFT JOIN fragments_albums ON fragments_images.albumid = fragments_albums.id WHERE LOCATE('_color-',name) = 1 AND fragments_albums.parentid = " . $_zp_current_album->getID() . " GROUP BY ID ORDER BY count DESC;";
+            $data_ColorCounts = query_full_array($query);
             $gallery_item = "<div id='album' class='row'>";
             $checked = false;
             while (next_album($all = true)) :
@@ -118,63 +121,70 @@ include_once "masonFunctions.php";
 
 
 
-    </div>
-    <hr class="space" />
+   </div>
+   <hr class="space" />
 
 
-    <script>
-        var type_dset_sql = <?php echo json_encode($data_TagCounts); ?>;
-        var type_dset = <?php echo json_encode($D3_BarChart_Array); ?>;
-        var wheel_dset = <?php echo json_encode($D3_Wheel_Array); ?>;
-        var tag_dset = <?php echo json_encode($D3_BarChartType_Array); ?>;
+   <script>
+   var type_dset_sql = <?php echo json_encode($data_TagCounts); ?>;
+   var color_dset_sql = <?php echo json_encode($data_ColorCounts); ?>;
+   var type_dset = <?php echo json_encode($D3_BarChart_Array); ?>;
+   var wheel_dset = <?php echo json_encode($D3_Wheel_Array); ?>;
+   var tag_dset = <?php echo json_encode($D3_BarChartType_Array); ?>;
 
-        $(document).ready(function() {
-            var $container = $('#album'),
-                $win = $(window),
-                $imgs = $("img.lazy");
-            drawBarChartNav("value", type_dset, "#filterHolder");
-            // drawBarChartNav("value", type_dset, "#filterHolder", {
-            //     w: 250,
-            //     h: 250,
-            //     m: 10
-            // });
-            drawDonutChart("value", tag_dset, "#typeHolder", {
-                w: 250,
-                h: 250,
-                m: 10
-            });
-            drawColorWheel("value", wheel_dset, "#colorWheel", {
-                w: 250,
-                h: 250,
-                m: 10
-            });
-            $container.isotope({
-                itemSelector: '.images',
-                masonry: {
-                    columnWidth: 148
-                },
-                onLayout: function() {
-                    $win.trigger("scroll");
-                }
-            });
-            $('#filters a, #filterHolder a, #typeHolder a,#colorWheel a').click(function() {
-                var selector = $(this).attr('data-filter');
-                $container.isotope({
-                    filter: selector
-                });
-                return false;
-            });
+   $(document).ready(function() {
+      var $container = $('#album'),
+         $win = $(window),
+         $imgs = $("img.lazy");
+      drawBarChartNav("value", type_dset, "#filterHolder");
+      // drawBarChartNav("value", type_dset, "#filterHolder", {
+      //     w: 250,
+      //     h: 250,
+      //     m: 10
+      // });
+      drawDonutChart("value", tag_dset, "#typeHolder", {
+         w: 250,
+         h: 250,
+         m: 10
+      });
+      drawColorBlocks("value", color_dset_sql, "#colorWheel", {
+         w: 375,
+         h: 375,
+         m: 10,
+         gutter: 2
+      });
+      drawColorWheel("value", wheel_dset, "#colorWheel", {
+         w: 250,
+         h: 250,
+         m: 10
+      });
+      $container.isotope({
+         itemSelector: '.images',
+         masonry: {
+            columnWidth: 148
+         },
+         onLayout: function() {
+            $win.trigger("scroll");
+         }
+      });
+      $('#filters a, #filterHolder a, #typeHolder a,#colorWheel a').click(function() {
+         var selector = $(this).attr('data-filter');
+         $container.isotope({
+            filter: selector
+         });
+         return false;
+      });
 
-            $imgs.lazyload({
-                effect: "fadeIn",
-                threshold: 200,
-                failure_limit: Math.max($imgs.length - 1, 0)
-            });
+      $imgs.lazyload({
+         effect: "fadeIn",
+         threshold: 200,
+         failure_limit: Math.max($imgs.length - 1, 0)
+      });
 
-        });
-    </script>
+   });
+   </script>
 
 
-    <script src="<?php echo $_zp_themeroot ?>/javascripts/isotope.2.js" type="text/javascript"></script>
+   <script src="<?php echo $_zp_themeroot ?>/javascripts/isotope.2.js" type="text/javascript"></script>
 
-    <?php include('_endofTheme.php'); ?> 
+   <?php include('_endofTheme.php'); ?>

@@ -51,7 +51,7 @@ include_once "masonFunctions.php";
             $query = "SELECT fragments_obj_to_tag.tagid as ID, fragments_tags.name as name, fragments_albums.title as ablum, SUBSTRING( fragments_albums.folder, 1 ,LOCATE('/',fragments_albums.folder)-1) as parent, COUNT(fragments_obj_to_tag.tagid) as count FROM fragments_obj_to_tag LEFT JOIN fragments_tags ON fragments_obj_to_tag.tagid = fragments_tags.id LEFT JOIN fragments_images ON fragments_obj_to_tag.objectid = fragments_images.id LEFT JOIN fragments_albums ON fragments_images.albumid = fragments_albums.id WHERE LOCATE('_color',name)!= 1 AND fragments_albums.parentid = " . $_zp_current_album->getID() . " GROUP BY ID ORDER BY count DESC;";
             $data_TagCounts = query_full_array($query);
 
-            $query = "SELECT fragments_obj_to_tag.tagid as ID, SUBSTRING(fragments_tags.name,LOCATE('-', fragments_tags.name )+1,CHAR_LENGTH(fragments_tags.name)) as name,SUBSTRING( fragments_albums.folder, 1 ,LOCATE('/',fragments_albums.folder)-1) as parent, COUNT(fragments_obj_to_tag.tagid) as count FROM fragments_obj_to_tag LEFT JOIN fragments_tags ON fragments_obj_to_tag.tagid = fragments_tags.id LEFT JOIN fragments_images ON fragments_obj_to_tag.objectid = fragments_images.id LEFT JOIN fragments_albums ON fragments_images.albumid = fragments_albums.id WHERE LOCATE('_color-',name) = 1 AND fragments_albums.parentid = " . $_zp_current_album->getID() . " GROUP BY ID ORDER BY count DESC;";
+            $query = "SELECT fragments_obj_to_tag.tagid as ID, SUBSTRING(fragments_tags.name,LOCATE('-', fragments_tags.name )+1,CHAR_LENGTH(fragments_tags.name)) as name,SUBSTRING( fragments_albums.folder, 1 ,LOCATE('/',fragments_albums.folder)-1) as parent, COUNT(fragments_obj_to_tag.tagid) as count FROM fragments_obj_to_tag LEFT JOIN fragments_tags ON fragments_obj_to_tag.tagid = fragments_tags.id LEFT JOIN fragments_images ON fragments_obj_to_tag.objectid = fragments_images.id LEFT JOIN fragments_albums ON fragments_images.albumid = fragments_albums.id WHERE LOCATE('_color-',name) = 1 AND fragments_albums.parentid = " . $_zp_current_album->getID() . " GROUP BY ID;";
             $data_ColorCounts = query_full_array($query);
             $gallery_item = "<div id='album' class='row'>";
             $checked = false;
@@ -153,11 +153,11 @@ include_once "masonFunctions.php";
          m: 10,
          gutter: 2
       });
-      drawColorWheel("value", wheel_dset, "#colorWheel", {
-         w: 250,
-         h: 250,
-         m: 10
-      });
+      // drawColorWheel("value", wheel_dset, "#colorWheel", {
+      //    w: 250,
+      //    h: 250,
+      //    m: 10
+      // });
       $container.isotope({
          itemSelector: '.images',
          masonry: {
@@ -167,10 +167,16 @@ include_once "masonFunctions.php";
             $win.trigger("scroll");
          }
       });
-      $('#filters a, #filterHolder a, #typeHolder a,#colorWheel a').click(function() {
+      $('#filters a, #filterHolder a, #typeHolder a,#colorWheel a,#colorBlockContainer .block').click(function() {
          var selector = $(this).attr('data-filter');
+
+         var position = $container.position();
          $container.isotope({
             filter: selector
+         }, function() {
+            $(window).scroll(position.left, position.top);
+            console.log(selector);
+
          });
          return false;
       });
@@ -180,11 +186,20 @@ include_once "masonFunctions.php";
          threshold: 200,
          failure_limit: Math.max($imgs.length - 1, 0)
       });
-
+      var $container2 = $("#colorBlockContainer");
+      $container2.isotope({
+         itemSelector: ".block",
+         layoutMode: 'packery',
+         masonry: {
+            columnWidth: 75,
+         }
+      });
    });
    </script>
 
 
    <script src="<?php echo $_zp_themeroot ?>/javascripts/isotope.2.js" type="text/javascript"></script>
+
+   <script src="<?php echo $_zp_themeroot ?>/javascripts/packery-mode.pkgd.min.js" type="text/javascript"></script>
 
    <?php include('_endofTheme.php'); ?>

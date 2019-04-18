@@ -3,18 +3,15 @@ function drawDonutChart(chartID, dataSet, selectString) {
 	// dataSet => Input Data for the chart, itself.
 	// selectString => String that allows you to pass in
 	// a D3.selectAll() string.
-	var wCalc = $(selectString).width() - 40;
-	var hCalc = Math.max(
-		Math.max(document.documentElement.clientHeight, window.innerHeight || 0) /
-			4,
-		250
-	);
+	var modes = "portrait";
+	var wCalc = Math.max($(selectString).width(), 375);
+	var hCalc = Math.max($(selectString).height(), 375);
 
 	var donutChart = {
 		w: wCalc,
 		h: hCalc,
-		r: Math.min((wCalc - 32) * 0.4, hCalc - 32) / 2,
-		m: 16
+		r: 375 / 2,
+		m: 8
 	};
 	var color = d3.scale.category20c();
 	var pie = d3.layout
@@ -26,7 +23,7 @@ function drawDonutChart(chartID, dataSet, selectString) {
 	var arc = d3.svg
 		.arc()
 		.outerRadius(donutChart.r - donutChart.m / 2)
-		.innerRadius(donutChart.r - (donutChart.r * 2) / 3);
+		.innerRadius(donutChart.r * 0.33);
 	var _svg = d3
 		.select(selectString)
 		.append("svg")

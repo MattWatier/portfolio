@@ -17,7 +17,6 @@ function drawBarChart(chartID, dataSet, selectString) {
 		document.documentElement.clientHeight,
 		window.innerHeight || 0
 	);
-	var dataSet = dataSet;
 	var barChart = { w: wCalc, h: Math.max(hCalc * 0.45, 300), m: 10 };
 
 	barChart.height = barChart.h;

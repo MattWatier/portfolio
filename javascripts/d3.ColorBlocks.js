@@ -3,23 +3,28 @@ function drawColorBlocks(selectData, dataSet, selectString, dimensions) {
 	// dataSet => Input Data for the chart, itself.
 	// selectString => String that allows you to pass in
 	// a D3.selectAll() string.
-	var Chart = dimensions;
-	var blockChart = {
+	var columns = 5;
+	var blockSize = {
 		w: dimensions.w,
 		h: dimensions.h,
 		m: dimensions.m,
-		block: dimensions.w / 15 - dimensions.gutter,
-		gutter: dimensions.gutter
+		block: (dimensions.w - (columns - 1) * 2) / columns,
+		gutter: 2
 	};
-	var blocks = {
-		five: {
-			y: 0
-		},
-		four: { y: 0 },
-		three: { y: 0 },
-		two: { y: 0 },
-		one: { y: 0 }
-	};
+	function blockDimension(multiplier) {
+		if (multiplier == 1) {
+			return blockSize.block;
+		} else {
+			return blockSize.block * multiplier + blockSize.gutter * (multiplier - 1);
+		}
+	}
+	var blocks = [
+		{ type: "1", y: 0, x: 0, w: blockDimension(1), h: blockDimension(1) },
+		{ type: "2", y: 0, x: 0, w: blockDimension(1), h: blockDimension(2) },
+		{ type: "3", y: 0, x: 0, w: blockDimension(3), h: blockDimension(1) },
+		{ type: "4", y: 0, x: 0, w: blockDimension(2), h: blockDimension(2) },
+		{ type: "5", y: 0, x: 0, w: blockDimension(5), h: blockDimension(1) }
+	];
 	var color = d3.scale.ordinal();
 	color.domain([
 		"black",
@@ -31,12 +36,13 @@ function drawColorBlocks(selectData, dataSet, selectString, dimensions) {
 		"yellow",
 		"green",
 		"blue",
+		"teal",
 		"purple",
 		"brown"
 	]);
 	color.range([
-		"#222222",
-		"#888888",
+		"#111111",
+		"#999999",
 		"#dfdfdf",
 		"#EF3368",
 		"#EB1313",
@@ -44,43 +50,79 @@ function drawColorBlocks(selectData, dataSet, selectString, dimensions) {
 		"#FDE93A",
 		"#5DD245",
 		"#448BD2",
+		"#008080",
 		"#6E4ACB",
 		"#5D3A18"
 	]);
-	var maxCount = d3.max(dataSet, function(d) {
-		return d.count;
-	});
+
+	var tempCountArray = [];
+	for (var i = 0; i < dataSet.length; i++) {
+		tempCountArray.push(dataSet[i].count);
+	}
+	var maxCount = Math.max.apply(Math, tempCountArray);
+
+	console.log(maxCount);
 	var unit = d3.scale
 		.linear()
-		.domain([
-			0,
-			d3.max(dataSet[0], function(d) {
-				return d.count;
-			})
-		])
-		.range([1, 5])
+		.domain([0, maxCount])
+		.range([1, 4])
 		.interpolate(d3.interpolateRound);
-	console.log(maxCount);
+
 	var _svg = d3
 		.select(selectString)
-		.append("svg")
-		.attr("class", function() {
-			return "block" + selectData;
-		})
-		.attr("width", blockChart.width)
-		.attr("height", blockChart.height)
-		.append("svg:g")
-		.attr("transform", "translate(0,0)");
-	var block_chart = _svg
-		.selectAll(".blocks")
-		.data(dataSet)
-		.enter()
-		.append("g")
-		.attr("class", "block")
-		.attr("transform", function(d) {
-			return "translate(" + unit(d.count) + "," + blocks.five.y + ")";
+		.append("div")
+		.attr({
+			class: function() {
+				return "block" + selectData;
+			},
+			width: blockSize.w,
+			height: blockSize.h,
+			transform: "translate(0,0)"
 		});
-	block_chart.append("svg:a").attr("xlink:href", function(d) {
-		return d.type;
-	});
+
+	var block_chart = _svg
+		.append("div")
+		.attr("id", "colorBlockContainer")
+		.selectAll(".blocks")
+		.data(dataSet);
+
+	// .attr("transform", function(d) {
+	// 	var returnTranslate =
+	// 		"translate(" +
+	// 		blocks[unit(d.count) - 1].x +
+	// 		"," +
+	// 		blocks[unit(d.count) - 1].y +
+	// 		")";
+	// 	blocks[unit(d.count) - 1].y =
+	// 		blocks[unit(d.count) - 1].y +
+	// 		unit(d.count) * blockSize.block +
+	// 		unit(d.count) * blockSize.gutter;
+	// 	return returnTranslate;
+	// });
+	// translate to the cube to the slot
+	block_chart
+		.enter()
+		.append("div")
+		.attr("data-filter", function(d, i) {
+			return ".color-" + d.name;
+		})
+		.attr({
+			class: function(d) {
+				return (
+					d.name +
+					" block br_3 m_1 br_solid br_black-2 block hover:opacity opacity_7"
+				);
+			},
+			style: function(d, i) {
+				return (
+					"height:" +
+					blocks[unit(d.count) - 1].h +
+					"px; width:" +
+					blocks[unit(d.count) - 1].w +
+					"px; background-color:" +
+					color(d.name) +
+					";"
+				);
+			}
+		});
 }

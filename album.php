@@ -51,15 +51,15 @@ include_once "masonFunctions.php";
          $query = "SELECT fragments_obj_to_tag.tagid as ID, fragments_tags.name as name, fragments_albums.title as ablum, SUBSTRING( fragments_albums.folder, 1 ,LOCATE('/',fragments_albums.folder)-1) as parent, COUNT(fragments_obj_to_tag.tagid) as count FROM fragments_obj_to_tag LEFT JOIN fragments_tags ON fragments_obj_to_tag.tagid = fragments_tags.id LEFT JOIN fragments_images ON fragments_obj_to_tag.objectid = fragments_images.id LEFT JOIN fragments_albums ON fragments_images.albumid = fragments_albums.id WHERE LOCATE('_color',name)!= 1 AND fragments_albums.parentid = " . $_zp_current_album->getID() . " GROUP BY ID ORDER BY count DESC;";
          $data_TagCounts = query_full_array($query);
 
-            $query = "SELECT fragments_obj_to_tag.tagid as ID, SUBSTRING(fragments_tags.name,LOCATE('-', fragments_tags.name )+1,CHAR_LENGTH(fragments_tags.name)) as name,SUBSTRING( fragments_albums.folder, 1 ,LOCATE('/',fragments_albums.folder)-1) as parent, COUNT(fragments_obj_to_tag.tagid) as count FROM fragments_obj_to_tag LEFT JOIN fragments_tags ON fragments_obj_to_tag.tagid = fragments_tags.id LEFT JOIN fragments_images ON fragments_obj_to_tag.objectid = fragments_images.id LEFT JOIN fragments_albums ON fragments_images.albumid = fragments_albums.id WHERE LOCATE('_color-',name) = 1 AND fragments_albums.parentid = " . $_zp_current_album->getID() . " GROUP BY ID;";
-            $data_ColorCounts = query_full_array($query);
-            $gallery_item = "<div id='album' class='row'>";
-            $checked = false;
-            while (next_album($all = true)) :
-                $current_alblum = $_zp_current_album;
-                $albumTitle = $_zp_current_album->name;
-                $album_item = "";
-                $images = $current_alblum->images;
+         $query = "SELECT fragments_obj_to_tag.tagid as ID, SUBSTRING(fragments_tags.name,LOCATE('-', fragments_tags.name )+1,CHAR_LENGTH(fragments_tags.name)) as name,SUBSTRING( fragments_albums.folder, 1 ,LOCATE('/',fragments_albums.folder)-1) as parent, COUNT(fragments_obj_to_tag.tagid) as count FROM fragments_obj_to_tag LEFT JOIN fragments_tags ON fragments_obj_to_tag.tagid = fragments_tags.id LEFT JOIN fragments_images ON fragments_obj_to_tag.objectid = fragments_images.id LEFT JOIN fragments_albums ON fragments_images.albumid = fragments_albums.id WHERE LOCATE('_color-',name) = 1 AND fragments_albums.parentid = " . $_zp_current_album->getID() . " GROUP BY ID;";
+         $data_ColorCounts = query_full_array($query);
+         $gallery_item = "<div id='album' class='row'>";
+         $checked = false;
+         while (next_album($all = true)) :
+            $current_alblum = $_zp_current_album;
+            $albumTitle = $_zp_current_album->name;
+            $album_item = "";
+            $images = $current_alblum->images;
 
 
             //Print out List of current images in gallery.
@@ -125,77 +125,78 @@ include_once "masonFunctions.php";
    <hr class="space" />
 
 
-   <script>
+   <script type="text/javascript">
       var type_dset_sql = <?php echo json_encode($data_TagCounts); ?>;
       var color_dset_sql = <?php echo json_encode($data_ColorCounts); ?>;
       var type_dset = <?php echo json_encode($D3_BarChart_Array); ?>;
       var wheel_dset = <?php echo json_encode($D3_Wheel_Array); ?>;
       var tag_dset = <?php echo json_encode($D3_BarChartType_Array); ?>;
 
-   $(document).ready(function() {
-      var $container = $('#album'),
-         $win = $(window),
-         $imgs = $("img.lazy");
-      drawBarChartNav("value", type_dset, "#filterHolder");
-      // drawBarChartNav("value", type_dset, "#filterHolder", {
-      //     w: 250,
-      //     h: 250,
-      //     m: 10
-      // });
-      drawDonutChart("value", tag_dset, "#typeHolder", {
-         w: 250,
-         h: 250,
-         m: 10
-      });
-      drawColorBlocks("value", color_dset_sql, "#colorWheel", {
-         w: 375,
-         h: 375,
-         m: 10,
-         gutter: 2
-      });
-      // drawColorWheel("value", wheel_dset, "#colorWheel", {
-      //    w: 250,
-      //    h: 250,
-      //    m: 10
-      // });
-      $container.isotope({
-         itemSelector: '.images',
-         masonry: {
-            columnWidth: 187
-         },
-         onLayout: function() {
-            $win.trigger("scroll");
-         }
-      });
-      $('#filters a, #filterHolder a, #typeHolder a,#colorWheel a,#colorBlockContainer .block').click(function() {
-         var selector = $(this).attr('data-filter');
-
-         var position = $container.position();
-         $container.isotope({
-            filter: selector
+      $(document).ready(function() {
+         var $container = $('#album'),
+            $win = $(window),
+            $imgs = $("img.lazy");
+         drawBarChartNav("value", type_dset, "#filterHolder");
+         // drawBarChartNav("value", type_dset, "#filterHolder", {
+         //     w: 250,
+         //     h: 250,
+         //     m: 10
+         // });
+         drawDonutChart("value", tag_dset, "#typeHolder", {
+            w: 250,
+            h: 250,
+            m: 10
          });
-         $('#filters a, #filterHolder a, #typeHolder a,#colorWheel a').click(function() {
+         drawColorBlocks("value", color_dset_sql, "#colorWheel", {
+            w: 375,
+            h: 375,
+            m: 10,
+            gutter: 2
+         });
+         // drawColorWheel("value", wheel_dset, "#colorWheel", {
+         //    w: 250,
+         //    h: 250,
+         //    m: 10
+         // });
+         $container.isotope({
+            itemSelector: '.images',
+            masonry: {
+               columnWidth: 187
+            },
+            onLayout: function() {
+               $win.trigger("scroll");
+            }
+         });
+         $('#filters a, #filterHolder a, #typeHolder a,#colorWheel a,#colorBlockContainer .block').click(function() {
             var selector = $(this).attr('data-filter');
+
+            var position = $container.position();
             $container.isotope({
                filter: selector
             });
-            return false;
-         });
+            $('#filters a, #filterHolder a, #typeHolder a,#colorWheel a').click(function() {
+               var selector = $(this).attr('data-filter');
+               $container.isotope({
+                  filter: selector
+               });
+               return false;
+            });
 
-      $imgs.lazyload({
-         effect: "fadeIn",
-         threshold: 200,
-         failure_limit: Math.max($imgs.length - 1, 0)
+            // $imgs.lazyload({
+            //    effect: "fadeIn",
+            //    threshold: 200,
+            //    failure_limit: Math.max($imgs.length - 1, 0)
+            // });
+            var $container2 = $("#colorBlockContainer");
+            $container2.isotope({
+               itemSelector: ".block",
+               layoutMode: 'packery',
+               masonry: {
+                  columnWidth: 75,
+               }
+            });
+         });
       });
-      var $container2 = $("#colorBlockContainer");
-      $container2.isotope({
-         itemSelector: ".block",
-         layoutMode: 'packery',
-         masonry: {
-            columnWidth: 75,
-         }
-      });
-   });
    </script>
 
 

@@ -4,13 +4,13 @@ function drawDonutChart(chartID, dataSet, selectString) {
 	// selectString => String that allows you to pass in
 	// a D3.selectAll() string.
 	var modes = "portrait";
-	var wCalc = Math.max($(selectString).width(), 375);
-	var hCalc = Math.max($(selectString).height(), 375);
+	var wCalc = $(selectString).width();
+	var hCalc = $(selectString).height();
 
 	var donutChart = {
 		w: wCalc,
 		h: hCalc,
-		r: 375 / 2,
+		r: Math.max(hCalc / 2, (wCalc - 150) / 2),
 		m: 8
 	};
 	var color = d3.scale.category20c();
@@ -22,8 +22,8 @@ function drawDonutChart(chartID, dataSet, selectString) {
 		});
 	var arc = d3.svg
 		.arc()
-		.outerRadius(donutChart.r - donutChart.m / 2)
-		.innerRadius(donutChart.r * 0.33);
+		.outerRadius(donutChart.r - donutChart.m)
+		.innerRadius(donutChart.r * 0.4 - donutChart.m);
 	var _svg = d3
 		.select(selectString)
 		.append("svg")
@@ -32,16 +32,16 @@ function drawDonutChart(chartID, dataSet, selectString) {
 			return "pie" + chartID;
 		})
 		.attr("width", donutChart.w)
-		.attr("height", donutChart.h)
+		.attr("height", donutChart.r * 2 + donutChart.m * 2)
 		.append("svg:a")
 		.attr("xlink:href", chartID)
 		.append("svg:g")
 		.attr(
 			"transform",
 			"translate(" +
-				(donutChart.r + donutChart.m / 2) +
+				(donutChart.r + donutChart.m) +
 				"," +
-				(donutChart.h / 2 + donutChart.m) +
+				(donutChart.r + donutChart.m) +
 				")"
 		);
 	var _arc = _svg
@@ -60,11 +60,13 @@ function drawDonutChart(chartID, dataSet, selectString) {
 		})
 		.attr("d", arc);
 	var legend = _svg
+		.append("svg:g")
+		.attr("class", "legend")
 		.selectAll(".legend")
 		.data(color.domain())
 		.enter()
 		.append("g")
-		.attr("class", "legend")
+		.attr("class", "legend-item")
 		.attr("transform", function(d, i) {
 			return (
 				"translate(" +

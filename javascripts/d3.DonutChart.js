@@ -1,16 +1,14 @@
-function drawDonutChart(chartID, dataSet, selectString) {
+function drawDonutChart(chartID, dataSet, selectString, dimensions) {
 	// chartID => A unique drawing identifier that has no spaces, no "." and no "#" characters.
 	// dataSet => Input Data for the chart, itself.
 	// selectString => String that allows you to pass in
 	// a D3.selectAll() string.
-	var modes = "portrait";
-	var wCalc = $(selectString).width();
-	var hCalc = $(selectString).height();
+	var mode = dimensions.w >= 375 ? "portrait" : "landscape";
 
 	var donutChart = {
-		w: wCalc,
-		h: hCalc,
-		r: Math.max(hCalc / 2, (wCalc - 150) / 2),
+		w: dimensions.w,
+		h: dimensions.h,
+		r: mode == "portrait" ? dimensions.w : dimensions.w - 150,
 		m: 8
 	};
 	var color = d3.scale.category20c();
@@ -22,8 +20,8 @@ function drawDonutChart(chartID, dataSet, selectString) {
 		});
 	var arc = d3.svg
 		.arc()
-		.outerRadius(donutChart.r - donutChart.m)
-		.innerRadius(donutChart.r * 0.4 - donutChart.m);
+		.outerRadius(donutChart.r * 0.5 - donutChart.m)
+		.innerRadius(donutChart.r * 0.2 - donutChart.m);
 	var _svg = d3
 		.select(selectString)
 		.append("svg")
@@ -39,9 +37,9 @@ function drawDonutChart(chartID, dataSet, selectString) {
 		.attr(
 			"transform",
 			"translate(" +
-				(donutChart.r + donutChart.m) +
+				(donutChart.r / 2 + donutChart.m) +
 				"," +
-				(donutChart.r + donutChart.m) +
+				(donutChart.r / 2 + donutChart.m) +
 				")"
 		);
 	var _arc = _svg

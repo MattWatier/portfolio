@@ -3,28 +3,17 @@ function drawColorBlocks(selectData, dataSet, selectString, dimensions) {
 	// dataSet => Input Data for the chart, itself.
 	// selectString => String that allows you to pass in
 	// a D3.selectAll() string.
-	var columns = 5;
+
+	console.log(dataSet);
+	var columns = 6;
 	var blockSize = {
 		w: dimensions.w,
 		h: dimensions.h,
 		m: dimensions.m,
-		block: (dimensions.w - (columns - 1) * 2) / columns,
-		gutter: 2
+		block: dimensions.w / columns - dimensions.g * 2,
+		g: dimensions.g
 	};
-	function blockDimension(multiplier) {
-		if (multiplier == 1) {
-			return blockSize.block;
-		} else {
-			return blockSize.block * multiplier + blockSize.gutter * (multiplier - 1);
-		}
-	}
-	var blocks = [
-		{ type: "1", y: 0, x: 0, w: blockDimension(1), h: blockDimension(1) },
-		{ type: "2", y: 0, x: 0, w: blockDimension(1), h: blockDimension(2) },
-		{ type: "3", y: 0, x: 0, w: blockDimension(3), h: blockDimension(1) },
-		{ type: "4", y: 0, x: 0, w: blockDimension(2), h: blockDimension(2) },
-		{ type: "5", y: 0, x: 0, w: blockDimension(5), h: blockDimension(1) }
-	];
+	console.log(blockSize);
 	var color = d3.scale.ordinal();
 	color.domain([
 		"black",
@@ -55,74 +44,84 @@ function drawColorBlocks(selectData, dataSet, selectString, dimensions) {
 		"#5D3A18"
 	]);
 
-	var tempCountArray = [];
-	for (var i = 0; i < dataSet.length; i++) {
-		tempCountArray.push(dataSet[i].count);
-	}
-	var maxCount = Math.max.apply(Math, tempCountArray);
+	var countTotal = dataSet.reduce(function(accumulator, currentValue) {
+		console.log("prev " + accumulator);
+		return Number(accumulator) + Number(currentValue.count);
+	}, 0);
+	console.log("countTotal " + countTotal);
 
-	console.log(maxCount);
 	var unit = d3.scale
 		.linear()
-		.domain([0, maxCount])
-		.range([1, 4])
+		.domain([0, countTotal])
+		.range([0, 36])
 		.interpolate(d3.interpolateRound);
+	var graphData = [];
+	for (var i = 0; i < dataSet.length; i++) {
+		dataSet[i].unit = unit(dataSet[i].count) + 1;
+		var dataPush = dataSet[i];
+		for (var a = 1; a < dataSet[i].unit; a++) {
+			graphData.push(dataPush);
+		}
+	}
+
+	console.log(graphData);
 
 	var _svg = d3
 		.select(selectString)
-		.append("div")
+		.append("svg")
 		.attr({
 			class: function() {
 				return "block" + selectData;
 			},
 			width: blockSize.w,
-			height: blockSize.h,
-			transform: "translate(0,0)"
+			height: blockSize.w,
+			transform: "translate(0, 0)"
 		});
+	_svg.append("rect").attr({
+		class: "background",
+		width: blockSize.w - blockSize.g * 2,
+		height: blockSize.w - blockSize.g * 2,
+		stroke: "#cccccc",
+		"stroke-width": "1",
+		transform: "translate(" + 0 + "," + 0 + ")",
+		fill: "#fdfdfd"
+	});
 
 	var block_chart = _svg
-		.append("div")
+		.append("g")
 		.attr("id", "colorBlockContainer")
-		.selectAll(".blocks")
-		.data(dataSet);
-
-	// .attr("transform", function(d) {
-	// 	var returnTranslate =
-	// 		"translate(" +
-	// 		blocks[unit(d.count) - 1].x +
-	// 		"," +
-	// 		blocks[unit(d.count) - 1].y +
-	// 		")";
-	// 	blocks[unit(d.count) - 1].y =
-	// 		blocks[unit(d.count) - 1].y +
-	// 		unit(d.count) * blockSize.block +
-	// 		unit(d.count) * blockSize.gutter;
-	// 	return returnTranslate;
-	// });
-	// translate to the cube to the slot
-	block_chart
-		.enter()
-		.append("div")
-		.attr("data-filter", function(d, i) {
-			return ".color-" + d.name;
-		})
 		.attr({
-			class: function(d) {
-				return (
-					d.name +
-					" block br_3 m_1 br_solid br_black-2 block hover:opacity opacity_7"
-				);
-			},
-			style: function(d, i) {
-				return (
-					"height:" +
-					blocks[unit(d.count) - 1].h +
-					"px; width:" +
-					blocks[unit(d.count) - 1].w +
-					"px; background-color:" +
-					color(d.name) +
-					";"
-				);
-			}
-		});
+			width: blockSize.w - blockSize.m * 2,
+			height: blockSize.w - blockSize.m * 2,
+			stroke: "#cccccc",
+			"stroke-width": "1",
+			transform: "translate(" + blockSize.m + "," + blockSize.m + ")"
+		})
+		.selectAll(".blocks")
+		.data(graphData)
+		.enter();
+
+	block_chart.append("rect").attr({
+		class: function(d) {
+			return d.name + " block";
+		},
+		stroke: "#cccccc",
+		height: blockSize.block - blockSize.g * 2,
+		width: blockSize.block - blockSize.g * 2,
+		fill: function(d) {
+			return color(d.name);
+		},
+		transform: function(d, i) {
+			return "translate(" + blockPosition(i) + ")";
+		},
+		"data-filter": function(d, i) {
+			return ".color-" + d.name;
+		}
+	});
+	function blockPosition(i) {
+		var xpos, ypos;
+		xpos = (i % 6) * blockSize.block + blockSize.g;
+		ypos = Math.floor(i / 6) * blockSize.block + blockSize.g;
+		return xpos + "," + ypos;
+	}
 }

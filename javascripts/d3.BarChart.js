@@ -17,32 +17,31 @@ function drawBarChart(chartID, dataSet, selectString) {
 		document.documentElement.clientHeight,
 		window.innerHeight || 0
 	);
-	var barChart = {
-		w: wCalc,
-		h: Math.max(hCalc * 0.45, 300),
-		m: 10
-	};
+	var dataSet = dataSet;
+	var barChart = { w: wCalc, h: Math.max(hCalc * 0.45, 300), m: 10 };
 
 	barChart.height = barChart.h;
 	barChart.width = barChart.w;
 	var color = d3.scale.category20().domain(d3.range(dataSet.length));
 	var x = d3.scale
 		.ordinal()
-		.domain(0, 400)
-		.rangeRoundBands([0, barChart.w]);
+		.domain(d3.range(dataSet.length))
+		.rangeRoundBands([0, barChart.width], 0.05);
 	var y = d3.scale
 		.linear()
 		.domain([
 			0,
-			dataSet.length
+			d3.max(dataSet, function(d) {
+				return d.count;
+			})
 		])
-		.range([0, barChart.h]);
+		.range([0, barChart.height], 0);
 
 	var bchart_svg = d3
 		.select(selectString)
 		.append("svg")
 		.attr({
-			class: function () {
+			class: function() {
 				return "bar" + chartID;
 			},
 			width: barChart.w,
@@ -59,40 +58,40 @@ function drawBarChart(chartID, dataSet, selectString) {
 
 	bchart
 		.append("svg:a")
-		.attr("xlink:href", function (d) {
+		.attr("xlink:href", function(d) {
 			return d.type;
 		})
 		.append("rect")
 		.attr({
-			class: function (d) {
+			class: function(d) {
 				return d.type;
 			},
-			x: function (d, i) {
+			x: function(d, i) {
 				return x(i);
 			},
-			y: function (d) {
+			y: function(d) {
 				return barChart.height - y(d.count);
 			},
-			height: function (d) {
+			height: function(d) {
 				return y(d.count);
 			},
 			width: x.rangeBand(),
-			fill: function (d, i) {
+			fill: function(d, i) {
 				return color(i);
 			}
 		});
 	// The "Number" count of elements in each gallery
 	bchart
 		.append("text")
-		.text(function (d) {
+		.text(function(d) {
 			return d.count;
 		})
 		.attr({
 			class: "count font_display font_3",
-			x: function (d, i) {
+			x: function(d, i) {
 				return x(i) + 5;
 			},
-			y: function (d) {
+			y: function(d) {
 				return barChart.height - y(d.count) + 55;
 			},
 			width: x.rangeBand(),
@@ -101,15 +100,15 @@ function drawBarChart(chartID, dataSet, selectString) {
 	// The "Name" of each gallery
 	bchart
 		.append("text")
-		.text(function (d) {
+		.text(function(d) {
 			return d.type;
 		})
 		.attr({
 			class: "label font_0",
-			x: function (d, i) {
+			x: function(d, i) {
 				return x(i) + 5;
 			},
-			y: function (d) {
+			y: function(d) {
 				return barChart.height - y(d.count) + 20;
 			},
 			width: x.rangeBand(),

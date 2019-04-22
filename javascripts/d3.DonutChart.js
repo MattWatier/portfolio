@@ -8,7 +8,7 @@ function drawDonutChart(chartID, dataSet, selectString, dimensions) {
 	var donutChart = {
 		w: dimensions.w,
 		h: dimensions.h,
-		r: mode == "portrait" ? dimensions.w : dimensions.w - 150,
+		r: mode == "portrait" ? dimensions.h : dimensions.w - 150,
 		m: 8
 	};
 	var color = d3.scale.category20c();
@@ -30,7 +30,7 @@ function drawDonutChart(chartID, dataSet, selectString, dimensions) {
 			return "pie" + chartID;
 		})
 		.attr("width", donutChart.w)
-		.attr("height", donutChart.r * 2 + donutChart.m * 2)
+		.attr("height", donutChart.h)
 		.append("svg:a")
 		.attr("xlink:href", chartID)
 		.append("svg:g")
@@ -68,9 +68,9 @@ function drawDonutChart(chartID, dataSet, selectString, dimensions) {
 		.attr("transform", function(d, i) {
 			return (
 				"translate(" +
-				(donutChart.r + donutChart.m * 2) +
+				(donutChart.r / 2 + donutChart.m * 2) +
 				"," +
-				(i * 28 - donutChart.r + 10) +
+				(i * 28 - donutChart.r / 2 + 10) +
 				")"
 			);
 		});

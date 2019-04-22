@@ -34,17 +34,10 @@ include_once "masonFunctions.php";
       </div>
    </div>
    <div class="filters grid-x grid-margin-x p-x_4">
-      <div id="colorWheel" class="cell small-12 medium-6 large-auto">
-         <h4 class="text-left font_2 font_bold c_secondary-n1 m-b_0">Colors</h4>
+      <div id="colorFilter" class="cell small-12"></div>
+      <div id="typeHolder" class="cell small-12 medium-5 large-4">
       </div>
-      <div id="typeHolder" class="cell small-12 medium-6 large-auto">
-         <h4 class="text-left font_2 font_bold c_secondary-n1 m-b_n3">Type</h4>
-      </div>
-      <div id="filterHolder" class="cell small-12 large-auto">
-         <h4 class="text-left font_2 font_bold c_secondary-n1 m-b_n3">Content</h4>
-      </div>
-      <div id="colorFilter" class="cell small-12 ">
-
+      <div id="filterHolder" class="cell small-12 medium-7 large-8">
       </div>
    </div>
    <div class="page">
@@ -140,20 +133,20 @@ include_once "masonFunctions.php";
             $imgs = $("img.lazy");
          drawBarChartNav("value", type_dset_sql, "#filterHolder", {
             w: $("#filterHolder").innerWidth(),
-            h: 375,
+            h: 400,
             m: 10
          });
          drawDonutChart("value", tag_dset, "#typeHolder", {
-            w: $("#colorWheel").innerWidth(),
-            h: 375,
+            w: $("#typeHolder").innerWidth(),
+            h: 400,
             m: 10
          });
-         drawColorBlocks("value", color_dset_sql, "#colorWheel", {
-            w: $("#colorWheel").innerWidth(),
-            h: 375,
-            m: 10,
-            g: 2
-         });
+         // drawColorBlocks("value", color_dset_sql, "#colorWheel", {
+         //    w: $("#colorWheel").innerWidth(),
+         //    h: 375,
+         //    m: 10,
+         //    g: 2
+         // });
          drawColorBarFilter(
             color_dset_sql, "#colorFilter", {
                w: $("#colorFilter").innerWidth(),

@@ -33,15 +33,17 @@ include_once "masonFunctions.php";
          <div class="font_1"><?php printAlbumDesc(true); ?></div>
       </div>
    </div>
-   <div class="filters grid-x grid-margin-x p-x_4">
+   <div class="filters grid-x grid-margin-x p_1 p-x_4:medium">
       <div id="colorFilter" class="cell small-12"></div>
+   </div>
+   <div class="filters grid-x grid-margin-x p_1 p-x_4:medium">
       <div id="typeHolder" class="cell small-12 medium-5 large-4">
       </div>
-      <div id="filterHolder" class="cell small-12 medium-7 large-8">
+      <div id="tagHolder" class="cell small-12 medium-7 large-8">
       </div>
    </div>
    <div class="page">
-      <div class="p-y_4  p-l_5 p-r_3">
+      <div class="p-y_4 p-r_2 p-l_2 p-l_5:medium p-r_3:medium ">
          <?php
          $gallery = new MyGallery(getBareAlbumTitle());
          $query = "SELECT fragments_obj_to_tag.tagid as ID, fragments_tags.name as name, fragments_albums.title as ablum, SUBSTRING( fragments_albums.folder, 1 ,LOCATE('/',fragments_albums.folder)-1) as parent, COUNT(fragments_obj_to_tag.tagid) as count FROM fragments_obj_to_tag LEFT JOIN fragments_tags ON fragments_obj_to_tag.tagid = fragments_tags.id LEFT JOIN fragments_images ON fragments_obj_to_tag.objectid = fragments_images.id LEFT JOIN fragments_albums ON fragments_images.albumid = fragments_albums.id WHERE LOCATE('_color',name)!= 1 AND fragments_albums.parentid = " . $_zp_current_album->getID() . " GROUP BY ID ORDER BY count DESC;";
@@ -118,81 +120,87 @@ include_once "masonFunctions.php";
 
 
    </div>
-   <hr class="space" />
+
 
 
    <script type="text/javascript">
-      var type_dset_sql = <?php echo json_encode($data_TagCounts); ?>;
-      var color_dset_sql = <?php echo json_encode($data_ColorCounts); ?>;
-      var type_dset = <?php echo json_encode($D3_BarChart_Array); ?>;
-      var wheel_dset = <?php echo json_encode($D3_Wheel_Array); ?>;
-      var tag_dset = <?php echo json_encode($D3_BarChartType_Array); ?>;
-      $(document).ready(function() {
-         var $container = $('#album'),
-            $win = $(window),
-            $imgs = $("img.lazy");
-         drawBarChartNav("value", type_dset_sql, "#filterHolder", {
-            w: $("#filterHolder").innerWidth(),
-            h: 400,
-            m: 10
-         });
-         drawDonutChart("value", tag_dset, "#typeHolder", {
-            w: $("#typeHolder").innerWidth(),
-            h: 400,
-            m: 10
-         });
-         // drawColorBlocks("value", color_dset_sql, "#colorWheel", {
-         //    w: $("#colorWheel").innerWidth(),
-         //    h: 375,
-         //    m: 10,
-         //    g: 2
-         // });
-         drawColorBarFilter(
-            color_dset_sql, "#colorFilter", {
-               w: $("#colorFilter").innerWidth(),
-               h: 100,
-               m: 10,
-               g: 2,
-               font_small: .8333333333,
-               font_normal: 1,
-               font_large: 1.728
-            }
-         )
-         var col_width = Math.floor($container.innerWidth() / (Math.floor($container.innerWidth() / 188)));
-
-         console.log(Math.floor($container.innerWidth()) + "/" + (Math.floor($container.innerWidth() / 188)) + " = " + col_width + "column width for isotope");
-         $container.isotope({
-            itemSelector: '.images',
-            masonry: {
-               columnWidth: col_width
-            },
-            onLayout: function() {
-               $win.trigger("scroll");
-            }
-         });
-         $('#filters a, #filterHolder a, #typeHolder a,#colorWheel a,#colorBlockContainer .block,#colorFilter .block').click(function() {
-            var selector = $(this).attr('data-filter');
-
-            var position = $container.position();
-            $container.isotope({
-               filter: selector
-            });
-            $('#filters a, #filterHolder a, #typeHolder a,#colorWheel a,#colorFilter .block').click(function() {
-               var selector = $(this).attr('data-filter');
-               $container.isotope({
-                  filter: selector
-               });
-               return false;
-            });
-
-         });
+   var type_dset_sql = <?php echo json_encode($data_TagCounts); ?>;
+   var color_dset_sql = <?php echo json_encode($data_ColorCounts); ?>;
+   var type_dset = <?php echo json_encode($D3_BarChart_Array); ?>;
+   var wheel_dset = <?php echo json_encode($D3_Wheel_Array); ?>;
+   var tag_dset = <?php echo json_encode($D3_BarChartType_Array); ?>;
+   $(document).ready(function() {
+      var $container = $('#album'),
+         $win = $(window),
+         $imgs = $("img.lazy");
+      drawBarChartNav("value", type_dset_sql, "#tagHolder", {
+         w: $("#tagHolder").innerWidth(),
+         h: 300,
+         m: 10,
+         g: 1,
+         font_small: .8333333333,
+         font_normal: 1,
+         font_large: 1.728
       });
+      pieChart = drawDonutChart("value", tag_dset, "#typeHolder", {
+         w: $("#typeHolder").innerWidth(),
+         h: 300,
+         m: 10,
+         g: 1,
+         font_small: .8333333333,
+         font_normal: 1,
+         font_large: 1.728
+      });
+      // drawColorBlocks("value", color_dset_sql, "#colorWheel", {
+      //    w: $("#colorWheel").innerWidth(),
+      //    h: 375,
+      //    m: 10,
+      //    g: 2
+      // });
+      drawColorBarFilter(
+         color_dset_sql, "#colorFilter", {
+            w: $("#colorFilter").innerWidth(),
+            h: 100,
+            m: 10,
+            g: 1,
+            font_small: .8333333333,
+            font_normal: 1,
+            font_large: 1.728
+         }
+      )
+      var col_width = Math.floor($container.innerWidth() / (Math.floor($container.innerWidth() / 180)));
+
+      $container.isotope({
+         itemSelector: '.images',
+         masonry: {
+            columnWidth: col_width
+         },
+         onLayout: function() {
+            $win.trigger("scroll");
+         }
+      });
+      var isotopefilters = {};
+      $('#tagHolder .filter, #typeHolder .filter,#colorFilter .filter').click(function() {
+         console.log("click event trigger from filter object in chart")
+         var selector = $(this).attr('data-filter');
+         $container.isotope({
+            filter: selector
+         });
+         // $('#filters a, #tagHolder a, #typeHolder .filter,#colorWheel a,#colorFilter .block').click(function() {
+         //    var selector = $(this).attr('data-filter');
+         //    $container.isotope({
+         //       filter: selector
+         //    });
+         //    return false;
+         // });
+      });
+   });
    </script>
 
 
    <script src="<?php echo $_zp_themeroot ?>/javascripts/isotope.2.js" type="text/javascript"></script>
 
    <script src="<?php echo $_zp_themeroot ?>/javascripts/packery-mode.pkgd.min.js" type="text/javascript"></script>
-   <script src="<?php echo $_zp_themeroot ?>/javascripts/d3.ColorBarFitler.js" type="text/javascript"></script>
+
 
    <?php include('_endofTheme.php'); ?>

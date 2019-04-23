@@ -10,66 +10,149 @@ function drawBarChartNav(selectData, dataSet, selectString, dimensions) {
 		w: dimensions.w,
 		h: dimensions.h,
 		m: dimensions.m,
-		font_small:
-			dimensions.font_small != false ? dimensions.font_small : ".8333333333",
+		g: dimensions.g != false ? dimensions.g : '2',
+		font_small: dimensions.font_small != false ? dimensions.font_small : ".8333333333",
 		font_normal: dimensions.font_normal != false ? dimensions.font_normal : "1",
 		font_large: dimensions.font_large != false ? dimensions.font_large : "1.44"
 	};
-	var maxCount = Math.max.apply(
-		Math,
-		dataSet.map(function(o) {
-			return o.count;
-		})
-	);
-
+	var maxTagPerColumn = 6;
+	var minWidthForDoubleColumn = 700;
+	var columnMode = (dataSet.length > maxTagPerColumn && minWidthForDoubleColumn < chartSize.w) ? true : false;
 	var color = d3.scale.category20().domain(d3.range(dataSet.length));
+
+	var chartOffsetY = (((chartSize.font_large + chartSize.font_normal) * 16) + (chartSize.g * 2));
+	// divide up the space to fill the bars properly
+	// Need to split this into a stack of two when screen can allow. medium break space.
 	var y = d3.scale
 		.ordinal()
 		.domain(d3.range(dataSet.length))
-		.rangeRoundBands([0, chartSize.h], 0.05);
+		.rangeRoundBands([0, (chartSize.h - (chartOffsetY + (chartSize.m * 2)))], 0.05);
+	//Getting max width of the space so it can be split into a stack of two.
 	var x = d3.scale
 		.linear()
-		.domain([0, maxCount])
+		.domain([0, Math.max.apply(
+			Math,
+			dataSet.map(function (o) {
+				return o.count;
+			})
+		)])
 		.range([10, chartSize.w * 0.75]);
-
-	var bchart_svg = d3
+	if (columnMode) {
+		console.log();
+		var dataSetLength = dataSet.length;
+		y = d3.scale
+			.ordinal()
+			.domain(d3.range(0, dataSet.length / 2, 1))
+			.rangeRoundBands([0, (chartSize.h - (chartOffsetY + (chartSize.m * 2)))], 0.05);
+		x = d3.scale
+			.linear()
+			.domain([0, Math.max.apply(
+				Math,
+				dataSet.map(function (o) {
+					return o.count;
+				})
+			)])
+			.range([10, chartSize.w * 0.40]);
+	}
+	// Construction of the holder of the svg and the margin bump holder to make alignment easier.
+	var _svg = d3
 		.select(selectString)
 		.append("svg")
-
-		.attr("class", function() {
-			return " bar" + selectData;
+		.attr({
+			"class": function () {
+				return " bar" + selectData;
+			},
+			"width": chartSize.w,
+			"height": chartSize.h,
 		})
-		.attr("width", chartSize.w)
-		.attr("height", chartSize.h)
 		.append("g")
-		.attr("transform", "translate(" + chartSize.m + "," + chartSize.m + ")");
+		.attr({
+			"transform": function () {
+				return "translate(" + chartSize.m + "," + chartSize.m + ")";
+			},
+			width: chartSize.w - (chartSize.m * 2),
+			height: chartSize.h - (chartSize.m * 2)
+		});
+	// Append The title
+	_svg.append('text')
+		.text('Image Tags').style("font-family", "'SansationBold', 'trebuchet MS', Arial, sans-serif")
+		.attr({
+			class: "font_display",
+			'font-size': function () {
+				return chartSize.font_large + "rem";
+			},
+			x: 0,
+			y: 0,
+			'alignment-baseline': 'hanging',
+			fill: "#222"
+		});
+	// Append the Fragment Count
+	_svg.append('text')
+		.text('FRAGMENTS')
+		.attr({
+			class: "font_display font_bold c_secondary-1",
+			'font-size': function () {
+				return chartSize.font_normal + "rem";
+			},
+			x: chartSize.g,
+			y: chartSize.font_large * 16 + chartSize.g,
+			'alignment-baseline': 'hanging',
+			fill: "#888"
+		});
+	// Append the Selection Inicator
+	_svg.append('text')
+		.text('FILTER')
+		.style("font-family", "'SansationBold', 'trebuchet MS', Arial, sans-serif")
+		.attr({
+			class: "font_copy font_bold c_secondary-1 text-right",
+			'text-anchor': 'end',
+			'font-size': function () {
+				return chartSize.font_normal + "rem";
+			},
+			x: chartSize.w - chartSize.m * 2,
+			y: chartSize.font_large * 16 + chartSize.g,
+			'alignment-baseline': 'hanging',
+			fill: "#888"
+		});
 
-	var bchart = bchart_svg
+
+	var bchart = _svg
+		.append("g").attr({
+			transform: function () {
+				return "translate(0, " + chartOffsetY + ")";
+			}
+		})
 		.selectAll(".bar")
 		.data(dataSet)
 		.enter()
 		.append("g")
-		.attr("class", "bar")
-		.attr("transform", function(d, i) {
-			return "translate(0," + y(i) + ")";
+		.attr({
+			"class": "bar filter",
+			"data-filter": function (d) {
+				return "." + d.name.replace(/\s/g, "-");
+			},
+			transform: function (d, i) {
+				var xOffset = (columnMode && i >= dataSet.length / 2) ? (chartSize.w - chartSize.m * 2) / 2 : 0;
+				return "translate(" + xOffset + "," + y(i) + ")";
+			}
 		})
-		.on("mouseover", function() {
+		.on("mouseover", function () {
 			d3.select(this)
 				.select(".count")
 				.attr("fill", "#000000");
 			d3.select(this)
-				.select(".datalabel")
+				.select(".tag-label")
 				.attr("fill", "#000000");
 			d3.select(this)
 				.select(".bar")
 				.attr("opacity", "1");
 		})
-		.on("mouseout", function() {
+		.on("mouseout", function () {
 			d3.select(this)
 				.select(".count")
 				.attr("fill", "#888888");
 			d3.select(this)
-				.select(".datalabel")
+				.select(".tag-label")
 				.attr("fill", "#888888");
 			d3.select(this)
 				.select(".bar")
@@ -77,59 +160,57 @@ function drawBarChartNav(selectData, dataSet, selectString, dimensions) {
 		});
 	bchart
 		.append("rect")
-		.attr("id", function(d) {
-			return d.classtype;
-		})
-		.attr("class", "bar")
-		.attr("height", y.rangeBand())
-		.attr("width", function(d) {
-			return x(d.count);
-		})
-		.attr("y", "0")
-		.attr("fill", function(d, i) {
-			return color(i);
-		})
-		.attr("x", "0")
 		.attr({
-			opacity: ".75",
-			"data-filter": function(d, i) {
-				return d.name;
-			}
+			y: 0,
+			x: 0,
+			"id": function (d) {
+				return d.classtype;
+			},
+			"class": function () {
+				return "bar filter";
+			},
+			height: y.rangeBand(),
+			width: function (d) {
+				return x(d.count);
+			},
+			"fill": function (d, i) {
+				return color(i);
+			},
+			opacity: ".75"
+
 		});
+	// bchart
+	// 	.append("text")
+	// 	.attr({
+	// 		"class": "count font_bold"})
+	// 	.attr("y", "18")
+	// 	.attr("x", function (d) {
+	// 		return x(d.count) + 4;
+	// 	})
+	// 	.attr("fill", "#888888")
+	// 	.style("font-wieght", 900)
+	// 	.style("font-family", "'SansationBold', 'trebuchet MS', Arial, sans-serif")
+	// 	.text(function (d) {
+	// 		return d.count;
+	// 	});
+
+	// Add label
 	bchart
 		.append("text")
-		.attr("class", "count font_1 font_bold")
-		.attr("y", "18")
-		.attr("x", function(d) {
-			return x(d.count) + 4;
+		.attr({
+			"class": "tag-label font_copy",
+			y: y.rangeBand() / 2,
+			x: function (d) {
+				return x(d.count) + 8;
+			},
+			height: y.rangeBand(),
+			"font-size": function () {
+				return chartSize.font_small + "rem";
+			},
+			"fill": "#888888",
+			'alignment-baseline': 'central'
 		})
-		.attr("fill", "#888888")
-		.style("font-wieght", 900)
-		.style("font-family", "'SansationBold', 'trebuchet MS', Arial, sans-serif")
-		.text(function(d) {
-			return d.count;
-		});
-	bchart
-		.append("text")
-		.attr("class", "datalabel font_0")
-		.attr("y", "34")
-		.attr("fill", "#888888")
-		.attr("x", function(d) {
-			return x(d.count) + 7;
-		})
-		.text(function(d) {
+		.text(function (d) {
 			return d.name;
 		});
-	bchart
-		.append("svg:a")
-		.attr("xlink:href", "#")
-		.attr("data-filter", function(d) {
-			return "." + d.name.replace(/\s/g, "-");
-		})
-		.append("rect")
-		.attr("height", y.rangeBand())
-		.attr("width", chartSize.w)
-		.attr("y", "0")
-		.attr("opacity", "0")
-		.attr("x", "0");
 }

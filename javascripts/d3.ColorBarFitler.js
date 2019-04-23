@@ -5,18 +5,19 @@ function drawColorBarFilter(dataSet, selectString, dimensions) {
 		w: dimensions.w,
 		h: dimensions.h,
 		m: dimensions.m,
+		g: dimensions.g != false ? dimensions.g : '2',
 		font_small: dimensions.font_small != false ? dimensions.font_small : '.8333333333',
 		font_normal: dimensions.font_normal != false ? dimensions.font_normal : '1',
 		font_large: dimensions.font_large != false ? dimensions.font_large : '1.44',
 	};
-	console.log('chart size  ' + chartSize);
+	console.log('chart size  ' + JSON.stringify(chartSize));
 	// Color Set Up
 	var color = d3.scale.ordinal();
 	color.domain(['black', 'brown', 'grey', 'white', 'red', 'orange', 'yellow', 'green', 'blue', 'purple']);
 	color.range([
 		'#111111',
 		'#5D3A18',
-		'#bbbbbb',
+		'#aaaaaa',
 		'#dfdfdf',
 		'#EB1313',
 		'#E75516',
@@ -47,7 +48,7 @@ function drawColorBarFilter(dataSet, selectString, dimensions) {
 			},
 			width: chartSize.w,
 			height: function () {
-				return (((chartSize.font_large + chartSize.font_normal) * 16) + 29);
+				return (((chartSize.font_large + chartSize.font_normal) * 16) + chartSize.m * 2 + chartSize.g * 2) + 29;
 			},
 			transform: 'translate(0, 0)',
 		});
@@ -55,32 +56,35 @@ function drawColorBarFilter(dataSet, selectString, dimensions) {
 	// Append The title
 	_svg.append('text')
 		.text('Colors')
+		.style("font-family", "'SansationBold', 'trebuchet MS', Arial, sans-serif")
 		.attr({
-			class: "font_display c_secondary-n3",
+			class: "font_display",
 			'font-size': function () {
 				return chartSize.font_large + "rem";
 			},
 			x: chartSize.m,
-			y: 0,
+			y: chartSize.m,
 			'alignment-baseline': 'hanging',
 			fill: "#222"
 		});
 	// Append the Fragment Count
 	_svg.append('text')
 		.text('FRAGMENTS')
+		.style("font-family", "'SansationBold', 'trebuchet MS', Arial, sans-serif")
 		.attr({
 			class: "font_copy font_bold c_secondary-1",
 			'font-size': function () {
 				return chartSize.font_normal + "rem";
 			},
 			x: chartSize.m,
-			y: chartSize.font_large * 16 - 2,
+			y: chartSize.font_large * 16 + chartSize.g + chartSize.m,
 			'alignment-baseline': 'hanging',
 			fill: "#888"
 		});
 	// Append the Selection Inicator
 	_svg.append('text')
 		.text('FILTER')
+		.style("font-family", "'SansationBold', 'trebuchet MS', Arial, sans-serif")
 		.attr({
 			class: "font_copy font_bold c_secondary-1 text-right",
 			'text-anchor': 'end',
@@ -88,9 +92,8 @@ function drawColorBarFilter(dataSet, selectString, dimensions) {
 				return chartSize.font_normal + "rem";
 			},
 			x: chartSize.w - chartSize.m,
-			y: chartSize.font_large * 16 - 2,
+			y: chartSize.font_large * 16 + chartSize.g + chartSize.m,
 			'alignment-baseline': 'hanging',
-
 			fill: "#888"
 		});
 	// Append the Chart
@@ -103,19 +106,20 @@ function drawColorBarFilter(dataSet, selectString, dimensions) {
 				return chartSize.w < 1024 ? 29 : 10;
 			},
 			transform: function () {
-				return 'translate(' + chartSize.m + ',' + (chartSize.font_large + chartSize.font_normal) * 16 + 4 + ')';
+				return 'translate(' + chartSize.m + ',' + (((chartSize.font_large + chartSize.font_normal) * 16) + chartSize.m + (chartSize.g * 2)) + ')';
 
 			},
 		})
 		.selectAll('.blocks')
 		.data(dataSet)
 		.enter();
+	console.log();
 	// Each Block needs to build upon the last to make a full line across the page.
 	block_chart.append('rect').attr({
 		class: function (d) {
-			return d.name + ' block';
+			return d.name + ' block filter';
 		},
-		stroke: '#333',
+		stroke: '#fff',
 		'stroke-width': 1,
 		height: function () {
 			return chartSize.w < 1024 ? 29 : 10;

@@ -2,3 +2,6 @@ node_modules
 Strathmore
 dist
 docs
+\.vscode/sftp\.json
+
+\.vscode/

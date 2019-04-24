@@ -11,38 +11,38 @@ if ($_GET["flush"] == "true") {
 <html>
 
 <head>
-   <?php zp_apply_filter('theme_head'); ?>
-   <title>Artistic Fragments of Matt Watier</title>
-   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-   <meta name="viewport" content="width=device-width">
-   <?php include('_htmlHeader.php'); ?>
+  <?php zp_apply_filter('theme_head'); ?>
+  <title>Artistic Fragments of Matt Watier</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width">
+  <?php include('_htmlHeader.php'); ?>
 </head>
 
 <body class="">
-   <!--[if lt IE 8]>
+  <!--[if lt IE 8]>
         <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
  <![endif]-->
-   <?php zp_apply_filter('theme_body_open'); ?>
-   <?php include('_siteHeaderNav.php'); ?>
-   <div class="grid-container" style="max-width:100%;">
-      <div class='page grid-x grid-margin-x'>
-         <div id="introduction" class="cell large-4">
-            <h1 class="font_display font_5">Welcome to the Fragments of Me.</h1>
-            <div id="bar_holder">
-               <!-- this is a holder for the bar chart -->
-            </div>
-            <div class="font_3 font_copy m-t_4"><?php printGalleryDesc(); ?></div>
-            <hr>
-            <!-- <h4  class="font_display font_4">Shards of my work scatter across time</h4>
+  <?php zp_apply_filter('theme_body_open'); ?>
+  <?php include('_siteHeaderNav.php'); ?>
+  <div class="grid-container" style="max-width:100%;">
+    <div class='page grid-x grid-margin-x'>
+      <div id="introduction" class="cell large-4 p-x_5:large p-t_5">
+        <h1 class="font_display font_5 ">Welcome to the Fragments of Me.</h1>
+        <div id="bar_holder" class="">
+          <!-- this is a holder for the bar chart -->
+        </div>
+        <div class="font_3 font_copy m-t_4"><?php printGalleryDesc(); ?></div>
+        <hr>
+        <!-- <h4  class="font_display font_4">Shards of my work scatter across time</h4>
          <p><em>It is interesteding to see my work plotted into the months they were created over time. This isn't all my work but the work that is represented this repository.</em></p> -->
-         </div><!-- End of Introduction -->
-         <?php
+      </div><!-- End of Introduction -->
+      <?php
       $gallery_item = '<div id="ablumns" class="cell large-8"><div class="grid-x grid-margin-x grid-margin-y">';
       while (next_album()) :
-        $gallery_item .= '<div class="albumn ' . getAnnotatedAlbumTitle() . ' cell small-12 medium-6" ><div class="">';
-        $gallery_item .= '<h3 class="font_4 br-b_1 br_solid br_0 br_primary-5 p-x_4"><a href="' . html_encode(getAlbumURL()) . '" class="c_primary no-underline" title="View album ' . getAnnotatedAlbumTitle() . '">' . getAlbumTitle() . '<i class="far fa-arrow-alt-circle-right font_2 p-l_2"></i></a></h3>';
-        $gallery_item .= '<div class="d3_chart " id="dataholder_' . getAnnotatedAlbumTitle() . '">&nbsp;</div>';
-        $images = '<ul class="thumbnail-holder grid-x no-bullet">';
+        $gallery_item .= '<div class="albumn p_5:large  ' . getAnnotatedAlbumTitle() . ' cell small-12 medium-6" ><div class="">';
+        $gallery_item .= '<h3 class="font_4 br-b_1 br_solid br_0 br_primary-5 p-x_4"><a href="' . html_encode(getAlbumURL()) . '" class="c_primary no-underline" title="View album ' . getAnnotatedAlbumTitle() . '">' . getAnnotatedAlbumTitle() . '<i class="far fa-arrow-alt-circle-right font_2 p-l_2"></i></a></h3>';
+        $gallery_item .= '<div class="d3_chart" id="dataholder_' . getAnnotatedAlbumTitle() . '">&nbsp;</div>';
+        $images = '<ul class="thumbnail-holder grid-x no-bullet p_5 ">';
         for ($i = 1; $i <= 18; $i++) {
           $randomImage = getRandomImagesAlbum($rootAlbum = getAnnotatedAlbumTitle(), $daily = false);
           $images .= "<li class='cell center m-x_auto m-y_2 text-center m-x_3 image-thumb'><a data-fancybox='gallery_" . getAnnotatedAlbumTitle() . "' style='width:65px;height:70px;' class='br_1 inline-block br_secondary-4 br_solid p_2 bg_secondary-5 hover:primary' href='" . $randomImage->getFullImage() . "'>";
@@ -64,9 +64,9 @@ if ($_GET["flush"] == "true") {
       $gallery_item .= '</div></div></div></div>';
       echo $gallery_item;
       ?>
-      </div>
-      <div class="row" id="dataholder" style="position: relative;"></div>
-      <?php
+    </div>
+    <div class="row" id="dataholder" style="position: relative;"></div>
+    <?php
 
 
     require_once('cache.php');
@@ -90,7 +90,7 @@ if ($_GET["flush"] == "true") {
       $cacheName = 'cachedQuery_' . $value["id"] . '.tmp';
       $data = query_full_array($query); //d3QueryCache($flush, $query, $cacheName, $cache);
       echo 'var dset_' . $value["id"] . '=' . json_encode($data) . ';';
-      $d3BuilderCall .= "drawDonutChartSimple('" . $value['type'] . "', dset_" . $value['id'] . ",'#dataholder_" . $value['type'] . "' ,{w: $('#dataholder_". $value['type']."').innerWidth(), h: 300, m: 10, g: 1, font_small: .8333333333, font_normal: 1, font_large: 1.728});";
+      $d3BuilderCall .= "drawDonutChartSimple('" . $value['type'] . "', dset_" . $value['id'] . ",'#dataholder_" . $value['type'] . "' ,{w: $('#dataholder_" . $value['type'] . "').innerWidth(), h: 300, m: 10, g: 1, font_small: .8333333333, font_normal: 1, font_large: 1.728});";
     }
 
     // tag_time
@@ -130,32 +130,32 @@ if ($_GET["flush"] == "true") {
       return $storageVar;
     }
     ?>
-   </div>
-   <?php include('_endofTheme.php'); ?>
-   <div id="colortheme">
-      <!-- this is a holder for a secondary block -->
-   </div>
+  </div>
+  <?php include('_endofTheme.php'); ?>
+  <div id="colortheme">
+    <!-- this is a holder for a secondary block -->
+  </div>
 
-   <script type="text/javascript">
-   $(document).ready(function() {
+  <script type="text/javascript">
+    $(document).ready(function() {
       <?php echo $d3BuilderCall; ?>
       // $imgs = $("img.lazy");
       // $imgs.lazyload({
       //     effect: "fadeIn",
       //     failure_limit: Math.max($imgs.length - 1, 0)
       // });
-   });
-   </script>
-   <style>
-   .thumbnail-holder {
+    });
+  </script>
+  <style>
+    .thumbnail-holder {
       max-height: 160px;
       overflow: hidden;
-   }
+    }
 
-   .image-thumb {
+    .image-thumb {
       flex: 0 1 55px;
-   }
-   </style>
+    }
+  </style>
 
 </body>
 

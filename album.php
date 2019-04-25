@@ -34,6 +34,7 @@ include_once "masonFunctions.php";
       </div>
    </div>
    <div class="filters grid-x grid-margin-x p_1 p-x_4:medium">
+      <div id="masterChart" class="cell small-12"></div>
       <div id="colorFilter" class="cell small-12"></div>
    </div>
    <div class="filters grid-x grid-margin-x p_1 p-x_4:medium">
@@ -99,7 +100,7 @@ include_once "masonFunctions.php";
          $colors = $gallery->get_colorfilters();
          $D3_Wheel_Array = flattenArray($colors);
          $type_tags = $gallery->get_typefilters();
-         $D3_BarChartType_Array = flattenArray($type_tags);
+         $D3_CategoryCount = flattenArray($type_tags);
 
 
 
@@ -124,16 +125,30 @@ include_once "masonFunctions.php";
 
 
    <script type="text/javascript">
-   var type_dset_sql = <?php echo json_encode($data_TagCounts); ?>;
+   var tag_dset_sql = <?php echo json_encode($data_TagCounts); ?>;
    var color_dset_sql = <?php echo json_encode($data_ColorCounts); ?>;
    var type_dset = <?php echo json_encode($D3_BarChart_Array); ?>;
    var wheel_dset = <?php echo json_encode($D3_Wheel_Array); ?>;
-   var tag_dset = <?php echo json_encode($D3_BarChartType_Array); ?>;
+   var category_dset = <?php echo json_encode($D3_CategoryCount); ?>;
    $(document).ready(function() {
       var $container = $('#album'),
          $win = $(window),
          $imgs = $("img.lazy");
-      drawBarChartNav("value", type_dset_sql, "#tagHolder", {
+      let chartDimensions = {
+         w: $("#masterChart").innerWidth(),
+         m: 10,
+         g: 2,
+         font_small: .8333333333,
+         font_normal: 1,
+         font_large: 1.728
+      };
+      let dataSets = {
+         catData: <?php echo json_encode($D3_CategoryCount); ?>,
+         tagData: <?php echo json_encode($data_TagCounts); ?>,
+         colorData: <?php echo json_encode($data_ColorCounts); ?>,
+      };
+      masterChart("#masterChart", dataSets, chartDimensions);
+      drawBarChartNav("value", tag_dset_sql, "#tagHolder", {
          w: $("#tagHolder").innerWidth(),
          h: 300,
          m: 10,
@@ -142,7 +157,7 @@ include_once "masonFunctions.php";
          font_normal: 1,
          font_large: 1.728
       });
-      pieChart = drawDonutChart("value", tag_dset, "#typeHolder", {
+      pieChart = drawDonutChart("value", category_dset, "#typeHolder", {
          w: $("#typeHolder").innerWidth(),
          h: 300,
          m: 10,
@@ -197,6 +212,7 @@ include_once "masonFunctions.php";
    });
    </script>
 
+   <script src="<?php echo $_zp_themeroot ?>/javascripts/masterChart.js" type="text/javascript"></script>
 
    <script src="<?php echo $_zp_themeroot ?>/javascripts/isotope.2.js" type="text/javascript"></script>
 

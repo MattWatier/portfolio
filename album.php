@@ -52,6 +52,18 @@ include_once "masonFunctions.php";
 
          $query = "SELECT fragments_obj_to_tag.tagid as ID, SUBSTRING(fragments_tags.name,LOCATE('-', fragments_tags.name )+1,CHAR_LENGTH(fragments_tags.name)) as name,SUBSTRING( fragments_albums.folder, 1 ,LOCATE('/',fragments_albums.folder)-1) as parent, COUNT(fragments_obj_to_tag.tagid) as count FROM fragments_obj_to_tag LEFT JOIN fragments_tags ON fragments_obj_to_tag.tagid = fragments_tags.id LEFT JOIN fragments_images ON fragments_obj_to_tag.objectid = fragments_images.id LEFT JOIN fragments_albums ON fragments_images.albumid = fragments_albums.id WHERE LOCATE('_color-',name) = 1 AND fragments_albums.parentid = " . $_zp_current_album->getID() . " GROUP BY ID ORDER BY FIELD(name, '_color-black','_color-brown','_color-purple','_color-blue','_color-green','_color-yellow','_color-orange','_color-red','_color-grey','_color-white') ASC;";
          $data_ColorCounts = query_full_array($query);
+
+         $query = "SELECT fragments_albums.id as ID, fragments_albums.title as name,
+         SUBSTRING( fragments_albums.folder, 1 ,LOCATE('/',fragments_albums.folder)-1) as parent,
+         COUNT(fragments_images.albumid) as count
+         FROM fragments_obj_to_tag
+         LEFT JOIN fragments_tags ON fragments_obj_to_tag.tagid = fragments_tags.id
+         LEFT JOIN fragments_images ON fragments_obj_to_tag.objectid = fragments_images.id
+         LEFT JOIN fragments_albums ON fragments_images.albumid = fragments_albums.id
+         WHERE fragments_albums.parentid = " . $_zp_current_album->getID() . "
+         GROUP BY ID ORDER BY name DESC;";
+         $data_CategoryCounts = query_full_array($query);
+
          $gallery_item = "<div id='album'>";
          $checked = false;
          while (next_album($all = true)) :
@@ -125,98 +137,98 @@ include_once "masonFunctions.php";
 
 
    <script type="text/javascript">
-   var tag_dset_sql = <?php echo json_encode($data_TagCounts); ?>;
-   var color_dset_sql = <?php echo json_encode($data_ColorCounts); ?>;
-   var type_dset = <?php echo json_encode($D3_BarChart_Array); ?>;
-   var wheel_dset = <?php echo json_encode($D3_Wheel_Array); ?>;
-   var category_dset = <?php echo json_encode($D3_CategoryCount); ?>;
-   $(document).ready(function() {
-      var $container = $('#album'),
-         $win = $(window),
-         $imgs = $("img.lazy");
-      let chartDimensions = {
-         w: $("#masterChart").innerWidth(),
-         m: 10,
-         g: 2,
-         font_small: .8333333333,
-         font_normal: 1,
-         font_large: 1.728
-      };
-      let dataSets = {
-         catData: <?php echo json_encode($D3_CategoryCount); ?>,
-         tagData: <?php echo json_encode($data_TagCounts); ?>,
-         colorData: <?php echo json_encode($data_ColorCounts); ?>,
-      };
-      masterChart("#masterChart", dataSets, chartDimensions);
-      drawBarChartNav("value", tag_dset_sql, "#tagHolder", {
-         w: $("#tagHolder").innerWidth(),
-         h: 300,
-         m: 10,
-         g: 1,
-         font_small: .8333333333,
-         font_normal: 1,
-         font_large: 1.728
-      });
-      pieChart = drawDonutChart("value", category_dset, "#typeHolder", {
-         w: $("#typeHolder").innerWidth(),
-         h: 300,
-         m: 10,
-         g: 1,
-         font_small: .8333333333,
-         font_normal: 1,
-         font_large: 1.728
-      });
-      // drawColorBlocks("value", color_dset_sql, "#colorWheel", {
-      //    w: $("#colorWheel").innerWidth(),
-      //    h: 375,
-      //    m: 10,
-      //    g: 2
-      // });
-      drawColorBarFilter(
-         color_dset_sql, "#colorFilter", {
-            w: $("#colorFilter").innerWidth(),
-            h: 100,
+      var tag_dset_sql = <?php echo json_encode($data_TagCounts); ?>;
+      var color_dset_sql = <?php echo json_encode($data_ColorCounts); ?>;
+      var type_dset = <?php echo json_encode($D3_BarChart_Array); ?>;
+      var wheel_dset = <?php echo json_encode($D3_Wheel_Array); ?>;
+      var category_dset = <?php echo json_encode($D3_CategoryCount); ?>;
+      $(document).ready(function() {
+         var $container = $('#album'),
+            $win = $(window),
+            $imgs = $("img.lazy");
+         let chartDimensions = {
+            w: $("#masterChart").innerWidth(),
             m: 10,
-            g: 1,
+            g: 2,
             font_small: .8333333333,
             font_normal: 1,
             font_large: 1.728
-         }
-      )
-      var col_width = Math.floor($container.innerWidth() / (Math.floor($container.innerWidth() / 180)));
-
-      $container.isotope({
-         itemSelector: '.images',
-         masonry: {
-            columnWidth: col_width
-         },
-         onLayout: function() {
-            $win.trigger("scroll");
-         }
-      });
-      var isotopefilters = {};
-      $('#tagHolder .filter, #typeHolder .filter,#colorFilter .filter').click(function() {
-         console.log("click event trigger from filter object in chart")
-         var selector = $(this).attr('data-filter');
-         $container.isotope({
-            filter: selector
-         });
-         // $('#filters a, #tagHolder a, #typeHolder .filter,#colorWheel a,#colorFilter .block').click(function() {
-         //    var selector = $(this).attr('data-filter');
-         //    $container.isotope({
-         //       filter: selector
-         //    });
-         //    return false;
+         };
+         let dataSets = {
+            catData: <?php echo json_encode($data_CategoryCounts); ?>,
+            tagData: <?php echo json_encode($data_TagCounts); ?>,
+            colorData: <?php echo json_encode($data_ColorCounts); ?>,
+         };
+         masterChart("#masterChart", dataSets, chartDimensions);
+         // drawBarChartNav("value", tag_dset_sql, "#tagHolder", {
+         //    w: $("#tagHolder").innerWidth(),
+         //    h: 300,
+         //    m: 10,
+         //    g: 1,
+         //    font_small: .8333333333,
+         //    font_normal: 1,
+         //    font_large: 1.728
          // });
+         // var pieChart = drawDonutChart("value", category_dset, "#typeHolder", {
+         //    w: $("#typeHolder").innerWidth(),
+         //    h: 300,
+         //    m: 10,
+         //    g: 1,
+         //    font_small: .8333333333,
+         //    font_normal: 1,
+         //    font_large: 1.728
+         // });
+         // drawColorBlocks("value", color_dset_sql, "#colorWheel", {
+         //    w: $("#colorWheel").innerWidth(),
+         //    h: 375,
+         //    m: 10,
+         //    g: 2
+         // });
+         // drawColorBarFilter(
+         //    color_dset_sql, "#colorFilter", {
+         //       w: $("#colorFilter").innerWidth(),
+         //       h: 100,
+         //       m: 10,
+         //       g: 1,
+         //       font_small: .8333333333,
+         //       font_normal: 1,
+         //       font_large: 1.728
+         //    }
+         // ) 
+         var col_width = Math.floor($container.innerWidth() / (Math.floor($container.innerWidth() / 180)));
+
+         $container.isotope({
+            itemSelector: '.images',
+            masonry: {
+               columnWidth: col_width
+            },
+            onLayout: function() {
+               $win.trigger("scroll");
+            }
+         });
+         var isotopefilters = {};
+         $('#tagHolder .filter, #typeHolder .filter,#colorFilter .filter,#masterChart .filter').click(function() {
+            console.log("click event trigger from filter object in chart")
+            var selector = $(this).attr('data-filter');
+            $container.isotope({
+               filter: selector
+            });
+            // $('#filters a, #tagHolder a, #typeHolder .filter,#colorWheel a,#colorFilter .block').click(function() {
+            //    var selector = $(this).attr('data-filter');
+            //    $container.isotope({
+            //       filter: selector
+            //    });
+            //    return false;
+            // });
+         });
       });
-   });
    </script>
 
-   <script src="<?php echo $_zp_themeroot ?>/javascripts/masterChart.js" type="text/javascript"></script>
+   <script src="<?php echo $_zp_themeroot ?>/javascripts/d3.masterChart.js" type="text/javascript"></script>
 
    <script src="<?php echo $_zp_themeroot ?>/javascripts/isotope.2.js" type="text/javascript"></script>
 
    <script src="<?php echo $_zp_themeroot ?>/javascripts/packery-mode.pkgd.min.js" type="text/javascript"></script>
 
 
-   <?php include('_endofTheme.php'); ?>
+   <?php include('_endofTheme.php'); ?>s

@@ -37,23 +37,18 @@ include_once "masonFunctions.php";
       <div id="masterChart" class="cell small-12"></div>
       <div id="colorFilter" class="cell small-12"></div>
    </div>
-   <div class="filters grid-x grid-margin-x p_1 p-x_4:medium">
-      <div id="typeHolder" class="cell small-12 medium-5 large-4">
-      </div>
-      <div id="tagHolder" class="cell small-12 medium-7 large-8">
-      </div>
-   </div>
+
    <div class="page">
       <div class="p-y_4 p-r_2 p-l_2 p-l_5:medium p-r_3:medium ">
          <?php
          $gallery = new MyGallery(getBareAlbumTitle());
-         $query = "SELECT fragments_obj_to_tag.tagid as ID, fragments_tags.name as name, fragments_albums.title as ablum, SUBSTRING( fragments_albums.folder, 1 ,LOCATE('/',fragments_albums.folder)-1) as parent, COUNT(fragments_obj_to_tag.tagid) as count FROM fragments_obj_to_tag LEFT JOIN fragments_tags ON fragments_obj_to_tag.tagid = fragments_tags.id LEFT JOIN fragments_images ON fragments_obj_to_tag.objectid = fragments_images.id LEFT JOIN fragments_albums ON fragments_images.albumid = fragments_albums.id WHERE LOCATE('_color',name)!= 1 AND fragments_albums.parentid = " . $_zp_current_album->getID() . " GROUP BY ID ORDER BY count DESC;";
+         $query = "SELECT fragments_obj_to_tag.tagid as ID,'barTagChart' as chart, fragments_tags.name as name, fragments_albums.title as ablum, SUBSTRING( fragments_albums.folder, 1 ,LOCATE('/',fragments_albums.folder)-1) as parent, COUNT(fragments_obj_to_tag.tagid) as count FROM fragments_obj_to_tag LEFT JOIN fragments_tags ON fragments_obj_to_tag.tagid = fragments_tags.id LEFT JOIN fragments_images ON fragments_obj_to_tag.objectid = fragments_images.id LEFT JOIN fragments_albums ON fragments_images.albumid = fragments_albums.id WHERE LOCATE('_color',name)!= 1 AND fragments_albums.parentid = " . $_zp_current_album->getID() . " GROUP BY ID ORDER BY count DESC;";
          $data_TagCounts = query_full_array($query);
 
-         $query = "SELECT fragments_obj_to_tag.tagid as ID, SUBSTRING(fragments_tags.name,LOCATE('-', fragments_tags.name )+1,CHAR_LENGTH(fragments_tags.name)) as name,SUBSTRING( fragments_albums.folder, 1 ,LOCATE('/',fragments_albums.folder)-1) as parent, COUNT(fragments_obj_to_tag.tagid) as count FROM fragments_obj_to_tag LEFT JOIN fragments_tags ON fragments_obj_to_tag.tagid = fragments_tags.id LEFT JOIN fragments_images ON fragments_obj_to_tag.objectid = fragments_images.id LEFT JOIN fragments_albums ON fragments_images.albumid = fragments_albums.id WHERE LOCATE('_color-',name) = 1 AND fragments_albums.parentid = " . $_zp_current_album->getID() . " GROUP BY ID ORDER BY FIELD(name, '_color-black','_color-brown','_color-purple','_color-blue','_color-green','_color-yellow','_color-orange','_color-red','_color-grey','_color-white') ASC;";
+         $query = "SELECT fragments_obj_to_tag.tagid as ID,'colorBlockChart' as chart, SUBSTRING(fragments_tags.name,LOCATE('-', fragments_tags.name )+1,CHAR_LENGTH(fragments_tags.name)) as name,SUBSTRING( fragments_albums.folder, 1 ,LOCATE('/',fragments_albums.folder)-1) as parent, COUNT(fragments_obj_to_tag.tagid) as count FROM fragments_obj_to_tag LEFT JOIN fragments_tags ON fragments_obj_to_tag.tagid = fragments_tags.id LEFT JOIN fragments_images ON fragments_obj_to_tag.objectid = fragments_images.id LEFT JOIN fragments_albums ON fragments_images.albumid = fragments_albums.id WHERE LOCATE('_color-',name) = 1 AND fragments_albums.parentid = " . $_zp_current_album->getID() . " GROUP BY ID ORDER BY FIELD(name, '_color-black','_color-brown','_color-purple','_color-blue','_color-green','_color-yellow','_color-orange','_color-red','_color-grey','_color-white') ASC;";
          $data_ColorCounts = query_full_array($query);
 
-         $query = "SELECT fragments_albums.id as ID, fragments_albums.title as name,
+         $query = "SELECT fragments_albums.id as ID,'catPieChart' as chart, fragments_albums.title as name,
          SUBSTRING( fragments_albums.folder, 1 ,LOCATE('/',fragments_albums.folder)-1) as parent,
          COUNT(fragments_images.albumid) as count
          FROM fragments_obj_to_tag
@@ -146,55 +141,31 @@ include_once "masonFunctions.php";
          var $container = $('#album'),
             $win = $(window),
             $imgs = $("img.lazy");
-         let chartDimensions = {
-            w: $("#masterChart").innerWidth(),
-            m: 10,
-            g: 2,
-            font_small: .8333333333,
-            font_normal: 1,
-            font_large: 1.728
-         };
-         let dataSets = {
-            catData: <?php echo json_encode($data_CategoryCounts); ?>,
-            tagData: <?php echo json_encode($data_TagCounts); ?>,
-            colorData: <?php echo json_encode($data_ColorCounts); ?>,
-         };
-         masterChart("#masterChart", dataSets, chartDimensions);
-         // drawBarChartNav("value", tag_dset_sql, "#tagHolder", {
-         //    w: $("#tagHolder").innerWidth(),
-         //    h: 300,
-         //    m: 10,
-         //    g: 1,
-         //    font_small: .8333333333,
-         //    font_normal: 1,
-         //    font_large: 1.728
-         // });
-         // var pieChart = drawDonutChart("value", category_dset, "#typeHolder", {
-         //    w: $("#typeHolder").innerWidth(),
-         //    h: 300,
-         //    m: 10,
-         //    g: 1,
-         //    font_small: .8333333333,
-         //    font_normal: 1,
-         //    font_large: 1.728
-         // });
-         // drawColorBlocks("value", color_dset_sql, "#colorWheel", {
-         //    w: $("#colorWheel").innerWidth(),
-         //    h: 375,
-         //    m: 10,
-         //    g: 2
-         // });
-         // drawColorBarFilter(
-         //    color_dset_sql, "#colorFilter", {
-         //       w: $("#colorFilter").innerWidth(),
-         //       h: 100,
-         //       m: 10,
-         //       g: 1,
-         //       font_small: .8333333333,
-         //       font_normal: 1,
-         //       font_large: 1.728
-         //    }
-         // ) 
+
+         var svg = d3.select("#masterChart").append("svg");
+
+         function redraw() {
+            var chartDimensions = {
+               w: $("#masterChart").innerWidth(),
+               m: 10,
+               g: 2,
+               font_small: .8333333333,
+               font_normal: 1,
+               font_large: 1.728
+            };
+            var dataSets = {
+               catData: <?php echo json_encode($data_CategoryCounts); ?>,
+               tagData: <?php echo json_encode($data_TagCounts); ?>,
+               colorData: <?php echo json_encode($data_ColorCounts); ?>,
+            };
+            svg.selectAll("*").remove();
+            masterChart("#masterChart", dataSets, chartDimensions, svg);
+            // Draw for the first time to initialize.
+         }
+         redraw();
+
+         // Redraw based on the new size whenever the browser window is resized.
+         window.addEventListener("resize", redraw);
          var col_width = Math.floor($container.innerWidth() / (Math.floor($container.innerWidth() / 180)));
 
          $container.isotope({
@@ -213,13 +184,7 @@ include_once "masonFunctions.php";
             $container.isotope({
                filter: selector
             });
-            // $('#filters a, #tagHolder a, #typeHolder .filter,#colorWheel a,#colorFilter .block').click(function() {
-            //    var selector = $(this).attr('data-filter');
-            //    $container.isotope({
-            //       filter: selector
-            //    });
-            //    return false;
-            // });
+
          });
       });
    </script>

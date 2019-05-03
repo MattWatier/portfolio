@@ -31,7 +31,7 @@ if ($_GET["flush"] == "true") {
         <div id="bar_holder" class="">
           <!-- this is a holder for the bar chart -->
         </div>
-        <div class="font_3 font_copy m-t_4"><?php printGalleryDesc(); ?></div>
+        <div class="font_2 font_copy m-t_4"><?php printGalleryDesc(); ?></div>
         <hr>
         <!-- <h4  class="font_display font_4">Shards of my work scatter across time</h4>
          <p><em>It is interesteding to see my work plotted into the months they were created over time. This isn't all my work but the work that is represented this repository.</em></p> -->
@@ -41,7 +41,7 @@ if ($_GET["flush"] == "true") {
       while (next_album()) :
         $gallery_item .= '<div class="albumn p_5:large  ' . getAnnotatedAlbumTitle() . ' cell small-12 medium-6" ><div class="">';
         $gallery_item .= '<h3 class="font_4 br-b_1 br_solid br_0 br_primary-5 p-x_4"><a href="' . html_encode(getAlbumURL()) . '" class="c_primary no-underline" title="View album ' . getAnnotatedAlbumTitle() . '">' . getAnnotatedAlbumTitle() . '<i class="far fa-arrow-alt-circle-right font_2 p-l_2"></i></a></h3>';
-        $gallery_item .= '<div class="d3_chart" id="dataholder_' . getAnnotatedAlbumTitle() . '">&nbsp;</div>';
+        $gallery_item .= '<a href="' . html_encode(getAlbumURL()) . '"><div class="d3_chart" id="dataholder_' . getAnnotatedAlbumTitle() . '">&nbsp;</div></a>';
         $images = '<ul class="thumbnail-holder grid-x no-bullet p_5 ">';
         for ($i = 1; $i <= 18; $i++) {
           $randomImage = getRandomImagesAlbum($rootAlbum = getAnnotatedAlbumTitle(), $daily = false);
@@ -58,7 +58,7 @@ if ($_GET["flush"] == "true") {
         }
         $images .= "</ul> \n";
         $gallery_item .= $images;
-        $gallery_item .= '<div class="albumn-description font_2 font_copy c_secondary-n4 lh_4 p_5 p-t_4 br-t_1 br_solid br_0 br_primary-5">' . getAlbumCustomData() . '<a href="' . html_encode(getAlbumURL()) . '" class="font_2 font_display block">Explore my work on ' . getAnnotatedAlbumTitle() . '<i class="far fa-caret-square-right p-l_3"></i></a></div>';
+        $gallery_item .= '<div class="albumn-description font_1 font_copy c_secondary-n4 lh_3 p_5 p-t_4 br-t_1 br_solid br_0 br_primary-5">' . getAlbumCustomData() . '<a href="' . html_encode(getAlbumURL()) . '" class="font_1 font_display block">Explore my work on ' . getAnnotatedAlbumTitle() . '<i class="far fa-caret-square-right p-l_3"></i></a></div>';
         $gallery_item .= "\n </div></div> \n";
       endwhile;
       $gallery_item .= '</div></div></div></div>';
@@ -148,7 +148,7 @@ if ($_GET["flush"] == "true") {
   </script>
   <style>
     .thumbnail-holder {
-      max-height: 160px;
+      max-height: 186px;
       overflow: hidden;
     }
 

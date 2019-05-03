@@ -1,5 +1,5 @@
-function masterChart(DOMSelector, dset, dimensions) {
-	chartSize = {
+function masterChart(DOMSelector, dset, dimensions, _svg) {
+	var chartSize = {
 		w: dimensions.w,
 		m: dimensions.m,
 		g: dimensions.g != false ? dimensions.g : "2",
@@ -9,7 +9,7 @@ function masterChart(DOMSelector, dset, dimensions) {
 		font_large: dimensions.font_large != false ? dimensions.font_large : "1.44"
 	};
 
-	let baseFontSize = 16,
+	var baseFontSize = 16,
 		stackedColorData = dset.colorData,
 		barTagData = dset.tagData,
 		pieCatData = dset.catData,
@@ -19,7 +19,7 @@ function masterChart(DOMSelector, dset, dimensions) {
 		accumulatedXPos = 0;
 
 	// Need to calc these dimensions.
-	chartSize.h = 500;
+
 	chartSize.stackedColorW = chartSize.w;
 	chartSize.pieCatW =
 		chartSize.w < bp_md
@@ -35,29 +35,36 @@ function masterChart(DOMSelector, dset, dimensions) {
 			: dimensions.w * 0.3 - dimensions.m * 2;
 	chartSize.barTagW =
 		chartSize.w < bp_md
-			? dimensions.w - dimensions.m * 2
+			? dimensions.w
 			: chartSize.w < bp_lg
-			? dimensions.w * 0.6 - dimensions.m * 2
-			: dimensions.w * 0.7 - dimensions.m * 2;
-	chartSize.barTagH = chartSize.w > bp_md ? 300 : 500;
-	let barTagPos = {
+			? dimensions.w * 0.6 - dimensions.m
+			: dimensions.w * 0.7 - dimensions.m;
+	var barTagPos = {
 		x:
 			chartSize.w > bp_md
 				? chartSize.w - chartSize.barTagW + chartSize.m
 				: chartSize.m,
 		y: 90 + chartSize.m
 	};
-	let columnMode =
+	var columnMode =
 		barTagData.length > maxTagPerColumn && chartSize.barTagW > bp_md
 			? true
 			: false;
-	let chartOffsetY =
+	var chartOffsetY =
 		(chartSize.font_large + chartSize.font_normal) * baseFontSize +
 		chartSize.m +
 		chartSize.g * 2;
-	let colors = d3.scale.category20();
+	chartSize.barTagH =
+		chartSize.w > bp_md ? 300 : 29 * barTagData.length + chartOffsetY;
+	chartSize.r = Math.min(chartSize.pieCatW - 150, 250);
+	chartSize.pieCatH = chartSize.r + chartOffsetY;
+	chartSize.h =
+		chartSize.w > bp_md
+			? 97 + Math.max(chartSize.pieCatH, chartSize.barTagH)
+			: chartSize.pieCatH + chartSize.barTagH + 97;
+	var colors = d3.scale.category20();
 	// Color Bar
-	let rainbow = d3.scale
+	var rainbow = d3.scale
 		.ordinal()
 		.domain([
 			"black",
@@ -83,7 +90,7 @@ function masterChart(DOMSelector, dset, dimensions) {
 			"#448BD2",
 			"#6E4ACB"
 		]);
-	let barTagX = d3.scale
+	var barTagX = d3.scale
 		.linear()
 		.domain([
 			0,
@@ -95,7 +102,7 @@ function masterChart(DOMSelector, dset, dimensions) {
 			)
 		])
 		.range([10, chartSize.barTagW * 0.75]);
-	let barTagY = d3.scale
+	var barTagY = d3.scale
 		.ordinal()
 		.domain(d3.range(barTagData.length))
 		.rangeRoundBands(
@@ -133,19 +140,14 @@ function masterChart(DOMSelector, dset, dimensions) {
 		])
 		.range([0, dimensions.w - dimensions.m * 2])
 		.interpolate(d3.interpolateRound);
-	var _svg = d3
-		.select(DOMSelector)
-		.append("svg")
-		.attr({
-			class: "svg",
-			width: chartSize.w,
-			height: function() {
-				return chartSize.w > bp_md ? 540 : 1000;
-			},
-			transform: "translate(0, 0)"
-		});
+	_svg.attr({
+		class: "svg",
+		width: chartSize.w,
+		height: chartSize.h,
+		transform: "translate(0, 0)"
+	});
 	var _stackedColor = _svg.append("g").attr({
-		class: "stackedBarChart",
+		id: "colorBlockChart",
 		width: chartSize.stackedColorW,
 		height: function() {
 			return (
@@ -171,6 +173,28 @@ function masterChart(DOMSelector, dset, dimensions) {
 			y: chartSize.m,
 			"alignment-baseline": "hanging",
 			fill: "#222"
+		});
+	_stackedColor
+		.append("text")
+		.text("")
+		.style("cursor", "pointer")
+		.attr({
+			class:
+				"font_display font_bold  text-right underline h:black filter clearFilter",
+			"text-anchor": "end",
+			"data-filter": "*",
+			"font-size": function() {
+				return chartSize.font_small + "rem";
+			},
+			x: chartSize.stackedColorW - chartSize.m,
+			y:
+				(chartSize.font_large - chartSize.font_small) * baseFontSize +
+				chartSize.m,
+			"alignment-baseline": "hanging",
+			fill: "#3182bd"
+		})
+		.on("click", function() {
+			clearFilterButton();
 		});
 	// Append the Fragment Count
 	_stackedColor
@@ -203,10 +227,37 @@ function masterChart(DOMSelector, dset, dimensions) {
 			"alignment-baseline": "hanging",
 			fill: "#888"
 		});
-
+	_stackedColor
+		.append("text")
+		.text("all")
+		.attr({
+			class: "font_display font_bold text-right filterFragmentLabel",
+			"text-anchor": "end",
+			"font-size": function() {
+				return chartSize.font_normal + "rem";
+			},
+			x: chartSize.stackedColorW - chartSize.m - 57,
+			y: chartSize.font_large * baseFontSize + chartSize.g + chartSize.m,
+			"alignment-baseline": "hanging",
+			fill: "#ff7f0e"
+		});
+	_stackedColor
+		.append("text")
+		.text("none")
+		.attr({
+			class: "font_display font_bold filterFragmentCount",
+			"text-anchor": "start",
+			"font-size": function() {
+				return chartSize.font_normal + "rem";
+			},
+			x: 102 + chartSize.m,
+			y: chartSize.font_large * baseFontSize + chartSize.g + chartSize.m,
+			"alignment-baseline": "hanging",
+			fill: "#ff7f0e"
+		});
 	var singleStackedBlock = _stackedColor
 		.append("g")
-		.attr("id", "colorBlockChart")
+		.attr("id", "blockChart")
 		.attr({
 			width: chartSize.w - chartSize.m * 2,
 			height: function() {
@@ -241,6 +292,10 @@ function masterChart(DOMSelector, dset, dimensions) {
 			"data-filter": function(d, i) {
 				return ".color-" + d.name;
 			}
+		})
+		.on("click", function(d, i) {
+			console.log(d);
+			setFilterData(d, i);
 		});
 	singleStackedBlock
 		.on("mouseover", function() {
@@ -255,6 +310,7 @@ function masterChart(DOMSelector, dset, dimensions) {
 				}
 			});
 		});
+
 	function blockPosition(d) {
 		var xpos, ypos;
 		xpos = accumulatedXPos;
@@ -286,6 +342,26 @@ function masterChart(DOMSelector, dset, dimensions) {
 			"alignment-baseline": "hanging",
 			fill: "#222"
 		});
+	_barTagContainer
+		.append("text")
+		.text("")
+		.style("cursor", "pointer")
+		.attr({
+			class:
+				"font_display font_bold  text-right underline h:black filter clearFilter",
+			"text-anchor": "end",
+			"data-filter": "*",
+			"font-size": function() {
+				return chartSize.font_small + "rem";
+			},
+			x: chartSize.barTagW - chartSize.m * 2,
+			y: (chartSize.font_large - chartSize.font_small) * baseFontSize,
+			"alignment-baseline": "hanging",
+			fill: "#3182bd"
+		})
+		.on("click", function() {
+			clearFilterButton();
+		});
 	// Append the Fragment Count
 	_barTagContainer
 		.append("text")
@@ -316,6 +392,34 @@ function masterChart(DOMSelector, dset, dimensions) {
 			"alignment-baseline": "hanging",
 			fill: "#888"
 		});
+	_barTagContainer
+		.append("text")
+		.text("all")
+		.attr({
+			class: "font_display font_bold text-right filterFragmentLabel",
+			"text-anchor": "end",
+			"font-size": function() {
+				return chartSize.font_normal + "rem";
+			},
+			x: chartSize.barTagW - 57 - chartSize.m * 2,
+			y: chartSize.font_large * baseFontSize + chartSize.g,
+			"alignment-baseline": "hanging",
+			fill: "#ff7f0e"
+		});
+	_barTagContainer
+		.append("text")
+		.text("none")
+		.attr({
+			class: "font_display font_bold filterFragmentCount",
+			"text-anchor": "start",
+			"font-size": function() {
+				return chartSize.font_normal + "rem";
+			},
+			x: 102,
+			y: chartSize.font_large * baseFontSize + chartSize.g,
+			"alignment-baseline": "hanging",
+			fill: "#ff7f0e"
+		});
 	var _barTagChart = _barTagContainer.append("g").attr({
 		class: "barChart",
 		transform: function() {
@@ -339,6 +443,10 @@ function masterChart(DOMSelector, dset, dimensions) {
 						: 0;
 				return "translate(" + xOffset + "," + barTagY(i) + ")";
 			}
+		})
+		.on("click", function(d, i) {
+			console.log(d);
+			setFilterData(d, i);
 		})
 		.on("mouseover", function() {
 			d3.select(this)
@@ -391,14 +499,14 @@ function masterChart(DOMSelector, dset, dimensions) {
 		});
 
 	// PIE
-	let pieChartPos = {
+	var pieChartPos = {
 		x: chartSize.m,
 		y:
 			chartSize.w > bp_md
 				? 90 + chartSize.m
 				: 90 + chartSize.m + chartSize.barTagH
 	};
-	chartSize.r = Math.min(chartSize.pieCatW - 150, 250);
+
 	var pie = d3.layout
 		.pie()
 		.sort(null)
@@ -410,7 +518,7 @@ function masterChart(DOMSelector, dset, dimensions) {
 		.outerRadius(chartSize.r * 0.5 - chartSize.m)
 		.innerRadius(chartSize.r * 0.2 - chartSize.m);
 	var _pieCatContainer = _svg.append("g").attr({
-		class: "PieCatContainer",
+		id: "catPieChart",
 		width: chartSize.pieCatW,
 		height: chartSize.pieCatH,
 		transform: function() {
@@ -437,7 +545,7 @@ function masterChart(DOMSelector, dset, dimensions) {
 		.text("FRAGMENTS")
 		.style("font-family", "'SansationBold', 'trebuchet MS', Arial, sans-serif")
 		.attr({
-			class: "font_copy font_bold c_secondary-1",
+			class: "font_display font_bold c_secondary-1",
 			"font-size": function() {
 				return chartSize.font_normal + "rem";
 			},
@@ -453,7 +561,7 @@ function masterChart(DOMSelector, dset, dimensions) {
 		.text("FILTER")
 		.style("font-family", "'SansationBold', 'trebuchet MS', Arial, sans-serif")
 		.attr({
-			class: "font_copy font_bold c_secondary-1 text-right",
+			class: "font_display font_bold c_secondary-1 text-right",
 			"text-anchor": "end",
 			"font-size": function() {
 				return chartSize.font_normal + "rem";
@@ -463,6 +571,55 @@ function masterChart(DOMSelector, dset, dimensions) {
 			"alignment-baseline": "hanging",
 			fill: "#888"
 		});
+	_pieCatContainer
+		.append("text")
+		.text("")
+		.style("cursor", "pointer")
+		.attr({
+			class:
+				"font_display font_bold  text-right underline h:black filter clearFilter",
+			"text-anchor": "end",
+			"data-filter": "*",
+			"font-size": function() {
+				return chartSize.font_small + "rem";
+			},
+			x: chartSize.pieCatW,
+			y: (chartSize.font_large - chartSize.font_small) * baseFontSize,
+			"alignment-baseline": "hanging",
+			fill: "#3182bd"
+		})
+		.on("click", function() {
+			clearFilterButton();
+		});
+	_pieCatContainer
+		.append("text")
+		.text("all")
+		.attr({
+			class: "font_display font_bold text-right filterFragmentLabel",
+			"text-anchor": "end",
+			"font-size": function() {
+				return chartSize.font_normal + "rem";
+			},
+			x: chartSize.pieCatW - 57,
+			y: chartSize.font_large * baseFontSize + chartSize.g,
+			"alignment-baseline": "hanging",
+			fill: "#ff7f0e"
+		});
+	_pieCatContainer
+		.append("text")
+		.text("none")
+		.attr({
+			class: "font_display font_bold filterFragmentCount",
+			"text-anchor": "start",
+			"font-size": function() {
+				return chartSize.font_normal + "rem";
+			},
+			x: 102,
+			y: chartSize.font_large * baseFontSize + chartSize.g,
+			"alignment-baseline": "hanging",
+			fill: "#ff7f0e"
+		});
+
 	var _pieChart = _pieCatContainer
 		//	.data([pieCatData])
 		.append("svg:g")
@@ -477,7 +634,6 @@ function masterChart(DOMSelector, dset, dimensions) {
 				);
 			}
 		});
-	console.log(JSON.stringify(pieCatData));
 	var _arc = _pieChart
 		.selectAll("g.slice")
 		.data(pie(pieCatData))
@@ -491,6 +647,10 @@ function masterChart(DOMSelector, dset, dimensions) {
 			"data-filter": function(d) {
 				return "." + d.data.name.replace(/\s/g, "-");
 			}
+		})
+		.on("click", function(d, i) {
+			console.log(d);
+			setFilterData(d.data, i);
 		})
 		.append("svg:path")
 		.attr({
@@ -550,4 +710,28 @@ function masterChart(DOMSelector, dset, dimensions) {
 		.text(function(d) {
 			return d.name;
 		});
+	function setFilterData(d, i) {
+		_svg.selectAll(".filterFragmentCount").text("~");
+		_svg.selectAll(".filterFragmentLabel").text("~");
+		_svg.selectAll(".clearFilter").text("");
+		let chartID = "#" + d.chart;
+		_svg
+			.select(chartID)
+			.select(".filterFragmentCount")
+			.text(d.count);
+		_svg
+			.select(chartID)
+			.select(".filterFragmentLabel")
+			.text(d.name.toLowerCase());
+		_svg
+			.select(chartID)
+			.select(".clearFilter")
+			.text("clear filters");
+	}
+
+	function clearFilterButton() {
+		_svg.selectAll(".filterFragmentCount").text("all");
+		_svg.selectAll(".filterFragmentLabel").text("none");
+		_svg.selectAll(".clearFilter").text("");
+	}
 }

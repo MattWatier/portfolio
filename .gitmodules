@@ -1,0 +1,3 @@
+[submodule "UtilityClass"]
+	path = UtilityClass
+	url = https://github.com/MattWatier/UtilityClass.git

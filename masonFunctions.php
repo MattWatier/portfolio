@@ -7,10 +7,10 @@ function get_image_size($w, $h, $m){
 	}
 
 function get_modifier($proportioned,$w) {
-	$containerSize = 1140;
-	$gutter = 12;
-	$column = 152;
-	$padding = -10;
+	$containerSize = 1800;
+	$gutter = 18;
+	$column = 185;
+	$padding = -18;
 	$size_1x = $column+$padding;
 	$size_2x = $column+$column+$gutter+$padding+$padding;
 	$size_3x = $column+$column+$column+$gutter+$gutter+$padding+$padding+$padding;
@@ -43,29 +43,43 @@ function get_classes($tags){}
 class MyGallery{
  	public  $parent;
  	public  $color;
- 	public  $filters;
+	public  $filters;
+	public  $type;
  	public	function __construct($parent) {
      	$this->parent = $parent;
    		$this->filters = array();
  	}
 	public function add_to_filter($tags) {
 		foreach ($tags as $key => $value) {
-			$pos = strpos( $value , "_color" );
-			if( $pos === 0 ){
-				if(strlen($value) != 6 ){if( 
-					!isset($this->color[$value])) {	
+			if( strpos( $value , "_color" ) !== false ){
+				if(strlen($value) != 6 ){
+					if(!isset($this->color[$value])) {	
 					 $this->color[$value] = array();
-					 $this->color[$value]["type"] = $value;
+					 $this->color[$value]["type"] = str_replace("_color-", "", $value);;
 					 $this->color[$value]["classtype"] = str_replace("_", "", $value);
 					 $this->color[$value]["count"] = 1;
+					}
+					else
+					{
+						$this->color[$value]["count"] ++;
+					}
 				}
-				else
-				{
-					$this->color[$value]["count"] = $this->color[$value]["count"] + 1;
+			}
+			elseif( strpos( $value , "_type" )!== false ){
+				if(strlen($value) != 5 ){
+					if(!isset($this->type[$value])) {
+						$this->type[$value] = array();
+						$this->type[$value]["type"] = str_replace("_type-", "", $value);;
+						$this->type[$value]["classtype"] = str_replace("_", "", $value);
+						$this->type[$value]["count"] = 1;
+					}
+					else{
+						$this->type[$value]["count"] ++;
+					}
 				}
 			}
 
-			}else{
+			else{
 				if( !isset($this->filters[$value])) {	
 					 $this->filters[$value] = array();
 					 $this->filters[$value]["type"] = $value;
@@ -74,7 +88,7 @@ class MyGallery{
 				}
 				else
 				{
-					$this->filters[$value]["count"] = $this->filters[$value]["count"] + 1;
+					$this->filters[$value]["count"] ++;
 				}
 			}
 		}// end of foreach
@@ -93,6 +107,9 @@ class MyGallery{
  	}
 	public function get_colorfilters(){
 		return $this->color;
+	}
+	public function get_typefilters(){
+		return $this->type;
 	}
   	
 

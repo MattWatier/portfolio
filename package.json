@@ -1,0 +1,59 @@
+{
+	"name": "strathmore",
+	"version": "0.0.1",
+	"description": "ACC Application Framework. Refactored from Bristol",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ACC-Style/Strathmore.git"
+	},
+	"keywords": [
+		"Mobile",
+		"Framework",
+		"American",
+		"College",
+		"of",
+		"Cardiology",
+		"BEM",
+		"Utitlity",
+		"CSS"
+	],
+	"author": "American College of Cardiology",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/ACC-Style/Strathmore/issues"
+	},
+	"homepage": "https://github.com/ACC-Style/Strathmore#readme",
+	"dependencies": {
+		"foundation-sites": "^6.5.0",
+		"gulp-sourcemaps": "^2.6.4",
+		"gulp-watch": "^5.0.1",
+		"jquery": "^3.3.1",
+		"what-input": "^5.1.2"
+	},
+	"devDependencies": {
+		"@micahgodbolt/grunt-phantomcss": "^1.0.0",
+		"autoprefixer": "^8.5.0",
+		"babel": "^6.23.0",
+		"babel-preset-env": "^1.6.1",
+		"browser-sync": "^2.26.3",
+		"connect-livereload": "^0.6.0",
+		"cssnano": "^4.0.0-rc.2",
+		"fibers": "^2.0.2",
+		"gulp": "^3.9.1",
+		"gulp-clean": "^0.4.0",
+		"gulp-dart-sass": "^0.9.1",
+		"gulp-postcss": "^7.0.1",
+		"gulp-rename": "^1.4.0",
+		"gulp-serve": "^1.4.0",
+		"node-sass": "^4.9.2",
+		"npm": "^6.8.0",
+		"pixrem": "^4.0.1",
+		"sass": "^1.7.1",
+		"sc5-styleguide": "^2.2.0",
+		"slimerjs": "^1.0.0"
+	}
+}

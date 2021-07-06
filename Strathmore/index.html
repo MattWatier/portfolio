@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="sgApp" route-css-class>
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/Strathmore/assets/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    var _styleguideConfig = {"title":"Strathmore - Enteprise UI of the ACC","disableEncapsulation":true,"disableHtml5Mode":true,"sideNav":true,"showReferenceNumbers":true,"showMarkupSection":false,"hideSubsectionsOnMainSection":false,"additionalNgDependencies":false};
+    (function() {
+      'use strict';
+      var userStyleFiles = [
+          '/Strathmore/styleguide.css',
+          '/Strathmore/styleguide_pseudo_styles.css',
+          '/Strathmore/styleguide_helper_elements.css'
+        ],
+        head = document.querySelector('head');
+
+      function addCssLink(href, options) {
+        var link = document.createElement('link');
+        link.setAttribute('rel', 'stylesheet');
+        link.setAttribute('type', 'text/css');
+        link.setAttribute('href', href);
+        if (options && options.noReload) {
+          link.setAttribute('data-noreload', true);
+        }
+        head.appendChild(link);
+      }
+
+      addCssLink('/Strathmore/styleguide_at_rules.css');
+      addCssLink('/Strathmore/styleguide-app.css', {noReload: true});
+
+      // Use Shadow DOM but fallback to global styles if shadow DOM is not supported
+      if (typeof head.createShadowRoot !== 'function' || _styleguideConfig.disableEncapsulation) {
+        userStyleFiles.forEach(addCssLink);
+      }
+
+    }());
+  </script>
+  <script type="text/ng-template" id="userStyles.html">
+    <style>
+      @import url('/Strathmore/styleguide.css');
+      @import url('/Strathmore/styleguide_pseudo_styles.css');
+      @import url('/Strathmore/styleguide_helper_elements.css');
+    </style>
+  </script>
+  <title ng-bind-html="$root.pageTitle | unsafe">Strathmore - Enteprise UI of the ACC</title>
+  <link href="https://fonts.googleapis.com/css?family=Maven+Pro|Muli|Roboto+Slab" rel="stylesheet">
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/what-input.js" ></script>
+<script src="assets/js/foundation/foundation.js"></script>
+<script src="assets/js/styleguide.js"></script>
+  <script type="text/javascript">
+    var filesConfig = [];
+  </script>
+  <base href="/Strathmore/" />
+</head>
+<body class="sg">
+  
+  <div class="sg view-index" ui-view></div>
+  <script src="/Strathmore/js/vendor.js"></script>
+  <script src="/Strathmore/js/app.js"></script>
+  
+</body>
+</html>

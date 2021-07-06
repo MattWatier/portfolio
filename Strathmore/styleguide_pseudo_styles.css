@@ -1,0 +1,1655 @@
+[type=text].pseudo-class-focus,
+[type=password].pseudo-class-focus,
+[type=date].pseudo-class-focus,
+[type=datetime].pseudo-class-focus,
+[type=datetime-local].pseudo-class-focus,
+[type=month].pseudo-class-focus,
+[type=week].pseudo-class-focus,
+[type=email].pseudo-class-focus,
+[type=number].pseudo-class-focus,
+[type=search].pseudo-class-focus,
+[type=tel].pseudo-class-focus,
+[type=time].pseudo-class-focus,
+[type=url].pseudo-class-focus,
+[type=color].pseudo-class-focus,
+textarea.pseudo-class-focus {
+  outline: none;
+  border: 1px solid #8a8a8a;
+  background-color: #fff;
+  box-shadow: 0 0 5px #cacaca;
+  transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
+}
+
+input.pseudo-class-disabled,
+textarea.pseudo-class-disabled {
+  background-color: #e6e6e6;
+  cursor: not-allowed;
+}
+
+.input-group > .pseudo-class-first-child,
+.input-group > .pseudo-class-first-child.input-group-button > * {
+  border-radius: 0px 0 0 0px;
+}
+
+.input-group > .pseudo-class-last-child,
+.input-group > .pseudo-class-last-child.input-group-button > * {
+  border-radius: 0 0px 0px 0;
+}
+
+.input-group-label.pseudo-class-first-child {
+  border-right: 0;
+}
+
+.input-group-label.pseudo-class-last-child {
+  border-left: 0;
+}
+
+select.pseudo-class-focus {
+  outline: none;
+  border: 1px solid #8a8a8a;
+  background-color: #fff;
+  box-shadow: 0 0 5px #cacaca;
+  transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
+}
+
+select.pseudo-class-disabled {
+  background-color: #e6e6e6;
+  cursor: not-allowed;
+}
+
+a.pseudo-class-hover,
+a.pseudo-class-focus {
+  color: #2a70a3;
+}
+
+.button.pseudo-class-hover,
+.button.pseudo-class-focus {
+  background-color: #2a6fa1;
+  color: #fff;
+}
+
+.button.primary.pseudo-class-hover,
+.button.primary.pseudo-class-focus {
+  background-color: #276897;
+  color: #fff;
+}
+
+.button.secondary.pseudo-class-hover,
+.button.secondary.pseudo-class-focus {
+  background-color: #505257;
+  color: #fff;
+}
+
+.button.success.pseudo-class-hover,
+.button.success.pseudo-class-focus {
+  background-color: #066a28;
+  color: #fff;
+}
+
+.button.warning.pseudo-class-hover,
+.button.warning.pseudo-class-focus {
+  background-color: #af6210;
+  color: #111;
+}
+
+.button.alert.pseudo-class-hover,
+.button.alert.pseudo-class-focus {
+  background-color: #a21d16;
+  color: #fff;
+}
+
+.button.accent.pseudo-class-hover,
+.button.accent.pseudo-class-focus {
+  background-color: #d76500;
+  color: #111;
+}
+
+.button.info.pseudo-class-hover,
+.button.info.pseudo-class-focus {
+  background-color: #66605a;
+  color: #fff;
+}
+
+.button.disabled.pseudo-class-hover,
+.button.disabled.pseudo-class-focus,
+.button[disabled].pseudo-class-hover,
+.button[disabled].pseudo-class-focus {
+  background-color: #3182bd;
+  color: #fff;
+}
+
+.button.disabled.primary.pseudo-class-hover,
+.button.disabled.primary.pseudo-class-focus,
+.button[disabled].primary.pseudo-class-hover,
+.button[disabled].primary.pseudo-class-focus {
+  background-color: #3182bd;
+  color: #fff;
+}
+
+.button.disabled.secondary.pseudo-class-hover,
+.button.disabled.secondary.pseudo-class-focus,
+.button[disabled].secondary.pseudo-class-hover,
+.button[disabled].secondary.pseudo-class-focus {
+  background-color: #64666d;
+  color: #fff;
+}
+
+.button.disabled.success.pseudo-class-hover,
+.button.disabled.success.pseudo-class-focus,
+.button[disabled].success.pseudo-class-hover,
+.button[disabled].success.pseudo-class-focus {
+  background-color: #088532;
+  color: #fff;
+}
+
+.button.disabled.warning.pseudo-class-hover,
+.button.disabled.warning.pseudo-class-focus,
+.button[disabled].warning.pseudo-class-hover,
+.button[disabled].warning.pseudo-class-focus {
+  background-color: #db7b14;
+  color: #111;
+}
+
+.button.disabled.alert.pseudo-class-hover,
+.button.disabled.alert.pseudo-class-focus,
+.button[disabled].alert.pseudo-class-hover,
+.button[disabled].alert.pseudo-class-focus {
+  background-color: #cb241c;
+  color: #fff;
+}
+
+.button.disabled.accent.pseudo-class-hover,
+.button.disabled.accent.pseudo-class-focus,
+.button[disabled].accent.pseudo-class-hover,
+.button[disabled].accent.pseudo-class-focus {
+  background-color: #ff7f0e;
+  color: #111;
+}
+
+.button.disabled.info.pseudo-class-hover,
+.button.disabled.info.pseudo-class-focus,
+.button[disabled].info.pseudo-class-hover,
+.button[disabled].info.pseudo-class-focus {
+  background-color: #807871;
+  color: #fff;
+}
+
+.button.hollow.pseudo-class-hover,
+.button.hollow.pseudo-class-focus {
+  background-color: transparent;
+}
+
+.button.hollow.disabled.pseudo-class-hover,
+.button.hollow.disabled.pseudo-class-focus,
+.button.hollow[disabled].pseudo-class-hover,
+.button.hollow[disabled].pseudo-class-focus {
+  background-color: transparent;
+}
+
+.button.hollow.pseudo-class-hover,
+.button.hollow.pseudo-class-focus {
+  border-color: #19415f;
+  color: #19415f;
+}
+
+.button.hollow.pseudo-class-hover.disabled,
+.button.hollow.pseudo-class-hover[disabled],
+.button.hollow.pseudo-class-focus.disabled,
+.button.hollow.pseudo-class-focus[disabled] {
+  border: 1px solid #3182bd;
+  color: #3182bd;
+}
+
+.button.hollow.primary.pseudo-class-hover,
+.button.hollow.primary.pseudo-class-focus {
+  border-color: #19415f;
+  color: #19415f;
+}
+
+.button.hollow.primary.pseudo-class-hover.disabled,
+.button.hollow.primary.pseudo-class-hover[disabled],
+.button.hollow.primary.pseudo-class-focus.disabled,
+.button.hollow.primary.pseudo-class-focus[disabled] {
+  border: 1px solid #3182bd;
+  color: #3182bd;
+}
+
+.button.hollow.secondary.pseudo-class-hover,
+.button.hollow.secondary.pseudo-class-focus {
+  border-color: #323337;
+  color: #323337;
+}
+
+.button.hollow.secondary.pseudo-class-hover.disabled,
+.button.hollow.secondary.pseudo-class-hover[disabled],
+.button.hollow.secondary.pseudo-class-focus.disabled,
+.button.hollow.secondary.pseudo-class-focus[disabled] {
+  border: 1px solid #64666d;
+  color: #64666d;
+}
+
+.button.hollow.success.pseudo-class-hover,
+.button.hollow.success.pseudo-class-focus {
+  border-color: #044319;
+  color: #044319;
+}
+
+.button.hollow.success.pseudo-class-hover.disabled,
+.button.hollow.success.pseudo-class-hover[disabled],
+.button.hollow.success.pseudo-class-focus.disabled,
+.button.hollow.success.pseudo-class-focus[disabled] {
+  border: 1px solid #088532;
+  color: #088532;
+}
+
+.button.hollow.warning.pseudo-class-hover,
+.button.hollow.warning.pseudo-class-focus {
+  border-color: #6e3e0a;
+  color: #6e3e0a;
+}
+
+.button.hollow.warning.pseudo-class-hover.disabled,
+.button.hollow.warning.pseudo-class-hover[disabled],
+.button.hollow.warning.pseudo-class-focus.disabled,
+.button.hollow.warning.pseudo-class-focus[disabled] {
+  border: 1px solid #db7b14;
+  color: #db7b14;
+}
+
+.button.hollow.alert.pseudo-class-hover,
+.button.hollow.alert.pseudo-class-focus {
+  border-color: #66120e;
+  color: #66120e;
+}
+
+.button.hollow.alert.pseudo-class-hover.disabled,
+.button.hollow.alert.pseudo-class-hover[disabled],
+.button.hollow.alert.pseudo-class-focus.disabled,
+.button.hollow.alert.pseudo-class-focus[disabled] {
+  border: 1px solid #cb241c;
+  color: #cb241c;
+}
+
+.button.hollow.accent.pseudo-class-hover,
+.button.hollow.accent.pseudo-class-focus {
+  border-color: #873f00;
+  color: #873f00;
+}
+
+.button.hollow.accent.pseudo-class-hover.disabled,
+.button.hollow.accent.pseudo-class-hover[disabled],
+.button.hollow.accent.pseudo-class-focus.disabled,
+.button.hollow.accent.pseudo-class-focus[disabled] {
+  border: 1px solid #ff7f0e;
+  color: #ff7f0e;
+}
+
+.button.hollow.info.pseudo-class-hover,
+.button.hollow.info.pseudo-class-focus {
+  border-color: #403c39;
+  color: #403c39;
+}
+
+.button.hollow.info.pseudo-class-hover.disabled,
+.button.hollow.info.pseudo-class-hover[disabled],
+.button.hollow.info.pseudo-class-focus.disabled,
+.button.hollow.info.pseudo-class-focus[disabled] {
+  border: 1px solid #807871;
+  color: #807871;
+}
+
+.button.clear.pseudo-class-hover,
+.button.clear.pseudo-class-focus {
+  background-color: transparent;
+}
+
+.button.clear.disabled.pseudo-class-hover,
+.button.clear.disabled.pseudo-class-focus,
+.button.clear[disabled].pseudo-class-hover,
+.button.clear[disabled].pseudo-class-focus {
+  background-color: transparent;
+}
+
+.button.clear.pseudo-class-hover,
+.button.clear.pseudo-class-focus {
+  border-color: #19415f;
+  color: #19415f;
+}
+
+.button.clear.pseudo-class-hover.disabled,
+.button.clear.pseudo-class-hover[disabled],
+.button.clear.pseudo-class-focus.disabled,
+.button.clear.pseudo-class-focus[disabled] {
+  border: 1px solid #3182bd;
+  color: #3182bd;
+}
+
+.button.clear.pseudo-class-hover,
+.button.clear.pseudo-class-hover.disabled,
+.button.clear.pseudo-class-hover[disabled],
+.button.clear.pseudo-class-focus,
+.button.clear.pseudo-class-focus.disabled,
+.button.clear.pseudo-class-focus[disabled] {
+  border-color: transparent;
+}
+
+.button.clear.primary.pseudo-class-hover,
+.button.clear.primary.pseudo-class-focus {
+  border-color: #19415f;
+  color: #19415f;
+}
+
+.button.clear.primary.pseudo-class-hover.disabled,
+.button.clear.primary.pseudo-class-hover[disabled],
+.button.clear.primary.pseudo-class-focus.disabled,
+.button.clear.primary.pseudo-class-focus[disabled] {
+  border: 1px solid #3182bd;
+  color: #3182bd;
+}
+
+.button.clear.primary.pseudo-class-hover,
+.button.clear.primary.pseudo-class-hover.disabled,
+.button.clear.primary.pseudo-class-hover[disabled],
+.button.clear.primary.pseudo-class-focus,
+.button.clear.primary.pseudo-class-focus.disabled,
+.button.clear.primary.pseudo-class-focus[disabled] {
+  border-color: transparent;
+}
+
+.button.clear.secondary.pseudo-class-hover,
+.button.clear.secondary.pseudo-class-focus {
+  border-color: #323337;
+  color: #323337;
+}
+
+.button.clear.secondary.pseudo-class-hover.disabled,
+.button.clear.secondary.pseudo-class-hover[disabled],
+.button.clear.secondary.pseudo-class-focus.disabled,
+.button.clear.secondary.pseudo-class-focus[disabled] {
+  border: 1px solid #64666d;
+  color: #64666d;
+}
+
+.button.clear.secondary.pseudo-class-hover,
+.button.clear.secondary.pseudo-class-hover.disabled,
+.button.clear.secondary.pseudo-class-hover[disabled],
+.button.clear.secondary.pseudo-class-focus,
+.button.clear.secondary.pseudo-class-focus.disabled,
+.button.clear.secondary.pseudo-class-focus[disabled] {
+  border-color: transparent;
+}
+
+.button.clear.success.pseudo-class-hover,
+.button.clear.success.pseudo-class-focus {
+  border-color: #044319;
+  color: #044319;
+}
+
+.button.clear.success.pseudo-class-hover.disabled,
+.button.clear.success.pseudo-class-hover[disabled],
+.button.clear.success.pseudo-class-focus.disabled,
+.button.clear.success.pseudo-class-focus[disabled] {
+  border: 1px solid #088532;
+  color: #088532;
+}
+
+.button.clear.success.pseudo-class-hover,
+.button.clear.success.pseudo-class-hover.disabled,
+.button.clear.success.pseudo-class-hover[disabled],
+.button.clear.success.pseudo-class-focus,
+.button.clear.success.pseudo-class-focus.disabled,
+.button.clear.success.pseudo-class-focus[disabled] {
+  border-color: transparent;
+}
+
+.button.clear.warning.pseudo-class-hover,
+.button.clear.warning.pseudo-class-focus {
+  border-color: #6e3e0a;
+  color: #6e3e0a;
+}
+
+.button.clear.warning.pseudo-class-hover.disabled,
+.button.clear.warning.pseudo-class-hover[disabled],
+.button.clear.warning.pseudo-class-focus.disabled,
+.button.clear.warning.pseudo-class-focus[disabled] {
+  border: 1px solid #db7b14;
+  color: #db7b14;
+}
+
+.button.clear.warning.pseudo-class-hover,
+.button.clear.warning.pseudo-class-hover.disabled,
+.button.clear.warning.pseudo-class-hover[disabled],
+.button.clear.warning.pseudo-class-focus,
+.button.clear.warning.pseudo-class-focus.disabled,
+.button.clear.warning.pseudo-class-focus[disabled] {
+  border-color: transparent;
+}
+
+.button.clear.alert.pseudo-class-hover,
+.button.clear.alert.pseudo-class-focus {
+  border-color: #66120e;
+  color: #66120e;
+}
+
+.button.clear.alert.pseudo-class-hover.disabled,
+.button.clear.alert.pseudo-class-hover[disabled],
+.button.clear.alert.pseudo-class-focus.disabled,
+.button.clear.alert.pseudo-class-focus[disabled] {
+  border: 1px solid #cb241c;
+  color: #cb241c;
+}
+
+.button.clear.alert.pseudo-class-hover,
+.button.clear.alert.pseudo-class-hover.disabled,
+.button.clear.alert.pseudo-class-hover[disabled],
+.button.clear.alert.pseudo-class-focus,
+.button.clear.alert.pseudo-class-focus.disabled,
+.button.clear.alert.pseudo-class-focus[disabled] {
+  border-color: transparent;
+}
+
+.button.clear.accent.pseudo-class-hover,
+.button.clear.accent.pseudo-class-focus {
+  border-color: #873f00;
+  color: #873f00;
+}
+
+.button.clear.accent.pseudo-class-hover.disabled,
+.button.clear.accent.pseudo-class-hover[disabled],
+.button.clear.accent.pseudo-class-focus.disabled,
+.button.clear.accent.pseudo-class-focus[disabled] {
+  border: 1px solid #ff7f0e;
+  color: #ff7f0e;
+}
+
+.button.clear.accent.pseudo-class-hover,
+.button.clear.accent.pseudo-class-hover.disabled,
+.button.clear.accent.pseudo-class-hover[disabled],
+.button.clear.accent.pseudo-class-focus,
+.button.clear.accent.pseudo-class-focus.disabled,
+.button.clear.accent.pseudo-class-focus[disabled] {
+  border-color: transparent;
+}
+
+.button.clear.info.pseudo-class-hover,
+.button.clear.info.pseudo-class-focus {
+  border-color: #403c39;
+  color: #403c39;
+}
+
+.button.clear.info.pseudo-class-hover.disabled,
+.button.clear.info.pseudo-class-hover[disabled],
+.button.clear.info.pseudo-class-focus.disabled,
+.button.clear.info.pseudo-class-focus[disabled] {
+  border: 1px solid #807871;
+  color: #807871;
+}
+
+.button.clear.info.pseudo-class-hover,
+.button.clear.info.pseudo-class-hover.disabled,
+.button.clear.info.pseudo-class-hover[disabled],
+.button.clear.info.pseudo-class-focus,
+.button.clear.info.pseudo-class-focus.disabled,
+.button.clear.info.pseudo-class-focus[disabled] {
+  border-color: transparent;
+}
+
+a.button.pseudo-class-hover,
+a.button.pseudo-class-focus {
+  text-decoration: none;
+}
+
+.button-group .button.pseudo-class-last-child {
+  margin-right: 0;
+}
+
+.button-group.primary .button.pseudo-class-hover,
+.button-group.primary .button.pseudo-class-focus {
+  background-color: #276897;
+  color: #fff;
+}
+
+.button-group.secondary .button.pseudo-class-hover,
+.button-group.secondary .button.pseudo-class-focus {
+  background-color: #505257;
+  color: #fff;
+}
+
+.button-group.success .button.pseudo-class-hover,
+.button-group.success .button.pseudo-class-focus {
+  background-color: #066a28;
+  color: #fff;
+}
+
+.button-group.warning .button.pseudo-class-hover,
+.button-group.warning .button.pseudo-class-focus {
+  background-color: #af6210;
+  color: #111;
+}
+
+.button-group.alert .button.pseudo-class-hover,
+.button-group.alert .button.pseudo-class-focus {
+  background-color: #a21d16;
+  color: #fff;
+}
+
+.button-group.accent .button.pseudo-class-hover,
+.button-group.accent .button.pseudo-class-focus {
+  background-color: #d76500;
+  color: #111;
+}
+
+.button-group.info .button.pseudo-class-hover,
+.button-group.info .button.pseudo-class-focus {
+  background-color: #66605a;
+  color: #fff;
+}
+
+.button-group.stacked .button.pseudo-class-last-child,
+.button-group.stacked-for-small .button.pseudo-class-last-child,
+.button-group.stacked-for-medium .button.pseudo-class-last-child {
+  margin-bottom: 0;
+}
+
+.close-button.pseudo-class-hover,
+.close-button.pseudo-class-focus {
+  color: #fff;
+}
+
+.slider-handle.pseudo-class-hover {
+  background-color: #2a6fa1;
+}
+
+input.pseudo-class-checked ~ .switch-paddle {
+  background: #3182bd;
+}
+
+input.pseudo-class-checked ~ .switch-paddle::after {
+  left: 2.25rem;
+}
+
+[data-whatinput=mouse] input.pseudo-class-focus ~ .switch-paddle {
+  outline: 0;
+}
+
+input.pseudo-class-checked + label > .switch-active {
+  display: block;
+}
+
+input.pseudo-class-checked + label > .switch-inactive {
+  display: none;
+}
+
+.switch.tiny input.pseudo-class-checked ~ .switch-paddle::after {
+  left: 1.75rem;
+}
+
+.switch.small input.pseudo-class-checked ~ .switch-paddle::after {
+  left: 2rem;
+}
+
+.switch.large input.pseudo-class-checked ~ .switch-paddle::after {
+  left: 2.75rem;
+}
+
+table.hover thead tr.pseudo-class-hover {
+  background-color: #f4f4f4;
+}
+
+table.hover tfoot tr.pseudo-class-hover {
+  background-color: #ededed;
+}
+
+table.hover tbody tr.pseudo-class-hover {
+  background-color: #fafafa;
+}
+
+table.hover:not(.unstriped) tr:nth-of-type(even).pseudo-class-hover {
+  background-color: #ededed;
+}
+
+.breadcrumbs a.pseudo-class-hover {
+  text-decoration: underline;
+}
+
+.callout > .pseudo-class-first-child {
+  margin-top: 0;
+}
+
+.callout > .pseudo-class-last-child {
+  margin-bottom: 0;
+}
+
+.card > .pseudo-class-last-child {
+  margin-bottom: 0;
+}
+
+.card-divider > .pseudo-class-last-child {
+  margin-bottom: 0;
+}
+
+.card-section > .pseudo-class-last-child {
+  margin-bottom: 0;
+}
+
+.pagination li.pseudo-class-last-child,
+.pagination li.pseudo-class-first-child {
+  display: inline-block;
+}
+
+.pagination a.pseudo-class-hover,
+.pagination button.pseudo-class-hover {
+  background: #e6e6e6;
+}
+
+.pagination .disabled.pseudo-class-hover {
+  background: transparent;
+}
+
+.accordion-item.pseudo-class-first-child > .pseudo-class-first-child {
+  border-radius: 0px 0px 0 0;
+}
+
+.accordion-item.pseudo-class-last-child > .pseudo-class-last-child {
+  border-radius: 0 0 0px 0px;
+}
+
+.accordion-title .pseudo-class-last-child:not(.is-active) > .accordion-title .pseudo-class-last-child {
+  border-bottom: 1px solid #e6e6e6;
+  border-radius: 0 0 0px 0px;
+}
+
+.accordion-title.pseudo-class-hover,
+.accordion-title.pseudo-class-focus {
+  background-color: #e6e6e6;
+}
+
+.pseudo-class-last-child > .accordion-content.pseudo-class-last-child {
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.tabs.simple > li > a.pseudo-class-hover {
+  background: transparent;
+}
+
+.tabs.primary > li > a.pseudo-class-hover,
+.tabs.primary > li > a.pseudo-class-focus {
+  background: #2f7cb4;
+}
+
+.tabs-title > a.pseudo-class-hover {
+  background: #fff;
+  color: #2a70a3;
+}
+
+.tabs-title > a.pseudo-class-focus {
+  background: #fff;
+  color: #111;
+}
+
+a.thumbnail.pseudo-class-hover,
+a.thumbnail.pseudo-class-focus {
+  box-shadow: 0 0 6px 1px rgba(49, 130, 189, 0.5);
+}
+
+.menu-icon.pseudo-class-hover::after {
+  background: #cacaca;
+  box-shadow: 0 7px 0 #cacaca, 0 14px 0 #cacaca;
+}
+
+.menu-icon.dark.pseudo-class-hover::after {
+  background: #8a8a8a;
+  box-shadow: 0 7px 0 #8a8a8a, 0 14px 0 #8a8a8a;
+}
+
+.reveal > .pseudo-class-last-child {
+  margin-bottom: 0;
+}
+
+.show-on-focus.pseudo-class-active,
+.show-on-focus.pseudo-class-focus {
+  position: static !important;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+.button.shadow.pseudo-class-hover {
+  box-shadow: 0.5px 0.5px 2px 0.25px rgba(0, 0, 0, 0.1);
+}
+
+.close-button.pseudo-class-focus {
+  outline: none;
+}
+
+.tabs-title > a.pseudo-class-hover {
+  background: #dcdddf;
+  text-decoration: underline;
+}
+
+.tabs .tabs-title.is-active a.pseudo-class-hover {
+  background: white;
+}
+
+.pagination .disabled.pseudo-class-hover {
+  background-image: url("../img/cross_disabled.png");
+}
+
+.pagination-container a:not([class=pagination-previous]):not([class=pagination-next]).pseudo-class-hover {
+  color: #111;
+}
+
+.quicklinks a.pseudo-class-hover {
+  background-color: #e9f3f9;
+  color: #111;
+}
+
+.quicklinks__item.pseudo-class-last-child {
+  border-right-width: 0;
+}
+
+.quicklinks__item .quicklinks__link.pseudo-class-last-child {
+  border-right: 0;
+}
+
+.disabled.pseudo-class-hover {
+  background-image: url("../img/cross_disabled.png");
+}
+
+a.pseudo-class-focus {
+  color: unset;
+}
+
+.hover\:opacity.pseudo-class-focus,
+.button.shadow.pseudo-class-focus,
+.tabs-title > a.pseudo-class-focus,
+*[class^=" hover:"].pseudo-class-focus {
+  background: inherit;
+  border: inherit;
+  color: inherit;
+}
+
+.hover\:bg_primary.pseudo-class-hover {
+  background-color: #3182bd !important;
+}
+
+.hover\:bg_primary-0.pseudo-class-hover,
+.hover\:back_primary-0.pseudo-class-hover .hover\:bg_primary-0.pseudo-class-hover {
+  background-color: #3182bd !important;
+}
+
+.hover\:bg_primary-1.pseudo-class-hover,
+.hover\:back_primary-1.pseudo-class-hover .hover\:bg_primary-1.pseudo-class-hover {
+  background-color: #5095c7 !important;
+}
+
+.hover\:bg_primary-2.pseudo-class-hover,
+.hover\:back_primary-2.pseudo-class-hover .hover\:bg_primary-2.pseudo-class-hover {
+  background-color: #7db0d5 !important;
+}
+
+.hover\:bg_primary-3.pseudo-class-hover,
+.hover\:back_primary-3.pseudo-class-hover .hover\:bg_primary-3.pseudo-class-hover {
+  background-color: #adcde5 !important;
+}
+
+.hover\:bg_primary-4.pseudo-class-hover,
+.hover\:back_primary-4.pseudo-class-hover .hover\:bg_primary-4.pseudo-class-hover {
+  background-color: #d2e4f0 !important;
+}
+
+.hover\:bg_primary-5.pseudo-class-hover,
+.hover\:back_primary-5.pseudo-class-hover .hover\:bg_primary-5.pseudo-class-hover {
+  background-color: #eaf3f8 !important;
+}
+
+.hover\:bg_primary-n1.pseudo-class-hover {
+  background-color: #2c75aa !important;
+}
+
+.hover\:bg_primary-n2.pseudo-class-hover {
+  background-color: #25628e !important;
+}
+
+.hover\:bg_primary-n3.pseudo-class-hover {
+  background-color: #1b4868 !important;
+}
+
+.hover\:bg_primary-n4.pseudo-class-hover {
+  background-color: #14344c !important;
+}
+
+.hover\:bg_primary-n5.pseudo-class-hover {
+  background-color: #0c212f !important;
+}
+
+.hover\:c_primary.pseudo-class-hover {
+  color: #3182bd !important;
+}
+
+.hover\:c_primary-0.pseudo-class-hover,
+.hover\:color_primary-0.pseudo-class-hover .hover\:c_primary-0.pseudo-class-hover {
+  color: #3182bd !important;
+}
+
+.hover\:c_primary-1.pseudo-class-hover,
+.hover\:color_primary-1.pseudo-class-hover .hover\:c_primary-1.pseudo-class-hover {
+  color: #5095c7 !important;
+}
+
+.hover\:c_primary-2.pseudo-class-hover,
+.hover\:color_primary-2.pseudo-class-hover .hover\:c_primary-2.pseudo-class-hover {
+  color: #7db0d5 !important;
+}
+
+.hover\:c_primary-3.pseudo-class-hover,
+.hover\:color_primary-3.pseudo-class-hover .hover\:c_primary-3.pseudo-class-hover {
+  color: #adcde5 !important;
+}
+
+.hover\:c_primary-4.pseudo-class-hover,
+.hover\:color_primary-4.pseudo-class-hover .hover\:c_primary-4.pseudo-class-hover {
+  color: #d2e4f0 !important;
+}
+
+.hover\:c_primary-5.pseudo-class-hover,
+.hover\:color_primary-5.pseudo-class-hover .hover\:c_primary-5.pseudo-class-hover {
+  color: #eaf3f8 !important;
+}
+
+.hover\:c_primary-n1.pseudo-class-hover {
+  color: #2c75aa !important;
+}
+
+.hover\:c_primary-n2.pseudo-class-hover {
+  color: #25628e !important;
+}
+
+.hover\:c_primary-n3.pseudo-class-hover {
+  color: #1b4868 !important;
+}
+
+.hover\:c_primary-n4.pseudo-class-hover {
+  color: #14344c !important;
+}
+
+.hover\:c_primary-n5.pseudo-class-hover {
+  color: #0c212f !important;
+}
+
+.hover\:bg_secondary.pseudo-class-hover {
+  background-color: #64666d !important;
+}
+
+.hover\:bg_secondary-0.pseudo-class-hover,
+.hover\:back_secondary-0.pseudo-class-hover .hover\:bg_secondary-0.pseudo-class-hover {
+  background-color: #64666d !important;
+}
+
+.hover\:bg_secondary-1.pseudo-class-hover,
+.hover\:back_secondary-1.pseudo-class-hover .hover\:bg_secondary-1.pseudo-class-hover {
+  background-color: #7b7d83 !important;
+}
+
+.hover\:bg_secondary-2.pseudo-class-hover,
+.hover\:back_secondary-2.pseudo-class-hover .hover\:bg_secondary-2.pseudo-class-hover {
+  background-color: #9d9fa3 !important;
+}
+
+.hover\:bg_secondary-3.pseudo-class-hover,
+.hover\:back_secondary-3.pseudo-class-hover .hover\:bg_secondary-3.pseudo-class-hover {
+  background-color: #c1c2c5 !important;
+}
+
+.hover\:bg_secondary-4.pseudo-class-hover,
+.hover\:back_secondary-4.pseudo-class-hover .hover\:bg_secondary-4.pseudo-class-hover {
+  background-color: #dddddf !important;
+}
+
+.hover\:bg_secondary-5.pseudo-class-hover,
+.hover\:back_secondary-5.pseudo-class-hover .hover\:bg_secondary-5.pseudo-class-hover {
+  background-color: #f0f0f0 !important;
+}
+
+.hover\:bg_secondary-n1.pseudo-class-hover {
+  background-color: #5a5c62 !important;
+}
+
+.hover\:bg_secondary-n2.pseudo-class-hover {
+  background-color: #4b4d52 !important;
+}
+
+.hover\:bg_secondary-n3.pseudo-class-hover {
+  background-color: #37383c !important;
+}
+
+.hover\:bg_secondary-n4.pseudo-class-hover {
+  background-color: #28292c !important;
+}
+
+.hover\:bg_secondary-n5.pseudo-class-hover {
+  background-color: #191a1b !important;
+}
+
+.hover\:c_secondary.pseudo-class-hover {
+  color: #64666d !important;
+}
+
+.hover\:c_secondary-0.pseudo-class-hover,
+.hover\:color_secondary-0.pseudo-class-hover .hover\:c_secondary-0.pseudo-class-hover {
+  color: #64666d !important;
+}
+
+.hover\:c_secondary-1.pseudo-class-hover,
+.hover\:color_secondary-1.pseudo-class-hover .hover\:c_secondary-1.pseudo-class-hover {
+  color: #7b7d83 !important;
+}
+
+.hover\:c_secondary-2.pseudo-class-hover,
+.hover\:color_secondary-2.pseudo-class-hover .hover\:c_secondary-2.pseudo-class-hover {
+  color: #9d9fa3 !important;
+}
+
+.hover\:c_secondary-3.pseudo-class-hover,
+.hover\:color_secondary-3.pseudo-class-hover .hover\:c_secondary-3.pseudo-class-hover {
+  color: #c1c2c5 !important;
+}
+
+.hover\:c_secondary-4.pseudo-class-hover,
+.hover\:color_secondary-4.pseudo-class-hover .hover\:c_secondary-4.pseudo-class-hover {
+  color: #dddddf !important;
+}
+
+.hover\:c_secondary-5.pseudo-class-hover,
+.hover\:color_secondary-5.pseudo-class-hover .hover\:c_secondary-5.pseudo-class-hover {
+  color: #f0f0f0 !important;
+}
+
+.hover\:c_secondary-n1.pseudo-class-hover {
+  color: #5a5c62 !important;
+}
+
+.hover\:c_secondary-n2.pseudo-class-hover {
+  color: #4b4d52 !important;
+}
+
+.hover\:c_secondary-n3.pseudo-class-hover {
+  color: #37383c !important;
+}
+
+.hover\:c_secondary-n4.pseudo-class-hover {
+  color: #28292c !important;
+}
+
+.hover\:c_secondary-n5.pseudo-class-hover {
+  color: #191a1b !important;
+}
+
+.hover\:bg_success.pseudo-class-hover {
+  background-color: #088532 !important;
+}
+
+.hover\:bg_success-0.pseudo-class-hover,
+.hover\:back_success-0.pseudo-class-hover .hover\:bg_success-0.pseudo-class-hover {
+  background-color: #088532 !important;
+}
+
+.hover\:bg_success-1.pseudo-class-hover,
+.hover\:back_success-1.pseudo-class-hover .hover\:bg_success-1.pseudo-class-hover {
+  background-color: #2d9751 !important;
+}
+
+.hover\:bg_success-2.pseudo-class-hover,
+.hover\:back_success-2.pseudo-class-hover .hover\:bg_success-2.pseudo-class-hover {
+  background-color: #63b27e !important;
+}
+
+.hover\:bg_success-3.pseudo-class-hover,
+.hover\:back_success-3.pseudo-class-hover .hover\:bg_success-3.pseudo-class-hover {
+  background-color: #9ccead !important;
+}
+
+.hover\:bg_success-4.pseudo-class-hover,
+.hover\:back_success-4.pseudo-class-hover .hover\:bg_success-4.pseudo-class-hover {
+  background-color: #c9e4d2 !important;
+}
+
+.hover\:bg_success-5.pseudo-class-hover,
+.hover\:back_success-5.pseudo-class-hover .hover\:bg_success-5.pseudo-class-hover {
+  background-color: #e6f3eb !important;
+}
+
+.hover\:bg_success-n1.pseudo-class-hover {
+  background-color: #07782d !important;
+}
+
+.hover\:bg_success-n2.pseudo-class-hover {
+  background-color: #066426 !important;
+}
+
+.hover\:bg_success-n3.pseudo-class-hover {
+  background-color: #04491c !important;
+}
+
+.hover\:bg_success-n4.pseudo-class-hover {
+  background-color: #033514 !important;
+}
+
+.hover\:bg_success-n5.pseudo-class-hover {
+  background-color: #02210d !important;
+}
+
+.hover\:c_success.pseudo-class-hover {
+  color: #088532 !important;
+}
+
+.hover\:c_success-0.pseudo-class-hover,
+.hover\:color_success-0.pseudo-class-hover .hover\:c_success-0.pseudo-class-hover {
+  color: #088532 !important;
+}
+
+.hover\:c_success-1.pseudo-class-hover,
+.hover\:color_success-1.pseudo-class-hover .hover\:c_success-1.pseudo-class-hover {
+  color: #2d9751 !important;
+}
+
+.hover\:c_success-2.pseudo-class-hover,
+.hover\:color_success-2.pseudo-class-hover .hover\:c_success-2.pseudo-class-hover {
+  color: #63b27e !important;
+}
+
+.hover\:c_success-3.pseudo-class-hover,
+.hover\:color_success-3.pseudo-class-hover .hover\:c_success-3.pseudo-class-hover {
+  color: #9ccead !important;
+}
+
+.hover\:c_success-4.pseudo-class-hover,
+.hover\:color_success-4.pseudo-class-hover .hover\:c_success-4.pseudo-class-hover {
+  color: #c9e4d2 !important;
+}
+
+.hover\:c_success-5.pseudo-class-hover,
+.hover\:color_success-5.pseudo-class-hover .hover\:c_success-5.pseudo-class-hover {
+  color: #e6f3eb !important;
+}
+
+.hover\:c_success-n1.pseudo-class-hover {
+  color: #07782d !important;
+}
+
+.hover\:c_success-n2.pseudo-class-hover {
+  color: #066426 !important;
+}
+
+.hover\:c_success-n3.pseudo-class-hover {
+  color: #04491c !important;
+}
+
+.hover\:c_success-n4.pseudo-class-hover {
+  color: #033514 !important;
+}
+
+.hover\:c_success-n5.pseudo-class-hover {
+  color: #02210d !important;
+}
+
+.hover\:bg_warning.pseudo-class-hover {
+  background-color: #db7b14 !important;
+}
+
+.hover\:bg_warning-0.pseudo-class-hover,
+.hover\:back_warning-0.pseudo-class-hover .hover\:bg_warning-0.pseudo-class-hover {
+  background-color: #db7b14 !important;
+}
+
+.hover\:bg_warning-1.pseudo-class-hover,
+.hover\:back_warning-1.pseudo-class-hover .hover\:bg_warning-1.pseudo-class-hover {
+  background-color: #e08f37 !important;
+}
+
+.hover\:bg_warning-2.pseudo-class-hover,
+.hover\:back_warning-2.pseudo-class-hover .hover\:bg_warning-2.pseudo-class-hover {
+  background-color: #e8ac6b !important;
+}
+
+.hover\:bg_warning-3.pseudo-class-hover,
+.hover\:back_warning-3.pseudo-class-hover .hover\:bg_warning-3.pseudo-class-hover {
+  background-color: #f1caa1 !important;
+}
+
+.hover\:bg_warning-4.pseudo-class-hover,
+.hover\:back_warning-4.pseudo-class-hover .hover\:bg_warning-4.pseudo-class-hover {
+  background-color: #f7e2cb !important;
+}
+
+.hover\:bg_warning-5.pseudo-class-hover,
+.hover\:back_warning-5.pseudo-class-hover .hover\:bg_warning-5.pseudo-class-hover {
+  background-color: #fbf2e8 !important;
+}
+
+.hover\:bg_warning-n1.pseudo-class-hover {
+  background-color: #c56f12 !important;
+}
+
+.hover\:bg_warning-n2.pseudo-class-hover {
+  background-color: #a45c0f !important;
+}
+
+.hover\:bg_warning-n3.pseudo-class-hover {
+  background-color: #78440b !important;
+}
+
+.hover\:bg_warning-n4.pseudo-class-hover {
+  background-color: #583108 !important;
+}
+
+.hover\:bg_warning-n5.pseudo-class-hover {
+  background-color: #371f05 !important;
+}
+
+.hover\:c_warning.pseudo-class-hover {
+  color: #db7b14 !important;
+}
+
+.hover\:c_warning-0.pseudo-class-hover,
+.hover\:color_warning-0.pseudo-class-hover .hover\:c_warning-0.pseudo-class-hover {
+  color: #db7b14 !important;
+}
+
+.hover\:c_warning-1.pseudo-class-hover,
+.hover\:color_warning-1.pseudo-class-hover .hover\:c_warning-1.pseudo-class-hover {
+  color: #e08f37 !important;
+}
+
+.hover\:c_warning-2.pseudo-class-hover,
+.hover\:color_warning-2.pseudo-class-hover .hover\:c_warning-2.pseudo-class-hover {
+  color: #e8ac6b !important;
+}
+
+.hover\:c_warning-3.pseudo-class-hover,
+.hover\:color_warning-3.pseudo-class-hover .hover\:c_warning-3.pseudo-class-hover {
+  color: #f1caa1 !important;
+}
+
+.hover\:c_warning-4.pseudo-class-hover,
+.hover\:color_warning-4.pseudo-class-hover .hover\:c_warning-4.pseudo-class-hover {
+  color: #f7e2cb !important;
+}
+
+.hover\:c_warning-5.pseudo-class-hover,
+.hover\:color_warning-5.pseudo-class-hover .hover\:c_warning-5.pseudo-class-hover {
+  color: #fbf2e8 !important;
+}
+
+.hover\:c_warning-n1.pseudo-class-hover {
+  color: #c56f12 !important;
+}
+
+.hover\:c_warning-n2.pseudo-class-hover {
+  color: #a45c0f !important;
+}
+
+.hover\:c_warning-n3.pseudo-class-hover {
+  color: #78440b !important;
+}
+
+.hover\:c_warning-n4.pseudo-class-hover {
+  color: #583108 !important;
+}
+
+.hover\:c_warning-n5.pseudo-class-hover {
+  color: #371f05 !important;
+}
+
+.hover\:bg_alert.pseudo-class-hover {
+  background-color: #cb241c !important;
+}
+
+.hover\:bg_alert-0.pseudo-class-hover,
+.hover\:back_alert-0.pseudo-class-hover .hover\:bg_alert-0.pseudo-class-hover {
+  background-color: #cb241c !important;
+}
+
+.hover\:bg_alert-1.pseudo-class-hover,
+.hover\:back_alert-1.pseudo-class-hover .hover\:bg_alert-1.pseudo-class-hover {
+  background-color: #d3453e !important;
+}
+
+.hover\:bg_alert-2.pseudo-class-hover,
+.hover\:back_alert-2.pseudo-class-hover .hover\:bg_alert-2.pseudo-class-hover {
+  background-color: #de7570 !important;
+}
+
+.hover\:bg_alert-3.pseudo-class-hover,
+.hover\:back_alert-3.pseudo-class-hover .hover\:bg_alert-3.pseudo-class-hover {
+  background-color: #eaa7a4 !important;
+}
+
+.hover\:bg_alert-4.pseudo-class-hover,
+.hover\:back_alert-4.pseudo-class-hover .hover\:bg_alert-4.pseudo-class-hover {
+  background-color: #f4cfcd !important;
+}
+
+.hover\:bg_alert-5.pseudo-class-hover,
+.hover\:back_alert-5.pseudo-class-hover .hover\:bg_alert-5.pseudo-class-hover {
+  background-color: #fae9e8 !important;
+}
+
+.hover\:bg_alert-n1.pseudo-class-hover {
+  background-color: #b72019 !important;
+}
+
+.hover\:bg_alert-n2.pseudo-class-hover {
+  background-color: #981b15 !important;
+}
+
+.hover\:bg_alert-n3.pseudo-class-hover {
+  background-color: #70140f !important;
+}
+
+.hover\:bg_alert-n4.pseudo-class-hover {
+  background-color: #510e0b !important;
+}
+
+.hover\:bg_alert-n5.pseudo-class-hover {
+  background-color: #330907 !important;
+}
+
+.hover\:c_alert.pseudo-class-hover {
+  color: #cb241c !important;
+}
+
+.hover\:c_alert-0.pseudo-class-hover,
+.hover\:color_alert-0.pseudo-class-hover .hover\:c_alert-0.pseudo-class-hover {
+  color: #cb241c !important;
+}
+
+.hover\:c_alert-1.pseudo-class-hover,
+.hover\:color_alert-1.pseudo-class-hover .hover\:c_alert-1.pseudo-class-hover {
+  color: #d3453e !important;
+}
+
+.hover\:c_alert-2.pseudo-class-hover,
+.hover\:color_alert-2.pseudo-class-hover .hover\:c_alert-2.pseudo-class-hover {
+  color: #de7570 !important;
+}
+
+.hover\:c_alert-3.pseudo-class-hover,
+.hover\:color_alert-3.pseudo-class-hover .hover\:c_alert-3.pseudo-class-hover {
+  color: #eaa7a4 !important;
+}
+
+.hover\:c_alert-4.pseudo-class-hover,
+.hover\:color_alert-4.pseudo-class-hover .hover\:c_alert-4.pseudo-class-hover {
+  color: #f4cfcd !important;
+}
+
+.hover\:c_alert-5.pseudo-class-hover,
+.hover\:color_alert-5.pseudo-class-hover .hover\:c_alert-5.pseudo-class-hover {
+  color: #fae9e8 !important;
+}
+
+.hover\:c_alert-n1.pseudo-class-hover {
+  color: #b72019 !important;
+}
+
+.hover\:c_alert-n2.pseudo-class-hover {
+  color: #981b15 !important;
+}
+
+.hover\:c_alert-n3.pseudo-class-hover {
+  color: #70140f !important;
+}
+
+.hover\:c_alert-n4.pseudo-class-hover {
+  color: #510e0b !important;
+}
+
+.hover\:c_alert-n5.pseudo-class-hover {
+  color: #330907 !important;
+}
+
+.hover\:bg_accent.pseudo-class-hover {
+  background-color: #ff7f0e !important;
+}
+
+.hover\:bg_accent-0.pseudo-class-hover,
+.hover\:back_accent-0.pseudo-class-hover .hover\:bg_accent-0.pseudo-class-hover {
+  background-color: #ff7f0e !important;
+}
+
+.hover\:bg_accent-1.pseudo-class-hover,
+.hover\:back_accent-1.pseudo-class-hover .hover\:bg_accent-1.pseudo-class-hover {
+  background-color: #ff9232 !important;
+}
+
+.hover\:bg_accent-2.pseudo-class-hover,
+.hover\:back_accent-2.pseudo-class-hover .hover\:bg_accent-2.pseudo-class-hover {
+  background-color: #ffae67 !important;
+}
+
+.hover\:bg_accent-3.pseudo-class-hover,
+.hover\:back_accent-3.pseudo-class-hover .hover\:bg_accent-3.pseudo-class-hover {
+  background-color: #ffcc9f !important;
+}
+
+.hover\:bg_accent-4.pseudo-class-hover,
+.hover\:back_accent-4.pseudo-class-hover .hover\:bg_accent-4.pseudo-class-hover {
+  background-color: #ffe3ca !important;
+}
+
+.hover\:bg_accent-5.pseudo-class-hover,
+.hover\:back_accent-5.pseudo-class-hover .hover\:bg_accent-5.pseudo-class-hover {
+  background-color: #fff2e7 !important;
+}
+
+.hover\:bg_accent-n1.pseudo-class-hover {
+  background-color: #e6720d !important;
+}
+
+.hover\:bg_accent-n2.pseudo-class-hover {
+  background-color: #bf5f0b !important;
+}
+
+.hover\:bg_accent-n3.pseudo-class-hover {
+  background-color: #8c4608 !important;
+}
+
+.hover\:bg_accent-n4.pseudo-class-hover {
+  background-color: #663306 !important;
+}
+
+.hover\:bg_accent-n5.pseudo-class-hover {
+  background-color: #402004 !important;
+}
+
+.hover\:c_accent.pseudo-class-hover {
+  color: #ff7f0e !important;
+}
+
+.hover\:c_accent-0.pseudo-class-hover,
+.hover\:color_accent-0.pseudo-class-hover .hover\:c_accent-0.pseudo-class-hover {
+  color: #ff7f0e !important;
+}
+
+.hover\:c_accent-1.pseudo-class-hover,
+.hover\:color_accent-1.pseudo-class-hover .hover\:c_accent-1.pseudo-class-hover {
+  color: #ff9232 !important;
+}
+
+.hover\:c_accent-2.pseudo-class-hover,
+.hover\:color_accent-2.pseudo-class-hover .hover\:c_accent-2.pseudo-class-hover {
+  color: #ffae67 !important;
+}
+
+.hover\:c_accent-3.pseudo-class-hover,
+.hover\:color_accent-3.pseudo-class-hover .hover\:c_accent-3.pseudo-class-hover {
+  color: #ffcc9f !important;
+}
+
+.hover\:c_accent-4.pseudo-class-hover,
+.hover\:color_accent-4.pseudo-class-hover .hover\:c_accent-4.pseudo-class-hover {
+  color: #ffe3ca !important;
+}
+
+.hover\:c_accent-5.pseudo-class-hover,
+.hover\:color_accent-5.pseudo-class-hover .hover\:c_accent-5.pseudo-class-hover {
+  color: #fff2e7 !important;
+}
+
+.hover\:c_accent-n1.pseudo-class-hover {
+  color: #e6720d !important;
+}
+
+.hover\:c_accent-n2.pseudo-class-hover {
+  color: #bf5f0b !important;
+}
+
+.hover\:c_accent-n3.pseudo-class-hover {
+  color: #8c4608 !important;
+}
+
+.hover\:c_accent-n4.pseudo-class-hover {
+  color: #663306 !important;
+}
+
+.hover\:c_accent-n5.pseudo-class-hover {
+  color: #402004 !important;
+}
+
+.hover\:bg_info.pseudo-class-hover {
+  background-color: #807871 !important;
+}
+
+.hover\:bg_info-0.pseudo-class-hover,
+.hover\:back_info-0.pseudo-class-hover .hover\:bg_info-0.pseudo-class-hover {
+  background-color: #807871 !important;
+}
+
+.hover\:bg_info-1.pseudo-class-hover,
+.hover\:back_info-1.pseudo-class-hover .hover\:bg_info-1.pseudo-class-hover {
+  background-color: #938c86 !important;
+}
+
+.hover\:bg_info-2.pseudo-class-hover,
+.hover\:back_info-2.pseudo-class-hover .hover\:bg_info-2.pseudo-class-hover {
+  background-color: #afaaa6 !important;
+}
+
+.hover\:bg_info-3.pseudo-class-hover,
+.hover\:back_info-3.pseudo-class-hover .hover\:bg_info-3.pseudo-class-hover {
+  background-color: #ccc9c6 !important;
+}
+
+.hover\:bg_info-4.pseudo-class-hover,
+.hover\:back_info-4.pseudo-class-hover .hover\:bg_info-4.pseudo-class-hover {
+  background-color: #e3e1e0 !important;
+}
+
+.hover\:bg_info-5.pseudo-class-hover,
+.hover\:back_info-5.pseudo-class-hover .hover\:bg_info-5.pseudo-class-hover {
+  background-color: #f2f2f1 !important;
+}
+
+.hover\:bg_info-n1.pseudo-class-hover {
+  background-color: #736c66 !important;
+}
+
+.hover\:bg_info-n2.pseudo-class-hover {
+  background-color: #605a55 !important;
+}
+
+.hover\:bg_info-n3.pseudo-class-hover {
+  background-color: #46423e !important;
+}
+
+.hover\:bg_info-n4.pseudo-class-hover {
+  background-color: #33302d !important;
+}
+
+.hover\:bg_info-n5.pseudo-class-hover {
+  background-color: #201e1c !important;
+}
+
+.hover\:c_info.pseudo-class-hover {
+  color: #807871 !important;
+}
+
+.hover\:c_info-0.pseudo-class-hover,
+.hover\:color_info-0.pseudo-class-hover .hover\:c_info-0.pseudo-class-hover {
+  color: #807871 !important;
+}
+
+.hover\:c_info-1.pseudo-class-hover,
+.hover\:color_info-1.pseudo-class-hover .hover\:c_info-1.pseudo-class-hover {
+  color: #938c86 !important;
+}
+
+.hover\:c_info-2.pseudo-class-hover,
+.hover\:color_info-2.pseudo-class-hover .hover\:c_info-2.pseudo-class-hover {
+  color: #afaaa6 !important;
+}
+
+.hover\:c_info-3.pseudo-class-hover,
+.hover\:color_info-3.pseudo-class-hover .hover\:c_info-3.pseudo-class-hover {
+  color: #ccc9c6 !important;
+}
+
+.hover\:c_info-4.pseudo-class-hover,
+.hover\:color_info-4.pseudo-class-hover .hover\:c_info-4.pseudo-class-hover {
+  color: #e3e1e0 !important;
+}
+
+.hover\:c_info-5.pseudo-class-hover,
+.hover\:color_info-5.pseudo-class-hover .hover\:c_info-5.pseudo-class-hover {
+  color: #f2f2f1 !important;
+}
+
+.hover\:c_info-n1.pseudo-class-hover {
+  color: #736c66 !important;
+}
+
+.hover\:c_info-n2.pseudo-class-hover {
+  color: #605a55 !important;
+}
+
+.hover\:c_info-n3.pseudo-class-hover {
+  color: #46423e !important;
+}
+
+.hover\:c_info-n4.pseudo-class-hover {
+  color: #33302d !important;
+}
+
+.hover\:c_info-n5.pseudo-class-hover {
+  color: #201e1c !important;
+}
+
+.hover\:c_white.pseudo-class-hover {
+  color: white !important;
+}
+
+.hover\:c_black.pseudo-class-hover {
+  color: black !important;
+}
+
+.hover\:dotted.pseudo-class-hover,
+.hover\:double.pseudo-class-hover,
+.hover\:dashed.pseudo-class-hover,
+.hover\:underline.pseudo-class-hover {
+  text-decoration: underline;
+}
+
+.hover\:dashed.pseudo-class-hover {
+  text-decoration-style: dashed;
+}
+
+.hover\:double.pseudo-class-hover {
+  text-decoration-style: double;
+}
+
+.hover\:dotted.pseudo-class-hover {
+  text-decoration-style: dotted;
+}
+
+.hover\:bg_white.pseudo-class-hover {
+  background-color: #fff;
+}
+
+.hover\:bg_black.pseudo-class-hover {
+  background-color: #111;
+}
+
+.hover\:bg_white-0.pseudo-class-hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.hover\:bg_white-1.pseudo-class-hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.hover\:bg_white-2.pseudo-class-hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.hover\:bg_white-3.pseudo-class-hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.hover\:bg_white-4.pseudo-class-hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.hover\:bg_white-5.pseudo-class-hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.hover\:bg_white-6.pseudo-class-hover {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.hover\:bg_white-7.pseudo-class-hover {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.hover\:bg_white-8.pseudo-class-hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.hover\:bg_white-9.pseudo-class-hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.hover\:bg_black-0.pseudo-class-hover {
+  background-color: rgba(17, 17, 17, 0.02);
+}
+
+.hover\:bg_black-1.pseudo-class-hover {
+  background-color: rgba(17, 17, 17, 0.1);
+}
+
+.hover\:bg_black-2.pseudo-class-hover {
+  background-color: rgba(17, 17, 17, 0.2);
+}
+
+.hover\:bg_black-3.pseudo-class-hover {
+  background-color: rgba(17, 17, 17, 0.3);
+}
+
+.hover\:bg_black-4.pseudo-class-hover {
+  background-color: rgba(17, 17, 17, 0.4);
+}
+
+.hover\:bg_black-5.pseudo-class-hover {
+  background-color: rgba(17, 17, 17, 0.5);
+}
+
+.hover\:bg_black-6.pseudo-class-hover {
+  background-color: rgba(17, 17, 17, 0.6);
+}
+
+.hover\:bg_black-7.pseudo-class-hover {
+  background-color: rgba(17, 17, 17, 0.7);
+}
+
+.hover\:bg_black-8.pseudo-class-hover {
+  background-color: rgba(17, 17, 17, 0.8);
+}
+
+.hover\:bg_black-9.pseudo-class-hover {
+  background-color: rgba(17, 17, 17, 0.9);
+}
+
+.hover\:opacity.pseudo-class-hover {
+  opacity: 1;
+}.sr-only-focusable.pseudo-class-active,
+.sr-only-focusable.pseudo-class-focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}

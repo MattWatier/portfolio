@@ -1,7 +1,4 @@
-node_modules
-Strathmore
-dist
 docs
-\.vscode/sftp\.json
-
-\.vscode/
+dist
+.vscode/
+node_modules/

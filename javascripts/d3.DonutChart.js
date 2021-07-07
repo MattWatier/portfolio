@@ -76,12 +76,12 @@ function drawDonutChart(chartID, dataSet, selectString, dimensions) {
 			fill: "#888"
 		});
 
-	// Append the Selection Inicator
+	// Append the Selection Indicator
 	_svg.append('text')
 		.text('FILTER')
 		.style("font-family", "'SansationBold', 'trebuchet MS', Arial, sans-serif")
 		.attr({
-			class: "font_copy font_bold c_secondary-1 text-right",
+			class: "font_display font_bold c_secondary-1 text-right",
 			'text-anchor': 'end',
 			'font-size': function () {
 				return chartSize.font_normal + "rem";

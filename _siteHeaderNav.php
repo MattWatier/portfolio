@@ -3,12 +3,12 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a class="c_white" href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 <!-- Add your site or application content here -->
-<div class="site-nav br-t_secondary-n2 br_solid br-t_3 br_0 block">
-   <div class="grid-container font_2" style="max-width:100%;">
-      <ul class="grid-x no-bullet bg_secondary-n2 br-bl_radius br-br_radius inline-flex">
-         <li class="logo cell shrink bg_secondary-n2 br-bl_radius hover:bg_secondary-n4">
-            <a class="p-y_2 lh_1 p-t_3 p-x_4 block br-bl_radius hover:bg_secondary-n4" href="/">
-               <svg style="height:1.5rem;" class="bg_white hover:bg_ br_white br_solid br_1 vertical-align_middle" version="1.1" id="Logo_MW" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1656 794" xml:space="preserve">
+<nav class="site-nav br_secondary-n2 br_solid br-t_3 br_0 block font_1">
+   <div class="w_100 flex justify_start" >
+      <ul class="ul_none m_0 m-x_5:lg m-x_4:md m-x_3 flex flex_row:md flex_column justify_start bg_secondary-n2 br-bl_radius br-br_radius br_square">
+         <li class="logo cell flex_none bg_secondary-n2 br-bl_radius h:bg_secondary-n4">
+            <a class="p-y_2 lh_1 p-t_3 p-x_4 block br-bl_radius h:bg_secondary-n4" href="/">
+               <svg style="height:1.5rem;" class="bg_white h:bg_ br_white br_solid br_1 vertical-align_middle" version="1.1" id="Logo_MW" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1656 794" xml:space="preserve">
                   <g>
                      <rect class="shape" width="72" height="792" />
                      <rect class="shape" x="792" width="72" height="792" />
@@ -30,21 +30,21 @@
                </svg>
             </a>
          </li>
-         <li class="section-nav cell small-12 medium-shrink">
-            <ul class="no-bullet grid-x">
-               <li class="medium-shrink small-auto cell"><a class="c_white bg_secondary block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_primary-1 br-bl_radius" href="/fragments/"><span class="text">fragments</span></a></li>
-               <li class="medium-shrink small-auto cell"><a class="c_white bg_secondary block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_primary-1" href="/thoughts/"><span class="text">thoughts</span></a></li>
-               <li class="medium-shrink small-auto cell"><a class="c_white br-br_radius bg_secondary block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_primary-1" href="/books/"><span class="text">books</span></a></li>
-            </ul>
+         <li class="section-nav bg_secondary-n1 br-br_radius br-bl_radius">
+            <nav class="ul_none flex flex_row:md flex_column">
+              <a class="c_white  block p-x_4 p-y_3 h:bg_secondary-n4 h:c_primary  br-bl_radius undecorated" href="/fragments/"><span class="text">fragments</span></a>
+              <a class="c_white  block p-x_4 p-y_3 h:bg_secondary-n4 h:c_primary  undecorated" href="/thoughts/"><span class="text">thoughts</span></a>
+              <a class="c_white  block p-x_4 p-y_3 h:bg_secondary-n4 h:c_primary br-br_radius undecorated" href="/books/"><span class="text">books</span></a>
+            </nav>
          </li>
-         <li class="social-nav cell small-12 medium-shrink bg_seondary-2">
-            <ul class="no-bullet grid-x">
-               <li class="cell medium-shrink small-3"><a class="c_white  block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_accent-1 " href="https://twitter.com/mattwatier" target="_blank"><i class="fab fa-twitter"></i><span class="text"></span></a></li>
-               <li class="cell medium-shrink small-3"><a class="c_white  block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_accent-1 " href="https://www.linkedin.com/in/mattwatier" target="_blank"><i class="fab fa-linkedin"></i><span class="text"></span></a></li>
-               <li class="cell medium-shrink small-3"><a class="c_white  block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_accent-1 " href="http://mattwatier.deviantart.com/" target="_blank"><i class="fab fa-deviantart"></i><span class="text"></span></a></li>
-               <li class="cell medium-shrink small-3"><a class="c_white  block p-x_4 p-y_2 hover:bg_secondary-n4 hover:c_accent-1 " href="/thoughts/contact_me.php" target="blank"><i class="far fa-envelope"></i><span></span></a></li>
-            </ul>
+         <li class="social-nav cell small-12 md-shrink bg_secondary-2 br-br_radius">
+            <nav class="ul_none flex flex_row">
+               <a class="c_white flex_none undecorated h:undecorated block p-x_4 p-y_3 h:bg_secondary-n4 h:c_accent-1 " href="https://twitter.com/mattwatier" target="_blank"><i class="fab fa-twitter"></i><span class="text"></span></a>
+               <a class="c_white  block p-x_4 p-y_3 h:bg_secondary-n4 h:c_accent-1 " href="https://www.linkedin.com/in/mattwatier" target="_blank"><i class="fab fa-linkedin"></i><span class="text"></span></a>
+               <a class="c_white flex_none undecorated h:undecorated block p-x_4 p-y_3 h:bg_secondary-n4 h:c_accent-1 " href="http://mattwatier.deviantart.com/" target="_blank"><i class="fab fa-deviantart"></i><span class="text"></span></a>
+               <a class="c_white flex_none undecorated h:undecorated block p-x_4 p-y_3 h:bg_secondary-n4 h:c_accent-1 br-br_radius" href="/thoughts/contact_me.php" target="blank"><i class="far fa-envelope"></i><span></span></a>
+            </nav>
          </li>
       </ul>
    </div>
-</div>
+</nav>

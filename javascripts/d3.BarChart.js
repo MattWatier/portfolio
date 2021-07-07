@@ -12,15 +12,12 @@ function drawBarChart(chartID, dataSet, selectString) {
 		}
 		return unique(data);
 	}
-	var wCalc = $(selectString).width();
-	var hCalc = Math.max(
-		document.documentElement.clientHeight,
-		window.innerHeight || 0
-	);
+	var wCalc = $(selectString).width() - 32;
+	var hCalc =  $(selectString).height()- 32;
 	var barChart = {
 		w: wCalc,
-		h: Math.max(hCalc * 0.45, 300),
-		m: 10
+		h: hCalc,
+		m: 16
 	};
 
 	barChart.height = barChart.h;
@@ -43,13 +40,11 @@ function drawBarChart(chartID, dataSet, selectString) {
 	var bchart_svg = d3
 		.select(selectString)
 		.append("svg")
+		.attr("viewBox", '0 0 ' + barChart.w+ ' '+ barChart.h+'')
 		.attr({
 			class: function () {
 				return "bar" + chartID;
-			},
-			width: barChart.w,
-			height: barChart.h,
-			transform: "translate(" + barChart.m + "," + barChart.m + ")"
+			}
 		});
 
 	var bchart = bchart_svg
@@ -90,12 +85,12 @@ function drawBarChart(chartID, dataSet, selectString) {
 			return d.count;
 		})
 		.attr({
-			class: "count font_display font_3",
+			class: "count font_display font_3:lg font_2:md font_1",
 			x: function (d, i) {
-				return x(i) + 5;
+				return x(i) + 8;
 			},
 			y: function (d) {
-				return barChart.height - y(d.count) + 55;
+				return barChart.height - y(d.count) + 65;
 			},
 			width: x.rangeBand(),
 			fill: "#ffffff"
@@ -107,12 +102,12 @@ function drawBarChart(chartID, dataSet, selectString) {
 			return d.type;
 		})
 		.attr({
-			class: "label font_0",
+			class: "label font_0 uppercase font_xbold font_display",
 			x: function (d, i) {
-				return x(i) + 5;
+				return x(i) + 8;
 			},
 			y: function (d) {
-				return barChart.height - y(d.count) + 20;
+				return barChart.height - y(d.count) + 18;
 			},
 			width: x.rangeBand(),
 			fill: "#ffffff"

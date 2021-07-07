@@ -4,10 +4,16 @@ function drawDonutChartSimple(chartID, dataSet, selectString, dimensions) {
    // selectString => String that allows you to pass in
    // a D3.selectAll() string.
 
-
+	var wCalc = $(selectString).width();
+	var hCalc =  $(selectString).height();
+	var barChart = {
+		w: wCalc,
+		h: hCalc,
+		m: 10
+	};
    var chartSize = {
-      w: dimensions.w,
-      h: dimensions.h,
+      w: wCalc,
+      h: hCalc,
       m: dimensions.m,
       g: dimensions.g != false ? dimensions.g : '2',
       font_small: dimensions.font_small != false ? dimensions.font_small : ".8333333333",
@@ -35,17 +41,19 @@ function drawDonutChartSimple(chartID, dataSet, selectString, dimensions) {
       .attr("class", function () {
          return "pie" + chartID;
       })
-      .attr("width", chartSize.w - chartSize.m * 2)
-      .attr({
-         "height": chartSize.h - chartSize.m * 2,
-         "transform": function () {
-            return "translate(" +
-               chartSize.m +
-               "," +
-               chartSize.m +
-               ")";
-         }
-      });
+      .attr("viewBox", '0 0 ' + barChart.w+ ' '+ barChart.h+'')
+      // .attr("width", chartSize.w - chartSize.m * 2)
+      // .attr({
+         //    "height": chartSize.h - chartSize.m * 2,
+         //    "transform": function () {
+            //       return "translate(" +
+            //          chartSize.m +
+            //          "," +
+            //          chartSize.m +
+            //          ")";
+            //    }
+            // })
+            ;
 
 
 

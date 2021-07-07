@@ -14,7 +14,7 @@
 <script src="https://cdn.jsdelivr.net/npm/lozad"></script>
 <!-- Add fancyBox main JS and CSS files -->
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.js"></script>
-
+<script defer src="https://pro.fontawesome.com/releases/v5.15.3/js/all.js" integrity="sha384-OF9QwbqmlzSPpIxe2GYS8lkGFyaFfrgUPD2J3qj8zGVps17Y/x8EK2U8PEl6UrpH" crossorigin="anonymous"></script>
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 <script type="text/javascript">

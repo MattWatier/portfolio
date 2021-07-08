@@ -26,7 +26,8 @@ include_once "masonFunctions.php";
 <body id="albumbody">
 
    <?php zp_apply_filter('theme_body_open'); ?>
-   <?php include('_siteHeaderNav.php'); ?>
+  
+   <?php include(dirname(__FILE__).'../_siteHeaderNav.php');  ?>
    <div class="header grid-x p-x_4">
       <div id="breadcrumb" class="cell">
          <h1 class="font_display font_5"><?php printHomeLink('', ' | '); ?><a href="<?php echo html_encode(getGalleryIndexURL()); ?>" title="<?php echo gettext('Albums Index'); ?>">Fragments</a> | <?php printParentBreadcrumb(); ?> <?php printAlbumTitle(true); ?></h1>

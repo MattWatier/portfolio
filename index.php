@@ -15,7 +15,7 @@ if ($_GET["flush"] == "true") {
   <title>Artistic Fragments of Matt Watier</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <?php include('_htmlHeader.php'); ?>
+  <?php include('../_htmlHeader.php'); ?>
 </head>
 
 <body class="m_0 p_0">
@@ -23,8 +23,8 @@ if ($_GET["flush"] == "true") {
         <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
  <![endif]-->
   <?php zp_apply_filter('theme_body_open'); ?>
-  <?php include('_siteHeaderNav.php'); ?>
-  <div class="grid-container ">
+  <?php include('../_siteHeaderNav.php');  ?>
+  <div class="grid-container max-w_90 m_auto">
     <div class='page gap-x_4 flex flex_row:md flex_column'>
       <div id="introduction" class="w_35:lg w_50:md w_auto flex_auto p_5:lg p_4">
         <h1 class="font_display font_3 ">Welcome to the Fragments of Me.</h1>
